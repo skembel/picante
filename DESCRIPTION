@@ -5,6 +5,6 @@ Version: 0.1
 Date: 2007-12-05
 Author: Steve Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu>, Simon Blomberg <s.blomberg1@uq.edu.au>, Cam Webb <cwebb@oeb.harvard.edu>
 Maintainer: Steve Kembel <skembel@berkeley.edu>
-Depends: ape, vegan
+Depends: ape, geiger, vegan
 Description: Phylocom integration, community analyses, null-models, traits and evolution in R
 License: GPL v2
