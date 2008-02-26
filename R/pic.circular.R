@@ -10,7 +10,7 @@
 ### Orginal copyright
 ### pic.R (2006-10-29)
 ###
-###     Phylogenetically Independent Contrasts4th Year/
+###     Phylogenetically Independent Contrasts
 ###
 ### Copyright 2002-2006 Emmanuel Paradis
 ###
