@@ -1,5 +1,6 @@
 `phylo2phylog` <-
 function(phy, ...) {
-    newick2phylog(write.tree(phy, multi.line = FALSE),...)
+    if(!require(ade4)) {stop("This function requires the ade4 package")}
+    newick2phylog(write.tree(phy),...)
 }
 
