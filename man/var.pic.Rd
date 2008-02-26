@@ -10,7 +10,7 @@ var.pic(x, phy, scaled = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ Vector of trait data sorted in phy$tip.label order }
+  \item{x}{ Vector of trait data sorted in phy\$tip.label order }
   \item{phy}{ phylo object }
   \item{scaled}{ TRUE or FALSE (PIC standardized or not) }
 }

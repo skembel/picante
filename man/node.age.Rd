@@ -14,7 +14,7 @@ node.age(phy)
 }
 
 \value{
-  Phylo object with phylo$ages vector of node ages corresponding to phylo$edge
+  Phylo object with phylo\$ages vector of node ages corresponding to phylo\$edge
 }
 
 \author{ David Ackerly <dackerly@berkeley.edu> }

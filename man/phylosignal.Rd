@@ -10,7 +10,7 @@ phylosignal(x, phy, reps = 999)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ Trait vector (same order as phy$tip.label) }
+  \item{x}{ Trait vector (same order as phy\$tip.label) }
   \item{phy}{ phylo object }
   \item{reps}{ Number of randomizations }
 }
