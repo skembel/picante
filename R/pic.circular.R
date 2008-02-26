@@ -20,6 +20,7 @@
 `pic.circular` <- 
 function(x, phy, scaled = TRUE, var.contrasts = FALSE)
 {
+    if (!require(circular)) {stop("The 'circular' package is required for this function")}
     if (class(phy) != "phylo")
       stop("object 'phy' is not of class \"phylo\"")
     if (is.null(phy$edge.length))
@@ -95,9 +96,11 @@ function(x, phy, scaled = TRUE, var.contrasts = FALSE)
     
     }
    # contr <- ans[[7]]
-    if (var.contrasts) {
-        contr <- cbind(contr, ans[[8]])
-        dimnames(contr) <- list(1:nb.node + nb.tip, c("contrasts", "variance"))
-    } else names(contr) <- 1:nb.node + nb.tip
+    # if (var.contrasts) {
+    #     contr <- cbind(contr, ans[[8]])
+    #     dimnames(contr) <- list(1:nb.node + nb.tip, c("contrasts", "variance"))
+    # } else 
+    # TODO check that the var.contrasts = T results are as expected
+    names(contr) <- 1:nb.node + nb.tip
     contr
 }
