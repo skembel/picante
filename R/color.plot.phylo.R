@@ -1,6 +1,6 @@
 ### Peter's tip coloring
 
-`plot.col.phylo` <- 
+`color.plot.phylo` <- 
 
 
 function(
