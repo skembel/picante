@@ -15,5 +15,5 @@ sppFreq(x)
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
 
-\seealso{ \code{\link{decostand}} }
+\seealso{ \code{\link[vegan]{decostand}} }
 \keyword{univar}

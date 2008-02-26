@@ -20,5 +20,5 @@ species.dist(samp, metric = c("cij", "jaccard", "roij"))
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
 
-\seealso{ \code{\link{cij}}, \code{\link{roij}},\code{\link{vegdist}} }
+\seealso{ \code{\link{cij}}, \code{\link{roij}},\code{\link[vegan]{vegdist}} }
 \keyword{univar}

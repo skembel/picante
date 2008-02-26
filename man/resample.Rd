@@ -8,6 +8,11 @@
 \usage{
 resample(x, size, ...)
 }
+\arguments{
+  \item{x}{ Object to be sampled from}
+  \item{size}{ Number of samples to take}
+  \item{...}{ Parameters to be passed on}
+}
 
 
 \seealso{ \code{\link{sample}} }

@@ -22,5 +22,4 @@ taxaShuffle(x, strata)
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
 
-\seealso{ \code{\link{mantel}} }
 \keyword{manip}
