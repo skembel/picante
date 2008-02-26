@@ -14,11 +14,13 @@ taxaShuffle(x, strata)
   \item{strata}{ Strata for randomization }
 }
 \details{
-  Code from \code{\link{mantel}}
+  Code from \code{\link[vegan]{mantel}}
 }
 \value{
   Matrix with taxa names shuffled
 }
+
+\seealso{ \code{\link[vegan]{mantel}} }
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
 
