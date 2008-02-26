@@ -1,4 +1,4 @@
-`stack.phylocom` <-
+`phylocom.stack` <-
 function(z) {
 	temp <- data.frame(expand.grid(dimnames(z))[1:2], as.vector(as.matrix(z)))
 	temp <- temp[(temp[, 3] > 0) & !is.na(temp[, 3]), ]

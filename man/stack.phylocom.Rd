@@ -1,12 +1,12 @@
-\name{stack.phylocom}
-\alias{stack.phylocom}
+\name{phylocom.stack}
+\alias{phylocom.stack}
 
 \title{ Stack a database-format community data frame into a community data matrix }
 \description{
   Stack a database-format community data frame into a community data matrix. Mostly utility function for converting Phylocom sample format data frames into community data matrices.
 }
 \usage{
-stack.phylocom(z)
+phylocom.stack(z)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
