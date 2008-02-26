@@ -17,8 +17,8 @@
 ### This file is part of the R-package `ape'.
 ### See the file ../COPYING for licensing issues.
 
-`pic.circular` 
-<- function(x, phy, scaled = TRUE, var.contrasts = FALSE)
+`pic.circular` <- 
+function(x, phy, scaled = TRUE, var.contrasts = FALSE)
 {
     if (class(phy) != "phylo")
       stop("object 'phy' is not of class \"phylo\"")
