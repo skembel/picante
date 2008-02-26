@@ -14,8 +14,9 @@ function(phy,
 	trait.mode = 'Brownian',
 	set.minbl = 1, #length of shortest branch
 	show.plots = TRUE,
-	use.bl=TRUE,
-	debug=FALSE) {
+	use.color = FALSE, # plots with color
+	use.bl = TRUE,
+	debug = FALSE) {
 
 	#print(mu)
 	phy$edge.length.original = phy$edge.length
@@ -138,12 +139,21 @@ function(phy,
 		phy.coph = cophenetic.phylo(phy)
 		trait.dist = as.matrix(dist(
 			x,diag=TRUE,upper=TRUE))
-	
-		plot.phylo(phy,show.tip.label=FALSE)
+		edgecolors <- rainbow(phy$Nedge)
+		if(use.color) {
+			plot.phylo(phy,show.tip.label=FALSE, edge.color = edgecolors)
+		} else {
+			plot.phylo(phy,show.tip.label=FALSE)
+		}
 		add.scale.bar(0,1,set.minbl)	
 		
 		plot(c(0,max.ht),c(min.trait,max.trait),type='n',xlab='time',ylab='trait value')
-		for (i in 1:phy$Nedge) lines(edges[[i]])
+		
+		if(use.color) {
+			for (i in 1:phy$Nedge) lines(edges[[i]], col = edgecolors[i])
+		} else {
+			for (i in 1:phy$Nedge) lines(edges[[i]])
+		}
 	
 	}
 	#print(phy$node.traits)
