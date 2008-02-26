@@ -4,7 +4,7 @@
 \description{
   Computes the phylogenetic independent contrasts for traits with circular distributions}
 \usage{
-x, phy, scaled = TRUE, var.contrasts = FALSE}
+pic.circular(x, phy, scaled = TRUE, var.contrasts = FALSE)}
 \arguments{
   \item{x}{ ~~Describe \code{x} here~~ }
   \item{phy}{ ~~Describe \code{phy} here~~ }
