@@ -21,3 +21,4 @@ checkerboard(x)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{univar}

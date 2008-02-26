@@ -31,4 +31,5 @@
 }
 
 \author{ Peter Cowan <pdc@berkeley.edu> }
+\keyword{color}
 

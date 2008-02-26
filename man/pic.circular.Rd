@@ -19,4 +19,5 @@ pic.circular(x, phy, scaled = TRUE, var.contrasts = FALSE)}
 }
 
 \author{ Peter Cowan <pdc@berkeley.edu> based on the ape package pic function by Emmanuel Paradis}
+\keyword{univar}
 

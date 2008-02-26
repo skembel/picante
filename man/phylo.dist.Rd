@@ -17,3 +17,4 @@ phylo.dist(phylo)
 }
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{misc}

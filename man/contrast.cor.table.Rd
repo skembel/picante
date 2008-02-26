@@ -14,3 +14,4 @@ contrast.cor.table(nodes, cor.method = "pearson")
 }
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{univar}

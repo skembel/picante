@@ -20,5 +20,6 @@ randomizeSpeciesMatrix(x, keepSppFreq = TRUE)
 \references{ Gotelli. 2000. Ecology. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \section{Warning }{Slow! Works only with presence-absence matrices.}
+\keyword{manip}
 
 

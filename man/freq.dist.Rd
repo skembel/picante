@@ -17,3 +17,4 @@ freq.dist(sppFreq, metric = "rank")
   A dist object
 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{univar}

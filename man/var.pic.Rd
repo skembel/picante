@@ -22,3 +22,4 @@ var.pic(x, phy, scaled = TRUE)
 \author{ Steve Kembel <skembel@berkeley.edu> }
 
 \seealso{ \code{\link{phylosignal}}}
+\keyword{univar}

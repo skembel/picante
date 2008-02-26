@@ -18,3 +18,4 @@ sample.prune(samp, phylo)
   Returns a phylo object pruned to include only the species present in samp.
 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{manip}

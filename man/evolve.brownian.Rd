@@ -17,3 +17,4 @@ evolve.brownian(phy, value = 0, var = 1)
   Vector of trait values with names corresponding to phylo tip.label
 }
 \author{ David Ackerly <dackerly@berkeley.edu> and Steve Kembel <skembel@berkeley.edu> }
+\keyword{datagen}

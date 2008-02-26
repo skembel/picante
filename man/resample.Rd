@@ -11,3 +11,4 @@ resample(x, size, ...)
 
 
 \seealso{ \code{\link{sample}} }
+\keyword{manip}

@@ -16,3 +16,4 @@ sppFreq(x)
 \author{ Steve Kembel <skembel@berkeley.edu> }
 
 \seealso{ \code{\link{decostand}} }
+\keyword{univar}

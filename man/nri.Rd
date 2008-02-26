@@ -23,3 +23,4 @@ nri(samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", "phylogeny.po
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \section{Warning }{Weighted sample pool null ONLY works with presence-absence data} 
 \seealso{ \code{\link{mpd}} }
+\keyword{univar}

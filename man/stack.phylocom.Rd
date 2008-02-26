@@ -14,3 +14,4 @@ stack.phylocom(z)
 }
 
 \author{ Cam Webb <cwebb@oeb.harvard.edu> }
+\keyword{manip}

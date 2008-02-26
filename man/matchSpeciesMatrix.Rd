@@ -17,3 +17,4 @@ matchSpeciesMatrix(x, y)
   Community data matrix 2 but with rows and columns for all sites and species present in community data matrix 1 present (even if those species/sites not present in matrix 2)
 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{manip}

@@ -18,3 +18,4 @@ writetraits(trt, file = "", bin = NULL, sigd = 3)
 
 \references{ Webb et al. 2007. Phylocom. }
 \author{ David Ackerly <dackerly@berkeley.edu> and Steve Kembel <skembel@berkeley.edu> }
+\keyword{file}

@@ -19,3 +19,4 @@ internal2tips(x, int.node, return.names = FALSE)
 }
 
 \author{ David Ackerly <dackerly@berkeley.edu> }
+\keyword{manip}

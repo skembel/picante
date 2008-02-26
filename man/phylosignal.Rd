@@ -16,7 +16,7 @@ phylosignal(x, phy, reps = 999)
 }
 \value{
  Data frame with columns...
-  \item{K }{Description of 'comp1'}
+  \item{K }{Description of `comp1'}
   \item{PIC.variance.obs }{Mean observed PIC variance}
   \item{PIC.variance.random }{Mean random PIC variance}
   \item{PIC.variance.P }{P-value of observed vs. random variance of PICs}
@@ -25,3 +25,4 @@ phylosignal(x, phy, reps = 999)
 \references{ Blomberg and Garland. 2002. Evolution. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \seealso{ \code{\link{Kcalc}} }
+\keyword{univar}

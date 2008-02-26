@@ -23,3 +23,4 @@ Steve Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu>, Simo
 
 Maintainer: Steve Kembel <skembel@berkeley.edu>
 }
+\keyword{package}

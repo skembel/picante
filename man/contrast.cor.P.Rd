@@ -12,3 +12,4 @@ contrast.cor.P(r, df)
   \item{df}{ Degrees of freedom }
 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{univar}

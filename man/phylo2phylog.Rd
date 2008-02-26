@@ -19,3 +19,4 @@ phylo2phylog(phy, ...)
 }
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{manip}

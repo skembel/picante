@@ -18,3 +18,4 @@ matrix2sample(z)
 }
 \references{ Webb et al. 2007. Phylocom. }
 \author{ Steve Kembel <skembel@berkeley.edu> and Cam Webb <cwebb@oeb.harvard.edu> }
+\keyword{manip}

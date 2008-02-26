@@ -21,3 +21,4 @@ Kcalc(x, phy)
 \author{ Simon Blomberg <s.blomberg1@uq.edu.au> and David Ackerly <dackerly@berkeley.edu> }
 
 \seealso{ \code{\link{phylosignal}} }
+\keyword{univar}

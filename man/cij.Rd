@@ -15,3 +15,4 @@ cij(x)
 }
 \references{ Schoener }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{univar}

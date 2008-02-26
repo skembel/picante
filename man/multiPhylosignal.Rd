@@ -16,3 +16,4 @@ multiPhylosignal(x,tree,...)
   Returns a data frame with phylogenetic signal results for each trait
 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{univar}

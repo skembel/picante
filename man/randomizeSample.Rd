@@ -19,3 +19,4 @@ randomizeSample(samp, null.model = c("keepFreq", "keepRichness", "keepBoth"))
 \references{ Gotelli. 2000. Ecology. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \section{Warning }{keepBoth (independent swap) works ONLY with presence-absence}
+\keyword{manip}

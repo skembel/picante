@@ -17,3 +17,4 @@ pruneMissing(x,tree)
   \item{data}{ Corresponding trait data sorted in tip.label order }  
 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{manip}

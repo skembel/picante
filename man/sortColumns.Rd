@@ -18,3 +18,4 @@ sortColumns(x)
 }
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{manip}

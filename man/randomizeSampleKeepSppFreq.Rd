@@ -15,3 +15,4 @@ randomizeSampleKeepSppFreq(samp)
 }
 \references{ Gotelli. 2000. Ecology. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
+\keyword{manip}

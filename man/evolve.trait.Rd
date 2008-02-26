@@ -34,4 +34,5 @@ evolve.trait(phy, x.root = 0, sigma = 1, trend = 0, bound = c(-10, 10), burst = 
 }
 
 \author{ David Ackerly <dackerly@berkeley.edu> and Steve Kembel <skembel@berkeley.edu>}
+\keyword{datagen}
 

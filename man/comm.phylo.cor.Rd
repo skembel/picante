@@ -23,3 +23,4 @@ comm.phylo.cor(samp, phylo, metric = c("cij", "jaccard", "roij"), null.model = c
 \references{ Cavender-Bares et al. 2004, 2006 }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \section{Warning }{Weighted null currently only works with presence-absence}
+\keyword{univar}
