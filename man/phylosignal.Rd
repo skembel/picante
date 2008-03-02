@@ -13,7 +13,7 @@ phylosignal(x, phy, reps = 999, ...)
   \item{x}{ Trait vector (same order as phy\$tip.label) }
   \item{phy}{ phylo object }
   \item{reps}{ Number of randomizations }
-  \item{reps}{ Additional arguments passed to pic }
+  \item{...}{ Additional arguments passed to pic }
 }
 \value{
  Data frame with columns...
