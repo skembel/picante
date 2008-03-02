@@ -1,29 +1,64 @@
-`phylosignal` <-
-function(x,phy,reps=999) {
+Kcalc <- function(x,phy) {
+	mat <- vcv.phylo(phy, cor=TRUE) # correlation matrix
+	ntax = length(phy$tip.label)
+	ntax1 = ntax-1
 
-  if (length(x) != length(phy$tip.label)) stop(
-              "Data vector and tree contain different numbers of taxa.")
-  if (!setequal(names(x), phy$tip.label)) warning(
-            "Taxon names in data vector and names of tip labels do not match.")
-
-	x <- x[phy$tip.label]
-	obs.var.pic.scaled = var.pic(x,phy)
-	K = Kcalc(x,phy)
+	dat = data.frame(x)
+	names(dat) = 'x'
+	# calculate "phylogenetic" mean via gls
+	fit <- gls(x ~ 1, data = dat, 	
+		correlation=corSymm(mat[lower.tri(mat)], fixed=TRUE))
+	ahat <- coef(fit)
 	
-	rnd.var.pic.scaled <- vector()
-		
+	#observed
+	MSE <- fit$sigma^2
+	MSE0 <- t(dat$x - ahat) %*% (dat$x - ahat)/ ntax1
+
+	#expected
+	MSE0.MSE <- 1/ ntax1 * 	
+		(sum(diag(mat))- ntax/sum(solve(mat)))
+
+	K <- MSE0/MSE / MSE0.MSE
+	return(K)
+}
+
+df2vec <- function(x, colID=1) {
+	vec <- x[,colID]
+	names(vec) <- row.names(x)
+	vec
+}
+
+pic.variance <- function(x,phy,scaled=TRUE) {
+	pics <- pic(x,phy,scaled)
+	N <- length(pics)
+	sum(pics^2) / (N -1)
+}
+
+phylosignal <- function(x,phy,reps=999,...) {
+
+    K <- Kcalc(x,phy)
+
+    if (!is.vector(x)) {
+        x.orig <- x
+        x <- as.vector(x)
+        names(x) <- row.names(x.orig)
+    }
+	
+	obs.var.pic = pic.variance(x,phy,...)
+	    
+	rnd.var.pic <- numeric(reps)
+	
 	#significance based on tip shuffle
 	for (i in 1:reps) {
 		tipsh.x <- sample(x)
-		names(tipsh.x) <- names(x)
-		rnd.var.pic.scaled <- c(rnd.var.pic.scaled,var.pic(tipsh.x,phy))
+	    names(tipsh.x) <- names(x)
+		rnd.var.pic[i] <- pic.variance(tipsh.x,phy,...)
 	}
 
-	var.pics.scaled = c(obs.var.pic.scaled,rnd.var.pic.scaled)
-	var.pics.scaled.p = rank(var.pics.scaled)[1] / (reps + 1)
-	var.pics.scaled.z = (obs.var.pic.scaled - mean(var.pics.scaled))/sd(var.pics.scaled)
+	var.pics = c(obs.var.pic,rnd.var.pic)
+	var.pics.p = rank(var.pics)[1] / (reps + 1)
+	var.pics.z = (obs.var.pic - mean(var.pics))/sd(var.pics)
 
-	data.frame(K,PIC.variance.obs=obs.var.pic.scaled,PIC.variance.random=mean(var.pics.scaled),
-		PIC.variance.P=var.pics.scaled.p, PIC.variance.Z=var.pics.scaled.z)
+	data.frame(K,PIC.variance=obs.var.pic,PIC.variance.P=var.pics.p, PIC.variance.Z=var.pics.z)
+
 }
-
