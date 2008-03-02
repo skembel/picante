@@ -22,12 +22,6 @@ Kcalc <- function(x,phy) {
 	return(K)
 }
 
-df2vec <- function(x, colID=1) {
-	vec <- x[,colID]
-	names(vec) <- row.names(x)
-	vec
-}
-
 pic.variance <- function(x,phy,scaled=TRUE) {
 	pics <- pic(x,phy,scaled)
 	N <- length(pics)
@@ -45,7 +39,7 @@ phylosignal <- function(x,phy,reps=999,...) {
     }
 	
 	obs.var.pic = pic.variance(x,phy,...)
-	    
+	
 	rnd.var.pic <- numeric(reps)
 	
 	#significance based on tip shuffle
@@ -58,7 +52,6 @@ phylosignal <- function(x,phy,reps=999,...) {
 	var.pics = c(obs.var.pic,rnd.var.pic)
 	var.pics.p = rank(var.pics)[1] / (reps + 1)
 	var.pics.z = (obs.var.pic - mean(var.pics))/sd(var.pics)
-
-	data.frame(K,PIC.variance=obs.var.pic,PIC.variance.P=var.pics.p, PIC.variance.Z=var.pics.z)
+    data.frame(K,PIC.variance.obs=obs.var.pic,PIC.variance.rnd.mean=mean(var.pics),PIC.variance.P=var.pics.p, PIC.variance.Z=var.pics.z)
 
 }
