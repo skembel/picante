@@ -1,7 +1,7 @@
 `comm.phylo.cor` <-
-function(samp,phylo,metric=c("cij","jaccard","roij"),
+function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 		null.model=c("sample.taxa.labels","pool.taxa.labels",
-					"keepFreq","keepRichness","weighted.sample.pool"),
+					"frequency","richness","weighted.sample.pool"),
 					runs=99)
 {
 	metric <- match.arg(metric)
@@ -26,7 +26,7 @@ function(samp,phylo,metric=c("cij","jaccard","roij"),
 	}
 	else if (null.model=="weighted.sample.pool") for (run in 1:runs)
 	{
-		samp.dist <- species.dist(randomizeSpeciesMatrix(samp,keepSppFreq=TRUE),metric)
+		samp.dist <- species.dist(randomizeSample(samp,null.model="both"),metric)
 		phylo.dist <- as.dist(as.matrix(pool.phylo.dist)[rownames(as.matrix(samp.dist)),
 							colnames(as.matrix(samp.dist))])	
 		results$random.corrs[run] <- cor(phylo.dist,samp.dist,use="pairwise")
@@ -40,4 +40,3 @@ function(samp,phylo,metric=c("cij","jaccard","roij"),
 	results$obs.rand.p <- results$obs.rank/(runs+1)
 	results
 }
-

@@ -1,17 +1,17 @@
-`nti` <-
-function (samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", 
+`ses.mnnd` <-
+function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
     "phylogeny.pool", "weighted.sample.pool"), runs = 99) 
 {
-    mnnd.obs <- mnnd(samp, phylo.dist)
+    dis <- as.matrix(dis)
+    mnnd.obs <- mnnd(samp, dis)
     null.model <- match.arg(null.model)
-    mnnd.rand <- switch(null.model, taxa.labels = t(replicate(runs, 
-        mnnd(samp, taxaShuffle(phylo.dist)))), sample.pool = t(replicate(runs, 
-        mnnd(randomizeSampleKeepSampRichness(samp), phylo.dist))), 
-        phylogeny.pool = t(replicate(runs, mnnd(randomizeSampleKeepSampRichness(samp), 
-            taxaShuffle(phylo.dist)))),
-        weighted.sample.pool = t(replicate(runs, 
-            mnnd(randomizeSpeciesMatrix(samp, keepSppFreq = TRUE),
-            	phylo.dist))))
+    mnnd.rand <- switch(null.model,
+    	taxa.labels = t(replicate(runs, mnnd(samp, taxaShuffle(dis)))),
+    	sample.pool = t(replicate(runs, mnnd(randomizeSample(samp,null.model="richness"), dis))),
+    	phylogeny.pool = t(replicate(runs, mnnd(randomizeSample(samp,null.model="richness"),
+    		taxaShuffle(dis)))),
+    	weighted.sample.pool = t(replicate(runs, mnnd(randomizeSample(samp,
+    		null.model = "both"), dis))))
     mnnd.obs.rank <- apply(X = rbind(mnnd.obs, mnnd.rand), MARGIN = 2, 
         FUN = rank)[1, ]
     mnnd.rand.mean <- apply(X = mnnd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)

@@ -1,5 +1,6 @@
-\name{nri}
+\name{ses.mpd}
 \alias{nri}
+\alias{ses.mpd}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Net Relatedness Index }
 \description{

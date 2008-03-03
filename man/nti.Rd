@@ -1,5 +1,6 @@
-\name{nti}
+\name{ses.mnnd}
 \alias{nti}
+\alias{ses.mnnd}
 
 \title{ Nearest Taxon Index }
 \description{

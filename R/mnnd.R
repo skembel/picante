@@ -1,12 +1,12 @@
 `mnnd` <-
-function(samp,phy.dist) {
+function(samp,dis) {
 	N <- dim(samp)[1]
-	mnnd <- vector()
+	mnnd <- numeric(N)
 	for (i in 1:N) {
 		sppInSample <- names(samp[i,samp[i,]>0])
-		sample.phy.dist <- phy.dist[sppInSample,sppInSample]
-		diag(sample.phy.dist) <- NA
-		mnnd <- c(mnnd,mean(sapply(data.frame(sample.phy.dist),min,na.rm=TRUE)))
+		sample.dis <- dis[sppInSample,sppInSample]
+		diag(sample.dis) <- NA
+		mnnd[i] <- mean(apply(sample.dis,2,min,na.rm=TRUE))
 	}
 	mnnd
 }
