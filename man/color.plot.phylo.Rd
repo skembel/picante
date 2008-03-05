@@ -13,15 +13,15 @@
   main = trait,
   ...)}
 \arguments{
-  \item{phylo}{ ~~Describe \code{phylo} here~~ }
-  \item{df}{ ~~Describe \code{df} here~~ }
-  \item{trait}{ ~~Describe \code{trait} here~~ }
-  \item{taxa.names}{ ~~Describe \code{taxa.names} here~~ }
-  \item{num.breaks}{ ~~Describe \code{num.breaks} here~~ }
-  \item{col.names}{ ~~Describe \code{col.names} here~~ }
-  \item{leg.title}{ ~~Describe \code{leg.title} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
-  \item{...}{ ~~Describe \code{...} here~~ }
+  \item{phylo}{An object of class \code{phylo}}
+  \item{df}{A dataframe containing the traits to be plotted}
+  \item{trait}{A string representing the name of column in the dataframe to be plotted}
+  \item{taxa.names}{A string representing the name of column in the dataframe that contains the names of the taxa}
+  \item{num.breaks}{For continuous traits, the number of bins to separate the data into}
+  \item{col.names}{A vector of colors to use for tip labels}
+  \item{leg.title}{A title for the tip color legend}
+  \item{main}{A main title for the plot}
+  \item{...}{Additional argument to pass to the \code{plot.phylo} function}
 }
 \details{
   ...
