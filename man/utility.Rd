@@ -6,6 +6,7 @@
 \alias{phylo2phylog}
 \alias{sortColumns}
 \alias{sortRows}
+\alias{taxaShuffle}
 \title{ Picante utility functions }
 \description{
   Picante utility functions for tree and data manipulation
@@ -17,16 +18,18 @@ node.age(phy)
 phylo2phylog(phy, ...)
 sortColumns(x)
 sortRows(x)
+taxaShuffle(x, strata)
 t2p2t(phy, species)
 }
 
 \arguments{
     \item{phy}{ phylo object }
     \item{species}{ Vector of species names }
-    \item{x}{ A data.frame or matrix }
+    \item{x}{ A data.frame, matrix or dist object }
     \item{colID}{ Numeric or character ID of column to include }
   \item{int.node}{ internal node number }
   \item{return.names}{ TRUE or FALSE }
+  \item{strata}{ Strata for randomization }  
   \item{...}{Additional arguments}
 }
 
@@ -38,7 +41,11 @@ t2p2t(phy, species)
   \item{phylo2phylog}{An ade4 phylog}
   \item{sortColumns}{A data.frame or matrix with columns sorted by name}
   \item{sortRows}{A data.frame or matrix with rows sorted by name}
-  
+    \item{taxaShuffle}{Matrix with taxa names shuffled}
+}
+
+\details{
+  Various utility functions. \code{taxaShuffle} code taken from \code{\link[vegan]{mantel}}
 }
 
 \author{ Steven Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu> }
