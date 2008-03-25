@@ -7,7 +7,7 @@
   Nearest Taxon Index of community phylogenetic structure
 }
 \usage{
-nti(samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", "phylogeny.pool", "weighted.sample.pool"), runs = 99)
+ses.mnnd(samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", "phylogeny.pool", "weighted.sample.pool"), runs = 99)
 }
 
 \arguments{

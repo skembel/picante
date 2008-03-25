@@ -1,7 +1,7 @@
 \name{phylosignal}
 \alias{phylosignal}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Metrics of phylogenetic signal }
+\title{ Measure phylogenetic signal }
 \description{
   Calculates K statistic of phylogenetic signal as well as P-value based on variance of phylogenetically independent contrasts relative to tip shuffling randomization.
 }

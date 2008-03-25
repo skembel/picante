@@ -7,7 +7,7 @@
   Net Relatedness Index of community phylogenetic structure
 }
 \usage{
-nri(samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", "phylogeny.pool", "weighted.sample.pool"), runs = 99)
+ses.mpd(samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", "phylogeny.pool", "weighted.sample.pool"), runs = 99)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
