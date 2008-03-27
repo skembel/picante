@@ -1,5 +1,4 @@
 \name{utility}
-\alias{t2p2t}
 \alias{df2vec}
 \alias{internal2tips}
 \alias{node.age}
@@ -7,6 +6,7 @@
 \alias{sortColumns}
 \alias{sortRows}
 \alias{taxaShuffle}
+\alias{t2p2t}
 \title{ Picante utility functions }
 \description{
   Picante utility functions for tree and data manipulation
@@ -18,7 +18,7 @@ node.age(phy)
 phylo2phylog(phy, ...)
 sortColumns(x)
 sortRows(x)
-taxaShuffle(x, strata)
+taxaShuffle(x)
 t2p2t(phy, species)
 }
 
@@ -45,7 +45,7 @@ t2p2t(phy, species)
 }
 
 \details{
-  Various utility functions. \code{taxaShuffle} code taken from \code{\link[vegan]{mantel}}
+  Various utility functions for manipulating trees, data, etc.
 }
 
 \author{ Steven Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu> }
