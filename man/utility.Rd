@@ -6,6 +6,7 @@
 \alias{sortColumns}
 \alias{sortRows}
 \alias{taxaShuffle}
+\alias{match.tree}
 \title{ Picante utility functions }
 \description{
   Picante utility functions for tree and data manipulation
@@ -18,7 +19,7 @@ phylo2phylog(phy, ...)
 sortColumns(x)
 sortRows(x)
 taxaShuffle(x)
-t2p2t(phy, species)
+match.tree(phy, x, taxacol, traitcol, strict = FALSE)
 }
 
 \arguments{
@@ -29,12 +30,15 @@ t2p2t(phy, species)
   \item{int.node}{ internal node number }
   \item{return.names}{ TRUE or FALSE }
   \item{strata}{ Strata for randomization }  
+  \item{taxacol} {column with taxa names}
+  \item{traitcol} {column with trait values}
+  \item{strict} {logical indicating whether matching should be strict or not}
   \item{...}{Additional arguments}
 }
 
 \value{
   \item{df2vec}{A named vector}
-  \item{t2p2t}{List of species missing from phylo and vice versa}
+  \item{match.tree}{ ?????????????}
   \item{internal2tips}{Vector of tips descended from a node}
   \item{node.age}{Phylo object with phylo\$ages vector of node ages corresponding to phylo\$edge}
   \item{phylo2phylog}{An ade4 phylog}
