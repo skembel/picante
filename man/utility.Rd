@@ -6,7 +6,6 @@
 \alias{sortColumns}
 \alias{sortRows}
 \alias{taxaShuffle}
-\alias{t2p2t}
 \title{ Picante utility functions }
 \description{
   Picante utility functions for tree and data manipulation
