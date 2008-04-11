@@ -6,7 +6,10 @@
   Calculates measures of community phylogenetic structure (correlation between co-occurrence and phylogenetic distance) under various null models
 }
 \usage{
-comm.phylo.cor(samp, phylo, metric = c("cij", "jaccard", "roij"), null.model = c("sample.taxa.labels", "pool.taxa.labels", "keepFreq", "keepRichness", "weighted.sample.pool"), runs = 99)
+comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard","jaccard", "roij"),
+    null.model = c("sample.taxa.labels", "pool.taxa.labels","frequency", "richness",
+    "weighted.sample.pool"), runs = 99)
+
 }
 \arguments{
   \item{samp}{ Community data matrix }
@@ -16,8 +19,12 @@ comm.phylo.cor(samp, phylo, metric = c("cij", "jaccard", "roij"), null.model = c
   \item{runs}{ Number of runs (randomizations) }
 }
 \value{
-  \item{obs.cor }{Observed correlation}
-  \item{etc }{todo}
+  \item{obs.corr }{Observed co-occurrence/phylogenetic distance correlation}
+    obs.corr.p
+    obs.rank
+    runs = runs
+    obs.rand.p
+    random.corrs = vector(length = runs)    
   ...
 }
 \references{ Cavender-Bares et al. 2004, 2006 }
