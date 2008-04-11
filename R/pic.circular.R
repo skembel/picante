@@ -63,12 +63,17 @@ function(x, phy, scaled = TRUE, var.contrasts = FALSE)
 		des2 <- phy$edge[j, 2]
 		sumbl <- bl[i] + bl[j]
 		ic <- anc - nb.tip
-		tempcontr <- phenotype[des1]  - phenotype[des2]
+		## get the differences between the decendant nodes
+		tempcontr <- phenotype[des1] - phenotype[des2]
 		abtemp <- abs(tempcontr)
+		## sanity check on the difference
 		if(abtemp > (2 * pi)) {
 			stop("ERROR. contrast between ", substitute(phenotype[des1] ),
 			 ' and ', substitute(phenotype[des2]), "is", substitute(tempcontr))
 		}
+		## ensure that contrasts record the short distance
+		## if the diff is greater than pi recalculate 
+		## then shorter side, while retaining directionality
 		if(abtemp > pi) {
 			if(phenotype[des1]  > phenotype[des2]) {
 				tempcontr <- tempcontr - (2 * pi)
@@ -82,12 +87,14 @@ function(x, phy, scaled = TRUE, var.contrasts = FALSE)
 		if (scaled) contr[ic] <- contr[ic]/sqrt(sumbl)
 		if (var.contrasts) var.con[ic] <- sumbl
 		
+		## get vector components and weight by the branch lengths
 		sin_des1 <- sin(as.numeric(phenotype[des1])) * bl[j]
 		cos_des1 <- cos(as.numeric(phenotype[des1])) * bl[j]
 
 		sin_des2 <- sin(as.numeric(phenotype[des2])) * bl[i]
 		cos_des2 <- cos(as.numeric(phenotype[des2])) * bl[i]
-    	
+	
+		## calculate the ancestral node value
 		phenotype[anc] <- as.circular(atan2(sin_des1 + sin_des2, cos_des1 + cos_des2), 
 							type = "angles", units = "radians", template = "none", 
 							rotation = "counter", zero = 0, modulo = "2pi"
