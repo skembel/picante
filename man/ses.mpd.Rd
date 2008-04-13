@@ -7,12 +7,12 @@
   Net Relatedness Index of community phylogenetic structure
 }
 \usage{
-ses.mpd(samp, phylo.dist, null.model = c("taxa.labels", "sample.pool", "phylogeny.pool", "weighted.sample.pool"), runs = 99)
+ses.mpd(samp, dis, null.model = c("taxa.labels", "sample.pool", "phylogeny.pool", "weighted.sample.pool"), runs = 99)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{samp}{ Community data matrix }
-  \item{phylo.dist}{ Cophenetic phylogenetic distance matrix }
+  \item{dis}{ Cophenetic phylogenetic distance matrix }
   \item{null.model}{ Choice of null models }
   \item{runs}{ Number of randomizations }
 }

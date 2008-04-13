@@ -8,9 +8,9 @@
 \usage{data(phylocom)}
 \format{
 A list with three elements
-  \item{phylocom$phylo}{Phylogenetic tree}
-  \item{phylocom$sample}{Community data}
-  \item{phylocom$traits}{Trait data}
+  \item{phylocom\$phylo}{Phylogenetic tree}
+  \item{phylocom\$sample}{Community data}
+  \item{phylocom\$traits}{Trait data}
 }
 
 \source{

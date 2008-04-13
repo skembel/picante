@@ -2,8 +2,8 @@
 	# some data input error checking, all taxa in tree and x
 	# no missing data values
 	stopifnot(traitcol %in% names(x), taxacol %in% names(x),
-		class(x) == "data.frame", class(phylo) == "phylo")
-	len.tips <- length(phylo$tip.label)
+		class(x) == "data.frame", class(phy) == "phylo")
+	len.tips <- length(phy$tip.label)
 	len.taxa <- length(x[,taxacol])
 	if (any(missing <- !(phy$tip.label %in% x[, taxacol]))) {
 		stop("ERROR. phylogeny tip(s): ", phy$tip.label[missing], 

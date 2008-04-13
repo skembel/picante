@@ -3,6 +3,7 @@
 \alias{internal2tips}
 \alias{node.age}
 \alias{phylo2phylog}
+\alias{pic.variance}
 \alias{sortColumns}
 \alias{sortRows}
 \alias{taxaShuffle}
@@ -16,6 +17,7 @@ df2vec(x, colID=1)
 internal2tips(phy, int.node, return.names = FALSE)
 node.age(phy)
 phylo2phylog(phy, ...)
+pic.variance(x, phy, scaled = TRUE)
 sortColumns(x)
 sortRows(x)
 taxaShuffle(x)
@@ -24,12 +26,11 @@ match.tree(phy, x, taxacol, traitcol, strict = FALSE)
 
 \arguments{
     \item{phy}{ phylo object }
-    \item{species}{ Vector of species names }
     \item{x}{ A data.frame, matrix or dist object }
     \item{colID}{ Numeric or character ID of column to include }
   \item{int.node}{ internal node number }
   \item{return.names}{ TRUE or FALSE }
-  \item{strata}{ Strata for randomization }  
+  \item{scaled}{ Scale contrasts by branch length }
   \item{taxacol} {column with taxa names}
   \item{traitcol} {column with trait values}
   \item{strict} {logical indicating whether matching should be strict or not}
@@ -42,6 +43,7 @@ match.tree(phy, x, taxacol, traitcol, strict = FALSE)
   \item{internal2tips}{Vector of tips descended from a node}
   \item{node.age}{Phylo object with phylo\$ages vector of node ages corresponding to phylo\$edge}
   \item{phylo2phylog}{An ade4 phylog}
+  \item{pic.variance}{Variance of independent contrasts}
   \item{sortColumns}{A data.frame or matrix with columns sorted by name}
   \item{sortRows}{A data.frame or matrix with rows sorted by name}
     \item{taxaShuffle}{Matrix with taxa names shuffled}

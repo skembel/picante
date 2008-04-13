@@ -6,7 +6,7 @@
   Various null models for randomizing community data matrices
 }
 \usage{
-randomizeSample(samp, null.model = c("keepFreq", "keepRichness", "keepBoth"))
+randomizeSample(samp, null.model = c("frequency", "richness", "both"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

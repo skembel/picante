@@ -5,12 +5,13 @@
 \description{
   Compute various indices of species co-occurrence
 }
+
 \usage{
-species.dist(samp, metric = c("cij", "jaccard", "roij"))
+species.dist(x, metric = c("cij", "jaccard", "checkerboard", "roij"))
 }
 
 \arguments{
-  \item{samp}{ Community data matrix }
+  \item{x}{ Community data matrix }
   \item{metric}{ Distance metric to use (COij, Jaccard, ROij) }
 }
 

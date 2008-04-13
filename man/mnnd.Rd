@@ -1,17 +1,17 @@
 \name{mnnd}
 \alias{mnnd}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Mean nearest relative phylogenetic distance }
+\title{ Mean nearest neighbour distance }
 \description{
-  Calculates MNND (mean nearest neighbour or relative phylogenetic distance) for a community 
+  Calculates MNND (mean nearest neighbour distance) for a community
 }
 \usage{
-mnnd(samp, phy.dist)
+mnnd(samp, dis)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{samp}{ Phylocom sample file }
-  \item{phy.dist}{ Cophenetic phylogenetic distance matrix }
+  \item{dis}{ Interspecific (e.g. phylogenetic) distance matrix }
 }
 \value{
 	Vector of MNND values for each community

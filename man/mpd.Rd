@@ -1,16 +1,16 @@
 \name{mpd}
 \alias{mpd}
-\title{ Mean pairwise phylogenetic distance }
+\title{ Mean pairwise distance }
 \description{
-  Calculates mean pairwise phylogenetic distance for a community
+  Calculates mean pairwise distance for a community
 }
 \usage{
-mpd(samp, phy.dist)
+mpd(samp, dis)
 }
 
 \arguments{
   \item{samp}{ Community data matrix }
-  \item{phy.dist}{ Cophenetic phylogenetic distance matrix }
+  \item{dis}{ Interspecific (e.g. phylogenetic) distance matrix }
 }
 
 \value{

@@ -1,4 +1,4 @@
-corr.table <- function (x, cor.method = "pearson", cor.type=c("standard","contrast")) 
+cor.table <- function (x, cor.method = "pearson", cor.type=c("standard","contrast")) 
 {
     cor.type <- match.arg(cor.type)
     if (identical(cor.type,"standard")) {
