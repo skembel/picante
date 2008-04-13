@@ -24,7 +24,7 @@
   \item{...}{Additional argument to pass to the \code{plot.phylo} function}
 }
 \details{
-  ...
+  If if \code{trait} is a factor then each level of the factor is plotted with the corresponding \code{col.names} value (if \code{length(num.breaks) > length(col.names)} colors are recycled.) If \code{trait} is not a factor then it is assumed to be continuous and \code{trait} is evenly divided into \code{num.breaks} levels.
 }
 \value{
   The command is invoked for it's side effect, a plot of the \code{phylo} with tips colored based on \code{trait}
