@@ -1,6 +1,6 @@
 \name{Kcalc}
 \alias{Kcalc}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{ K statistic of phylogenetic signal }
 \description{
   Calculates K statistic of phylogenetic signal
@@ -17,7 +17,7 @@ Kcalc(x, phy)
 \value{
   \item{K }{K statistic}
 }
-\references{ Blomberg and Garland 2002 Evolution}
+\references{ Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for phylogenetic signal in comparative data: behavioral traits are more labile. Evolution 57:717-745.}
 \author{ Simon Blomberg <s.blomberg1@uq.edu.au> and David Ackerly <dackerly@berkeley.edu> }
 
 \seealso{ \code{\link{phylosignal}} }

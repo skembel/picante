@@ -1,6 +1,6 @@
 \name{phylosignal}
 \alias{phylosignal}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{ Measure phylogenetic signal }
 \description{
   Calculates K statistic of phylogenetic signal as well as P-value based on variance of phylogenetically independent contrasts relative to tip shuffling randomization.
@@ -22,7 +22,12 @@ phylosignal(x, phy, reps = 999, ...)
   \item{PIC.variance.P }{P-value of observed vs. random variance of PICs}
    \item{PIC.variance.z }{Z-score of observed vs. random variance of PICs}
 }
-\references{ Blomberg and Garland. 2002. Evolution. }
+\references{ Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for phylogenetic signal in comparative data: behavioral traits are more labile. Evolution 57:717-745. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \seealso{ \code{\link{Kcalc}} }
+\examples{
+randtree <- rcoal(20)
+randtraits <- evolve.brownian(randtree)
+phylosignal(randtraits[randtree$tip.label],randtree)
+}
 \keyword{univar}
