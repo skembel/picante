@@ -11,7 +11,7 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 	phylo.dist <- as.dist(cophenetic(sample.prune(samp,phylo)))
 	pool.phylo.dist <- as.dist(cophenetic(phylo))
 	taxa.names <- rownames(as.matrix(phylo.dist))
-	samp.dist <- species.dist(samp,metric)
+	samp.dist <- as.dist(as.matrix(species.dist(samp,metric))[taxa.names,taxa.names])
 	results$obs.corr <- cor(phylo.dist,samp.dist,use="pairwise")
 	results$obs.corr.p <- cor.test(phylo.dist,samp.dist)$p.value
 	if (null.model=="sample.taxa.labels") for (run in 1:runs)
