@@ -8,7 +8,7 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 	null.model <- match.arg(null.model)
 	results <- list("obs.corr"=NA,"obs.corr.p"=NA,"obs.rank"=NA,"runs"=runs,
 			"obs.rand.p"=NA,"random.corrs"=vector(length=runs))
-	phylo.dist <- as.dist(cophenetic(sample.prune(samp,phylo)))
+	phylo.dist <- as.dist(cophenetic(prune.sample(samp,phylo)))
 	pool.phylo.dist <- as.dist(cophenetic(phylo))
 	taxa.names <- rownames(as.matrix(phylo.dist))
 	samp.dist <- as.dist(as.matrix(species.dist(samp,metric))[taxa.names,taxa.names])

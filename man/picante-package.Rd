@@ -6,7 +6,7 @@
 Picante: Phylocom Integration, Community Analyses, Null-models, Traits, and Evolution in R
 }
 \description{
-Collection of functions for integrating ecology and evolutionary biology.
+Collection of functions for integrating ecology and evolutionary biology
 }
 \details{
 \tabular{ll}{

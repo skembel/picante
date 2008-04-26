@@ -57,16 +57,16 @@ phylosignal <- function(x,phy,reps=999,...) {
 }
 
 'multiPhylosignal' <-
-function(x,tree,...) {
+function(x,phy,...) {
 	trait <- x[,1]
 	names(trait) <- row.names(x)
-	pruned <- pruneMissing(trait,tree)
+	pruned <- prune.missing(trait,phy)
 	output <- data.frame(phylosignal(pruned$data,pruned$tree,...))
 	if(length(colnames(x))>1) {
 		for (i in 2:length(colnames(x))) {
 			trait <- x[,i]
 			names(trait) <- row.names(x)
-			pruned <- pruneMissing(trait,tree)
+			pruned <- prune.missing(trait,phy)
 			output <- rbind(output,phylosignal(pruned$data,pruned$tree,...))
 		}
 	}
