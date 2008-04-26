@@ -5,11 +5,11 @@
   Calculates phylogenetic signal for data.frame of traits. Traits may have missing values in which case the tree will be pruned prior to calculating phylogenetic signal for each trait.
 }
 \usage{
-multiPhylosignal(x,tree,...)
+multiPhylosignal(x, phy, ...)
 }
 \arguments{
   \item{x}{ Data frame of trait data with row names corresponding to tip.labels }
-  \item{tree}{ phylo object }
+  \item{phy}{ phylo object }
   \item{...}{ Additional arguments to phylosignal }
 }
 \value{
