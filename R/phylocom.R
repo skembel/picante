@@ -10,7 +10,7 @@ function(x) {
 	colnames(x) <- c("plot","abund","id")
     y <- tapply(x$abund, list(x$plot, x$id), sum)
     y[is.na(y)] <- 0
-    y
+    as.data.frame(y)
 }
 
 `matrix2sample` <-
