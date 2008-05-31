@@ -8,12 +8,13 @@
 multiPhylosignal(x, phy, ...)
 }
 \arguments{
-  \item{x}{ Data frame of trait data with row names corresponding to tip.labels }
+  \item{x}{ Data frame of trait data (traits in columns) with row names corresponding to tip.labels}
   \item{phy}{ phylo object }
-  \item{...}{ Additional arguments to phylosignal }
+  \item{...}{ Additional arguments to \link{phylosignal} }
 }
 \value{
   Returns a data frame with phylogenetic signal results for each trait
 }
+\section{Warning }{ Assumes that trait data are sorted in the same order as phylo tip.label }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \keyword{univar}

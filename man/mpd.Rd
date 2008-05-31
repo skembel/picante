@@ -10,13 +10,13 @@ mpd(samp, dis)
 
 \arguments{
   \item{samp}{ Community data matrix }
-  \item{dis}{ Interspecific (e.g. phylogenetic) distance matrix }
+  \item{dis}{ Interspecific distance matrix }
 }
 
 \value{
   Vector of MPD values for each community
 }
-\references{ Webb et al. 2002. ARES. }
+\references{ Webb, C., D. Ackerly, M. McPeek, and M. Donoghue. 2002. Phylogenies and community ecology. Annual Review of Ecology and Systematics 33:475-505. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \seealso{ \code{\link{ses.mpd}}}
 \keyword{univar}

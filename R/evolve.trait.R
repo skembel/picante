@@ -6,7 +6,7 @@ function(phy,value=0,var=1) {
 }
 
 
-`evolve.trait` <-
+`.evolve.trait` <-
 function(phy,
 	x.root=0, #root value
 	sigma = 1, #brownian motion st. dev.

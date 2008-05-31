@@ -1,18 +1,22 @@
 \name{sample2matrix}
 \alias{sample2matrix}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{ Convert Phylocom sample to community data matrix }
 \description{
-  Convert Phylocom sample to community data matrix
+  Convert a Phylocom sample to community data matrix
 }
 \usage{
 sample2matrix(x)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
-  \item{x}{ Phylocom sample formatted data frame }
+  \item{x}{ Phylocom sample formatted data frame, a data frame with three columns:
+    \item{Column 1}{Community name}
+    \item{Column 2}{Species abundance}
+    \item{Column 3}{Species name}        
+  }
 }
 
-\references{ Webb et al. 2007. Phylocom. }
+\references{   Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. URL: http://www.phylodiversity.net/phylocom/.}
 \author{ Steve Kembel <skembel@berkeley.edu> and Cam Webb <cwebb@oeb.harvard.edu> }
 \keyword{IO}

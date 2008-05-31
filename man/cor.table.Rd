@@ -7,7 +7,7 @@
 \usage{
 cor.table(x, cor.method = "pearson", cor.type=c("standard","contrast")) 
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{x}{ Data frame of data points or contrasts at nodes }
   \item{cor.method}{ Correlation method (as \code{\link{cor}}) }
@@ -20,7 +20,7 @@ cor.table(x, cor.method = "pearson", cor.type=c("standard","contrast"))
   \item{P}{P-values}
 }
 
-\references{ Garland et al. 1992 }
+\references{ Garland, T., Jr., P. H. Harvey, and A. R. Ives. 1992. Procedures for the analysis of comparative data using phylogenetically independent contrasts. Systematic Biology 41:18-32. }
 
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \keyword{univar}

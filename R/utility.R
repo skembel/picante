@@ -1,4 +1,4 @@
-`match.tree` <- function(phy, x, taxacol, traitcol, strict = FALSE) {
+`.match.tree` <- function(phy, x, taxacol, traitcol, strict = FALSE) {
 	# some data input error checking, all taxa in tree and x
 	# no missing data values
 	stopifnot(traitcol %in% names(x), taxacol %in% names(x),

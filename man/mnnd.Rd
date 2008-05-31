@@ -1,22 +1,21 @@
 \name{mnnd}
 \alias{mnnd}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Mean nearest neighbour distance }
 \description{
-  Calculates MNND (mean nearest neighbour distance) for a community
+  Calculates MNND (mean nearest neighbour distance) for taxa in a community
 }
 \usage{
 mnnd(samp, dis)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
-  \item{samp}{ Phylocom sample file }
-  \item{dis}{ Interspecific (e.g. phylogenetic) distance matrix }
+  \item{samp}{ Community data matrix }
+  \item{dis}{ Interspecific distance matrix }
 }
 \value{
-	Vector of MNND values for each community
+	Vector of MNND values for each community.
 }
-\references{ Webb et al. 2002. ARES. }
+\references{ Webb, C., D. Ackerly, M. McPeek, and M. Donoghue. 2002. Phylogenies and community ecology. Annual Review of Ecology and Systematics 33:475-505. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
 \seealso{ \code{\link{ses.mnnd}} }
 \keyword{univar}

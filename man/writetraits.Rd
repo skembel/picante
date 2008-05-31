@@ -12,10 +12,10 @@ writetraits(trt, file = "", bin = NULL, sigd = 3)
 \arguments{
   \item{trt}{ Data frame containing trait data }
   \item{file}{ Filename path }
-  \item{bin}{ Vector index of trait columns to be treated as binary  }
+  \item{bin}{ Vector index of trait columns to be treated as binary }
   \item{sigd}{ Significant digits for output }
 }
 
-\references{ Webb et al. 2007. Phylocom. }
+\references{ Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. URL: http://www.phylodiversity.net/phylocom/. }
 \author{ David Ackerly <dackerly@berkeley.edu> and Steve Kembel <skembel@berkeley.edu> }
 \keyword{file}

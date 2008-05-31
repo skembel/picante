@@ -21,25 +21,20 @@ pic.variance(x, phy, scaled = TRUE)
 sortColumns(x)
 sortRows(x)
 taxaShuffle(x)
-match.tree(phy, x, taxacol, traitcol, strict = FALSE)
 }
 
 \arguments{
     \item{phy}{ phylo object }
     \item{x}{ A data.frame, matrix or dist object }
     \item{colID}{ Numeric or character ID of column to include }
-  \item{int.node}{ internal node number }
-  \item{return.names}{ TRUE or FALSE }
-  \item{scaled}{ Scale contrasts by branch length }
-  \item{taxacol} {column with taxa names}
-  \item{traitcol} {column with trait values}
-  \item{strict} {logical indicating whether matching should be strict or not}
-  \item{...}{Additional arguments}
+    \item{int.node}{ internal node number }
+    \item{return.names}{ TRUE or FALSE }
+    \item{scaled}{ Scale contrasts by branch length }
+    \item{...}{Additional arguments}
 }
 
 \value{
   \item{df2vec}{A named vector}
-  \item{match.tree}{ ?????????????}
   \item{internal2tips}{Vector of tips descended from a node}
   \item{node.age}{Phylo object with phylo\$ages vector of node ages corresponding to phylo\$edge}
   \item{phylo2phylog}{An ade4 phylog}
@@ -53,5 +48,5 @@ match.tree(phy, x, taxacol, traitcol, strict = FALSE)
   Various utility functions for manipulating trees, data, etc.
 }
 
-\author{ Steven Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu> }
+\author{ Steven Kembel <skembel@berkeley.edu>, Peter Cowan <pdc@berkeley.edu>, David Ackerly <dackerly@berkeley.edu> }
 \keyword{manip}
