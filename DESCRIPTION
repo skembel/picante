@@ -6,6 +6,6 @@ Date: 2008-5-30
 Author: Steve Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu>, Simon Blomberg <s.blomberg1@uq.edu.au>, Peter Cowan <pdc@berkeley.edu>, Cam Webb <cwebb@oeb.harvard.edu>
 Maintainer: Steve Kembel <skembel@berkeley.edu>
 Depends: ape, vegan
-Suggests: circular, ade4
+Suggests: circular
 Description: Phylocom integration, community analyses, null-models, traits and evolution in R
 License: GPL v2

@@ -16,7 +16,6 @@
 df2vec(x, colID=1)
 internal2tips(phy, int.node, return.names = FALSE)
 node.age(phy)
-phylo2phylog(phy, ...)
 pic.variance(x, phy, scaled = TRUE)
 sortColumns(x)
 sortRows(x)
@@ -37,7 +36,6 @@ taxaShuffle(x)
   \item{df2vec}{A named vector}
   \item{internal2tips}{Vector of tips descended from a node}
   \item{node.age}{Phylo object with phylo\$ages vector of node ages corresponding to phylo\$edge}
-  \item{phylo2phylog}{An ade4 phylog}
   \item{pic.variance}{Variance of independent contrasts}
   \item{sortColumns}{A data.frame or matrix with columns sorted by name}
   \item{sortRows}{A data.frame or matrix with rows sorted by name}
