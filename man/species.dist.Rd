@@ -3,7 +3,7 @@
 
 \title{ Species co-occurrence distances}
 \description{
-  Compute interspecific distances based on patterns of species co-occurrence in communities
+  Compute interspecific distances based on patterns of species co-occurrence in communities.
 }
 
 \usage{

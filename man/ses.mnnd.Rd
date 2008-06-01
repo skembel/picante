@@ -29,13 +29,13 @@ ses.mnnd(samp, dis, null.model = c("taxa.labels", "sample.pool",
   \item{mpd.rand.mean}{Mean MNND in null communities}
   \item{mpd.rand.sd}{Standard deviation of MNND in null communities}
   \item{mpd.obs.rank}{Rank of observed MNND vs. null communities}
-  \item{mpd.obs.z}{Standardized effect size of MNND vs. null communities (= mpd.obs - mpd.rand.mean / mpd.rand.sd, equivalent to -NTI)}
+  \item{mpd.obs.z}{Standardized effect size of MNND vs. null communities (= (mpd.obs - mpd.rand.mean) / mpd.rand.sd, equivalent to -NTI)}
   \item{mpd.obs.p}{P-value (quantile) of observed MNND vs. null communities (= mpd.obs.rank / runs + 1)}
   \item{runs}{Number of randomizations}  
 }
-\references{ Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. URL: http://www.phylodiversity.net/phylocom/. }
+\references{ Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. \url{http://www.phylodiversity.net/phylocom/}. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
-\section{Warning }{Weighted sample pool null ONLY works with presence-absence data} 
+\section{Warning }{ Weighted null model currently only works with presence-absence data. Convert your data to presence-absence before using this null model (e.g. \code{decostand(x,method="pa")})}
 \seealso{ \code{\link{mnnd}} }
 \examples{
 data(phylocom)

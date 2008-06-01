@@ -3,24 +3,25 @@
 
 \title{ Correlations between species co-occurrence and phylogenetic distances }
 \description{
-  Calculates measures of community phylogenetic structure (correlation between co-occurrence and phylogenetic distance) under various null models
+  Calculates measures of community phylogenetic structure (correlation between co-occurrence and phylogenetic distance) to patterns expected under various null models
 }
 \usage{
-comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard","jaccard", "roij"),
-    null.model = c("sample.taxa.labels", "pool.taxa.labels","frequency", "richness",
-    "weighted.sample.pool"), runs = 99)
+comm.phylo.cor(samp, phylo,
+    metric = c("cij", "checkerboard","jaccard", "roij"),
+    null.model = c("sample.taxa.labels", "pool.taxa.labels","frequency",
+    "richness", "weighted.sample.pool"), runs = 99)
 
 }
 \arguments{
   \item{samp}{ Community data matrix }
   \item{phylo}{ Phylogenetic tree }
   \item{metric}{ Metric of co-occurrence to use (see \code{\link{species.dist}})}
-  \item{null.model}{ Null model to use
-    \item{sample.taxa.labels}{Shuffle phylogeny tip labels (only within set of taxa present in community data)}
-    \item{pool.taxa.labels}{Shuffle phylogeny tip labels (across all taxa included in phylogenetic tree)}
-    \item{frequency}{Randomize community data matrix abundances within species (maintains species occurence frequency)}
-    \item{richness}{Randomize community data matrix abundances within samples (maintains sample species richness)}
-    \item{weighted.sample.pool}{Randomize community data matrix by drawing species from sample pool with probability weighted by occurrence frequency}
+  \item{null.model}{ Null model to use:
+        \item{sample.taxa.labels}{Shuffle phylogeny tip labels (only within set of taxa present in community data)}
+        \item{pool.taxa.labels}{Shuffle phylogeny tip labels (across all taxa included in phylogenetic tree)}
+        \item{frequency}{Randomize community data matrix abundances within species (maintains species occurence frequency)}
+        \item{richness}{Randomize community data matrix abundances within samples (maintains sample species richness)}
+        \item{weighted.sample.pool}{Randomize community data matrix by drawing species from sample pool with probability weighted by occurrence frequency}
   }
   \item{runs}{ Number of runs (randomizations) }
 }
