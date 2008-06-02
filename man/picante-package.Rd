@@ -14,7 +14,7 @@ Package: \tab picante\cr
 Type: \tab Package\cr
 Version: \tab 0.1-2\cr
 Date: \tab 2008-05-30\cr
-License: \tab GPL v2\cr
+License: \tab GPL-2\cr
 }
 }
 \author{
