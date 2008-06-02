@@ -2,12 +2,10 @@
 \alias{df2vec}
 \alias{internal2tips}
 \alias{node.age}
-\alias{phylo2phylog}
 \alias{pic.variance}
 \alias{sortColumns}
 \alias{sortRows}
 \alias{taxaShuffle}
-\alias{match.tree}
 \title{ Picante utility functions }
 \description{
   Picante utility functions for tree and data manipulation
