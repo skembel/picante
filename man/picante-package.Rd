@@ -12,13 +12,13 @@ Collection of functions for integrating ecology and evolutionary biology
 \tabular{ll}{
 Package: \tab picante\cr
 Type: \tab Package\cr
-Version: \tab 0.1-2\cr
-Date: \tab 2008-05-30\cr
+Version: \tab 0.2-0\cr
+Date: \tab 2008-06-10\cr
 License: \tab GPL-2\cr
 }
 }
 \author{
-Steve Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu>, Simon Blomberg <s.blomberg1@uq.edu.au>, Peter Cowan <pdc@berkeley.edu>, Cam Webb <cwebb@oeb.harvard.edu>
+Steve Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu>, Simon Blomberg <s.blomberg1@uq.edu.au>, Peter Cowan <pdc@berkeley.edu>, Matthew Helmus <mrhelmus@wisc.edu>, Cam Webb <cwebb@oeb.harvard.edu>
 
 Maintainer: Steve Kembel <skembel@berkeley.edu>
 }
