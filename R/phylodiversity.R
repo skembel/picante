@@ -123,3 +123,363 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
     data.frame(ntaxa=specnumber(samp),mnnd.obs, mnnd.rand.mean, mnnd.rand.sd, mnnd.obs.rank, 
         mnnd.obs.z, mnnd.obs.p=mnnd.obs.rank/(runs+1),runs=runs, row.names = row.names(samp))
 }
+
+psv<-function(samp,tree,compute.var=TRUE){
+  # Make samp matrix a pa matrix
+  samp[samp>0]<-1
+  
+  flag=0
+  if (is.null(dim(samp))) #if the samp matrix only has one site
+  {
+    samp<-rbind(samp,samp)
+    flag=2
+  }
+
+  if(is(tree)[1]=="phylo")
+  {
+    tree<-prune.sample(samp,tree)
+    # Make sure that the species line up
+    samp<-samp[,tree$tip.label]
+    # Make a correlation matrix of the species pool phylogeny
+    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+  } else {
+    Cmatrix<-tree
+    species<-colnames(samp)
+    preval<-colSums(samp)/sum(samp)
+    species<-species[preval>0]
+    Cmatrix<-Cmatrix[species,species]
+    samp<-samp[,colnames(Cmatrix)]
+  }
+  
+    # reduce given Cmatrix to the species observed in samp
+    SR<-rowSums(samp)
+    samp<-samp[SR>1,] # prune out locations with <2 species
+    SR<-SR[SR>1]
+  
+    #cull the species that are not found in the samp set after all communities with 1 species are removed
+    preval<-colSums(samp)/sum(samp)
+    indexcov<-preval>0
+    Cmatrix<-Cmatrix[indexcov,indexcov]
+    samp<-samp[,indexcov]
+  
+    # numbers of locations and species
+    nlocations<-dim(samp)[1]
+    nspecies<-dim(samp)[2]
+  
+    ##################################
+    # calculate observed PSVs
+    #
+    PSVs<-NULL
+  
+    for(i in 1:nlocations)
+    {
+      index<-seq(1:nrow(Cmatrix))[samp[i,]==1]	#species present
+      n<-length(index)			#number of species present
+      C<-Cmatrix[index,index]	#C for individual locations
+      PSV<-(n*sum(diag(as.matrix(C)))-sum(C))/(n*(n-1))
+      PSVs<-c(PSVs,PSV)
+    }
+      PSVout<-cbind(PSVs,SR)
+  
+  if(flag==2)
+  {
+    PSVout<-PSVout[-2,]
+    return(PSVout)
+  } else {
+    if(compute.var==FALSE) 
+    {
+      return(data.frame(PSVout))
+    } else {
+    
+      PSVvar<-NULL
+      X<-Cmatrix-(sum(sum(Cmatrix-diag(nspecies))))/(nspecies*(nspecies-1));
+      X<-X-diag(diag(X))
+  
+      SS1<-sum(X*X)/2
+  
+      SS2<-0;
+      for(i in 1:(nspecies-1)){
+        for(j in (i+1):nspecies){
+          SS2<-SS2+X[i,j]*(sum(X[i,])-X[i,j])
+        }
+      }
+      SS3<--SS1-SS2
+  
+      S1<-SS1*2/(nspecies*(nspecies-1))
+      S2<-SS2*2/(nspecies*(nspecies-1)*(nspecies-2))
+  
+      if(nspecies==3){
+        S3<-0
+      }else{
+      S3<-SS3*2/(nspecies*(nspecies-1)*(nspecies-2)*(nspecies-3))
+      }
+  
+      for(n in 2:nspecies){
+        approxi<-2/(n*(n-1))*(S1 + (n-2)*S2 + (n-2)*(n-3)*S3)
+        PSVvar<-rbind(PSVvar, c(n, approxi))
+      }
+  
+      vars<-rep(0,nlocations)
+      PSVout<-cbind(PSVout,vars)
+  
+      for (g in 1:nlocations)
+      {
+        PSVout[g,3]<-PSVvar[PSVout[g,2]-1,2]
+      }
+      return(data.frame(PSVout))
+    }
+  }
+}
+
+
+psr <- function(samp,tree,compute.var=TRUE){
+  PSVout<-psv(samp,tree,compute.var)
+  if(is.null(dim(PSVout))==TRUE) 
+  {
+    PSRout<-data.frame(cbind(PSVout[1]*PSVout[2],PSVout[2]))
+    names(PSRout)<-c("PSR","SR")
+    rownames(PSRout)<-""
+    return(PSRout)
+  } else {
+    PSRout<-cbind(PSVout[,1]*PSVout[,2],PSVout[,2])
+    if(compute.var!=TRUE) {
+      colnames(PSRout)<-c("PSR","SR")
+      return(data.frame(PSRout))
+    } else {
+      PSRout<-cbind(PSRout,PSVout[,3]*(PSVout[,2])^2)       
+      colnames(PSRout)<-c("PSR","SR","vars")
+      return(data.frame(PSRout))
+    }
+  }
+}
+
+pse<-function(samp,tree){
+  flag=0
+  if (is.null(dim(samp))) #if the samp matrix only has one site
+  {
+    samp<-rbind(samp,samp)
+    flag=2
+  }
+
+  if(is(tree)[1]=="phylo")
+  {
+    tree<-prune.sample(samp,tree) 
+    # Make sure that the species line up
+    samp<-samp[,tree$tip.label]
+    # Make a correlation matrix of the species pool phylogeny
+    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+  } else {
+    Cmatrix<-tree
+    species<-colnames(samp)
+    preval<-colSums(samp)/sum(samp)
+    species<-species[preval>0]
+    Cmatrix<-Cmatrix[species,species]
+    samp<-samp[,colnames(Cmatrix)]
+  }
+  
+  # reduce given Cmatrix to the species observed in samp
+  SR<-apply(samp>0,1,sum)
+  # prune out locations with <2 species
+  samp<-samp[SR>1,]
+  SR<-SR[SR>1]
+
+  #cull the species that are not found in the samp set after all communities with 1 species are removed
+  preval<-colSums(samp)/sum(samp)
+  indexcov<-preval>0
+  Cmatrix<-Cmatrix[indexcov,indexcov]
+  samp<-samp[,indexcov]
+
+  # numbers of locations and species
+  nlocations<-dim(samp)[1]
+  nspecies<-dim(samp)[2]
+
+  #################################
+  # calculate observed phylogenetic species evenness
+  PSEs<-NULL
+  for(i in 1:nlocations){
+    index<-seq(1,ncol(Cmatrix))[samp[i,]>0]	  # species present
+    C<-Cmatrix[index,index]		                #C for individual locations
+    n<-length(index)                          #location species richness
+    N<-sum(samp[i,])                          #location total abundance
+    M<-samp[i,samp[i,]>0]                  #species abundance column
+    mbar<-mean(M)                             #mean species abundance
+    PSE<-(N*t(diag(as.matrix(C)))%*%M-t(M)%*%as.matrix(C)%*%M)/(N^2-N*mbar)   #phylogenetic species evenness
+    PSEs<-c(PSEs,PSE)
+  }
+  PSEout=cbind(PSEs,SR)
+  if (flag==2)
+  {
+    PSEout<-PSEout[-2,]
+    return(PSEout)  
+  } else {
+    return(data.frame(PSEout))
+  }
+}
+
+psc<-function(samp,tree){
+  # Make samp matrix a pa matrix
+  samp[samp>0]<-1
+  flag=0
+  if (is.null(dim(samp))) #if the samp matrix only has one site
+  {
+    samp<-rbind(samp,samp)
+    flag=2
+  }
+
+  if(is(tree)[1]=="phylo")
+  {
+    tree<-prune.sample(samp,tree)
+    # Make sure that the species line up
+    samp<-samp[,tree$tip.label]
+    # Make a correlation matrix of the species pool phylogeny
+    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+  } else {
+    Cmatrix<-tree
+    species<-colnames(samp)
+    preval<-colSums(samp)/sum(samp)
+    species<-species[preval>0]
+    Cmatrix<-Cmatrix[species,species]
+    samp<-samp[,colnames(Cmatrix)]
+  }
+
+  # reduce given Cmatrix to the species observed in samp
+  SR<-rowSums(samp)
+  samp<-samp[SR>1,] # prune out locations with <2 species
+  SR<-SR[SR>1]
+
+  #cull the species that are not found in the samp set after all communities with 1 species are removed
+  preval<-colSums(samp)/sum(samp)
+  indexcov<-preval>0
+  Cmatrix<-Cmatrix[indexcov,indexcov]
+  samp<-samp[,indexcov]
+
+  # numbers of locations and species
+  nlocations<-dim(samp)[1]
+  nspecies<-dim(samp)[2]
+
+  ##################################
+  # calculate observed PSCs
+  #
+  PSCs<-NULL
+
+  for(i in 1:nlocations)
+  {
+    index<-seq(1:nrow(Cmatrix))[samp[i,]==1]	#species present
+    n<-length(index)			#number of species present
+    C<-Cmatrix[index,index]	#C for individual locations
+    diag(C)<--1
+    PSC<-sum(apply(C,1,max))/n
+    PSCs<-c(PSCs,PSC)
+  }
+    PSCout<-cbind(PSCs,SR)
+ if (flag==2)
+  {
+    PSCout<-PSCout[-2,]
+    return(PSCout)  
+  } else {
+    return(data.frame(PSCout))
+  }
+}
+
+psv.spp<-function(samp,tree){
+  # Make samp matrix a pa matrix
+  samp[samp>0]<-1
+  if (is.null(dim(samp))) #if the samp matrix only has one site
+  {
+    samp<-rbind(samp,samp)
+  }  
+  if(is(tree)[1]=="phylo")
+  {
+    tree<-prune.sample(samp,tree)
+    # Make sure that the species line up
+    samp<-samp[,tree$tip.label]
+    # Make a correlation matrix of the species pool phylogeny
+    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+  } else {
+    Cmatrix<-tree
+    species<-colnames(samp)
+    preval<-colSums(samp)/sum(samp)
+    species<-species[preval>0]
+    Cmatrix<-Cmatrix[species,species]
+    samp<-samp[,colnames(Cmatrix)]
+  }
+  # reduce given Cmatrix to the species observed in samp
+  samp<-samp[rowSums(samp)>1,] # prune out locations with <2 species
+
+  #cull the species that are not found in the samp set after all communities with 1 species are removed
+  preval<-colSums(samp)/sum(samp)
+  indexcov<-preval>0
+  Cmatrix<-Cmatrix[indexcov,indexcov]
+  samp<-samp[,indexcov]
+
+  obs.PSV<-mean(psv(samp,Cmatrix,compute.var=FALSE)[,1])
+
+  # numbers of locations and species
+  nlocations<-dim(samp)[1]
+  nspecies<-dim(samp)[2]
+
+  spp.PSVs<-NULL
+  for (j in 1:nspecies)
+  {
+    spp.samp<-samp[,-j]
+    spp.Cmatrix<-Cmatrix[-j,-j]
+    spp.PSV<-mean(psv(spp.samp,spp.Cmatrix,compute.var=FALSE)[,1])
+    spp.PSVs<-c(spp.PSVs,spp.PSV)
+  }
+  spp.PSVout<-(spp.PSVs-obs.PSV)/sum(abs(spp.PSVs-obs.PSV))
+  names(spp.PSVout)<-colnames(samp)
+  return(spp.PSVout)
+}
+
+psd<-function(samp,tree,compute.var=TRUE){
+  if (is.null(dim(samp))) #if the samp matrix only has one site
+  {
+    PSDout<-data.frame(c(psv(samp,tree,compute.var)[1],psc(samp,tree)[1],psr(samp,tree,compute.var)[1],pse(samp,tree)))
+    names(PSDout)<-c("PSV","PSC","PSR","PSE","SR")
+    return(PSDout)
+  } else {
+    if (compute.var==TRUE)
+    {
+      PSDout<-cbind(psv(samp,tree,compute.var)[,c(1,3)],psc(samp,tree)[,1],psr(samp,tree,compute.var)[,c(1,3)],pse(samp,tree))
+      colnames(PSDout)<-c("PSV","var.PSV","PSC","PSR","var.PSR","PSE","SR")
+    } else {
+      PSDout<-cbind(psv(samp,tree,compute.var)[,1],psc(samp,tree)[,1],psr(samp,tree,compute.var)[,1],pse(samp,tree))
+      colnames(PSDout)<-c("PSV","PSC","PSR","PSE","SR")
+    }
+    return(data.frame(PSDout))
+  }
+}
+
+pd<-function(samp,tree){
+  
+  # Make sure that the species line up
+  tree<-prune.sample(samp,tree)
+  samp<-samp[,tree$tip.label]
+  species<-colnames(samp)
+  
+  # reduce given Cmatrix to the species observed in samp
+  SR<-rowSums(samp)
+  samp<-samp[SR>1,] # prune out locations with <2 species
+  SR<-SR[SR>1]
+
+  # numbers of locations and species
+  nlocations=dim(samp)[1]
+  nspecies=dim(samp)[2]
+
+  ##################################
+  # calculate observed PDs
+  #
+  PDs=NULL
+
+  for(i in 1:nlocations)
+  {  
+    index<-species[samp[i,]==0]	#species not in sample
+    sub.tree<-drop.tip(tree,index)
+    PDs<-c(PDs,sum(sub.tree$edge.length))
+  }
+  
+  PDout<-data.frame(cbind(PDs,SR))
+  rownames(PDout)<-rownames(samp) 
+  return(PDout)
+}
+
