@@ -10,7 +10,7 @@ cor.table(x, cor.method = "pearson", cor.type=c("standard","contrast"))
 
 \arguments{
   \item{x}{ Data frame of data points or contrasts at nodes }
-  \item{cor.method}{ Correlation method (as \code{\link{cor}}) }
+  \item{cor.method}{ Correlation method (as \code{\link[stats]{cor}}) }
   \item{cor.type}{ Are data \code{standard} or independent \code{contrast} values?}
 }
 
