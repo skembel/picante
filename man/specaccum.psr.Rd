@@ -30,8 +30,8 @@ The function returns an object of class \code{"specaccum"} with items:
 
 \references{ Gotelli N.J. & Colwell R.K. (2001) Quantifying biodiversity: procedures and pitfalls in the measurement and comparison of species richness. Ecology Letters, 4, 379-391\cr
               \cr Helmus M.R., Bland T.J., Williams C.K. & Ives A.R. (2007) Phylogenetic measures of biodiversity. American Naturalist, 169, E68-E83 }
-\author{ Matthew Helmus \email{mrhelmus@gmail.com}
- }
+\author{ Matthew Helmus \email{mrhelmus@gmail.com} based on the \code{vegan} package \link[vegan]{specaccum} function by Roeland Kindt and Jari Oksanen. }
 \seealso{ \code{\link{psr}}, \code{\link[vegan]{specaccum}}}
 
 \keyword{univar}
+                                                                                                                 

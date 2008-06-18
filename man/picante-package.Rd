@@ -13,7 +13,7 @@ Collection of functions for integrating ecology and evolutionary biology
 Package: \tab picante\cr
 Type: \tab Package\cr
 Version: \tab 0.2-0\cr
-Date: \tab 2008-06-10\cr
+Date: \tab 2008-06-17\cr
 License: \tab GPL-2\cr
 }
 }
