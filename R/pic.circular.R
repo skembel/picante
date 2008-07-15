@@ -44,7 +44,7 @@ function(x, phy, scaled = TRUE, var.contrasts = FALSE)
 					rotation = 'counter', zero = 0, type = 'angles', 
 					template = 'none'
 				)
-	if (all(names(x) %in% phy$tip.label)) {
+	if (!is.null(names(x)) & all(names(x) %in% phy$tip.label)) {
 		phenotype[1:nb.tip] <- x[phy$tip.label]
 	} else {
 		phenotype[1:nb.tip] <- x
