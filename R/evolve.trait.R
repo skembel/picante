@@ -25,7 +25,8 @@ function(phy,
 	use.color = FALSE, # plots with color
 	use.bl = TRUE,
 	debug = FALSE) {
-
+	# I think this code requires the tree to be in cladewise order -- pdc
+	phy <- reorder(phy, 'cladewise')
 	#print(mu)
 	phy$edge.length.original = phy$edge.length
 	minbl = min(phy$edge.length)
@@ -153,6 +154,7 @@ function(phy,
 		} else {
 			plot.phylo(phy,show.tip.label=FALSE)
 		}
+		## TODO scale bar often overlaps with bottom branch
 		add.scale.bar(0,1,set.minbl)	
 		
 		plot(c(0,max.ht),c(min.trait,max.trait),type='n',xlab='time',ylab='trait value')
