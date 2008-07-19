@@ -35,8 +35,8 @@ specaccum.psr<-function (samp, tree, permutations = 100, method = "random", ...)
     perm[, i]<-r.x
   }
   sites <- 1:n
-  specaccum <- apply(perm, 1, mean)
-  sdaccum <- apply(perm, 1, sd)
+  specaccum <- apply(perm, 1, mean, na.rm=TRUE)
+  sdaccum <- apply(perm, 1, sd, na.rm=TRUE)
   out <- list(call = match.call(), method = method, sites = sites, richness = specaccum, sd = sdaccum, perm = perm)
   class(out) <- "specaccum"
   out

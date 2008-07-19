@@ -1,0 +1,62 @@
+\name{pblm}
+\alias{pblm}
+\title{ Phylogenetic Bipartite Linear Model }
+\description{
+  Fits a linear model to the association strengths of a bipartite data set with or without phylogenetic correlation among the interacting species
+}
+\usage{
+pblm(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=FALSE,nreps=10,maxit=10000,pstart=c(.5,.5))
+}
+
+\arguments{
+  \item{assocs}{ A matrix of association strengths among two sets of interacting species }
+  \item{tree1}{ A phylo tree object or a phylogenetic covariance matrix for the rows of \code{assocs} }
+  \item{tree2}{ A phylo tree object or a phylogenetic covariance matrix for the columns of \code{assocs}}
+  \item{covars1}{ A matrix of covariates (e.g., traits) for the row species of \code{assocs} }
+  \item{covars2}{ A matrix of covariates (e.g., traits) for the column species of \code{assocs} }
+  \item{bootstrap}{ logical, bootstrap confidence intervals of the parameter estimates }
+  \item{nreps}{ Number of bootstrap replicated data sets to estimate parameter CIs }
+  \item{maxit}{ as in \code{\link{optim}} }
+  \item{pstart}{ starting values of the two phylogenetic signal strength parameters passed to \code{\link{optim}} }
+}
+
+\details{
+ Fit a linear model with covariates using estimated generalized least squares to the association strengths between two sets of interacting species. 
+ Associations can be either binary or continuous. If phylogenies of the two sets of interacting species are supplied, 
+ two \emph{phyogenetic signal strength} parameters (\emph{d1} and \emph{d2}), one for each species set, based on an Ornstein-Uhlenbeck model of 
+ evolution with stabilizing selection are estimated. Values of \emph{d=1} indicate no stabilizing selection and correspond to the Brownian motion model of 
+ evolution; \emph{0<d<1} represents stabilizing selection; \emph{d=0} depicts the absence of phylogenetic correlation (i.e., a star phylogeny); and \emph{d>1} corresponds 
+ to disruptive selection where phylogenetic signal is amplified. Confidence intervals for these and the other parameters can be estimated with 
+ bootstrapping.
+ 
+ }
+
+\value{
+	The function returns a list with:
+  \item{MSE}{ total, full (each \emph{d} estimated), star (\emph{d=0}), and base (\emph{d=1}) mean squared errors }
+  \item{signal.strength}{ two estimates of phylogenetic signal strength }
+  \item{coefficients}{ estimated intercept and covariate coefficients with approximate 95 percent CIs for the three model types (full, star, base) }
+  \item{CI.boot}{ 95 percent CIs for all parameters }
+  \item{variates}{ matrix of model variates (can be used for plotting) }
+  \item{residuals}{ matrix of residuals from the three models (full, star and base) }
+  \item{bootvalues}{ matrix of parameters estimated from the \code{nreps} bootstrap replicated data sets used to calculate CIs }
+  
+}
+
+\note{Covariates that apply to both species sets (e.g., sampling site) should be supplied in the covariate matrix of the set with the most species.
+\cr
+\cr
+Bootstrapping CIs is slow due to the function \code{\link{optim}} used to estimate the model parameters. See appendix A in Ives and Godfray (2006) 
+for a discussion about this boostrapping procedure}
+
+
+
+\references{Ives A.R. & Godfray H.C. (2006) Phylogenetic analysis of trophic associations. The American Naturalist, 168, E1-E14 \cr
+\cr
+Blomberg S.P., Garland T.J. & Ives A.R. (2003) Testing for phylogenetic signal in comparative data: Behavioral traits are more labile. Evolution, 57, 717-745
+}
+
+\author{ Matthew Helmus \email{mrhelmus@gmail.com} }
+\seealso{ the K metric, \code{\link{Kcalc}}, uses the same Ornstein-Uhlenbeck model of evolution }
+
+\keyword{univar}
