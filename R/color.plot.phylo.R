@@ -16,14 +16,17 @@ function(
                     phylo, df, trait, taxa.names,
                     num.breaks = ifelse(is.factor(df[,trait]),
                         length(levels(df[,trait])), 12),
-                    col.names = rainbow(num.breaks),
+                    col.names = rainbow(ifelse(is.vector(num.breaks), length(num.breaks) - 1, num.breaks)),
+                    cut.labs = NULL,
                     leg.title = NULL,
                     main = trait,
+                    leg.cex = 1,
+                    tip.labs = NULL,
                     ...
 )
 {
     # Get the initial par settings so they can be restored
-    init.par <- par(mar = c(0, 0, 2, 0))
+    init.par <- par(mar = c(0, 0, 1, 0))
     # some data input error checking, all taxa in tree and df
     # no missing data values
     stopifnot( trait %in% names(df), taxa.names %in% names(df),
@@ -53,20 +56,25 @@ function(
             # levs gets used in legend, make one for continous data
             levs <- levels(cut(ordered.trait, breaks = num.breaks))
         }
+    if(!is.null(tip.labs)) {
+        phylo$tip.label <- df[tip.labs][order,]
+    }
     plot.phylo(
         phylo,
         y.lim = c(0,80),
         cex = .8,
         tip.color = tip.color,
-        main = trait,
+        main = main,
         ...
     )
     title(line = 0)
+    
+    if(is.null(cut.labs)) cut.labs <- levs
     legend(
-        "bottomleft", levs,
+        "bottomleft", cut.labs,
         fill = col.names,
         inset = 0.05, title = leg.title,
-        cex = 2.5
+        cex = leg.cex
     )
     # restore settings ?
     on.exit(par(init.par))
