@@ -10,7 +10,6 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
 	nspp2<-dim(assocs)[2]
   sppnames1<-rownames(assocs)
   sppnames2<-colnames(assocs)
-  
   #make names of species pairs
   pairnames=NULL  # make a vector of pairwise comparison names
   for (o in 1:(nspp2))
@@ -154,17 +153,25 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
 	s2aStar<-as.vector(MSETotal)*qr.solve((t(U)%*%U))
 	sdaStar<-t(diag(s2aStar)^(.5))
 	approxCFstar<-rbind(t(astar)-1.96%*%sdaStar, t(astar), t(astar)+1.96%*%sdaStar)
-  Estar<-A-U%*%astar
+  Pstar<-U%*%astar
+  Estar<-A-Pstar
   MSEStar<-cov(matrix(Estar))
-  #######
   
+  #######
   if(is.null(tree1) | is.null(tree2))
   {
     coefs<-approxCFstar
     rownames(coefs)<-c("lower CI 95%","estimate","upper CI 95%")
     colnames(coefs)<-paste("star",c("intercept",colnames(U)[-1]),sep="-")
     MSEs<-cbind(data.frame(MSETotal),data.frame(MSEStar))
-    return(list(MSE=MSEs,signal.strength=NULL,coefficients=data.frame(t(coefs)),CI.boot=NULL,variates=data.frame(data.vecs),residuals=data.frame(Estar),bootvalues=NULL))
+    Pstar<-data.frame(Pstar)
+    colnames(Pstar)<-"star"
+    Estar<-data.frame(Estar)
+    colnames(Estar)<-"star"
+    output<-list(MSE=MSEs,signal.strength=NULL,coefficients=data.frame(t(coefs)),CI.boot=NULL,variates=data.frame(data.vecs),residuals=Estar,predicted=Pstar,bootvalues=NULL,Vfull=NULL)
+    class(output)<-"pblm"
+    return(output)
+    
   } else {
   
     #tree1 is the phylogeny for the rows
@@ -193,7 +200,6 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
     V1<-as.matrix(V1)
     V2<-as.matrix(V2)
     
-    
     V1<-V1/det(V1)^(1/nspp1)   # scale covariance matrices (this reduces numerical problems caused by
   	V2<-V2/det(V2)^(1/nspp2)   # determinants going to infinity or zero)
   	V<-kronecker(V2,V1)  
@@ -204,8 +210,9 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
     s2abase<-as.vector(MSEBase)*qr.solve(t(U)%*%invV%*%U)
   	sdabase<-t(diag(s2abase)^(.5))
     approxCFbase<-rbind(t(abase)-1.96%*%sdabase, t(abase), t(abase)+1.96%*%sdabase)
-    Ebase<-A-U%*%abase
-    
+    Pbase<-t(t(U%*%abase)%*%invV)
+    Ebase<-A-Pbase
+  
     ###################
     # Full EGLS estimates of phylogenetic signal
     ##################
@@ -241,6 +248,7 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
   	d1<-abs(est$par[1])
   	d2<-abs(est$par[2])
   	
+  	
     # Calculate EGLS coef w estimated ds 
   	V1<-(d1^tau1)*(1-d1^(2*initV1))/(1-d1^2)
     V2<-(d2^tau2)*(1-d2^(2*initV2))/(1-d2^2)
@@ -252,7 +260,9 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
     s2aFull<-as.vector(MSEFull)*qr.solve(t(U)%*%invV%*%U)
   	sdaFull<-t(diag(s2aFull)^(.5))
   	approxCFfull<-rbind(t(aFull)-1.96%*%sdaFull, t(aFull), t(aFull)+1.96%*%sdaFull)
-    Efull<-A-U%*%aFull
+    Pfull<-t(t(U%*%aFull)%*%invV)
+    Efull<-A-Pfull
+
     ########################################
     
     #organize output
@@ -263,10 +273,15 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
     CI.boot<-NULL
     MSEs<-cbind(data.frame(MSETotal),data.frame(MSEFull), data.frame(MSEStar), data.frame(MSEBase))
     residuals<-cbind(data.frame(Efull),data.frame(Estar),data.frame(Ebase))
+    predicted<-cbind(data.frame(Pfull),data.frame(Pstar),data.frame(Pbase))
     rownames(residuals)<-pairnames
-  
-    #bootstrap CIs
+    rownames(predicted)<-pairnames
+    colnames(predicted)<-c("full","star","base")
+    colnames(residuals)<-c("full","star","base")
+    phylocovs=list(V1=V1,V2=V2)
     
+    ################
+    #bootstrap CIs
     if(bootstrap)
     {
       Vtrue<-V
@@ -334,17 +349,21 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
       rownames(CI.boot)<-c("d1","d2","intercept",colnames(U)[-1])
       colnames(CI.boot)<-c("booted lower CI 95%","booted upper CI 95%")
       colnames(bootlist)<-c("d1","d2","intercept",colnames(U)[-1])
-      return(list(MSE=MSEs,signal.strength=signal.strength,coefficients=data.frame(coefs),CI.boot=CI.boot,variates=data.frame(data.vecs),residuals=residuals,bootvalues=bootlist))
+      output<-list(MSE=MSEs,signal.strength=signal.strength,coefficients=data.frame(coefs),CI.boot=CI.boot,variates=data.frame(data.vecs),predicted=predicted,residuals=residuals,bootvalues=bootlist,phylocovs=phylocovs)
+      class(output)<-"pblm"
+      return(output)
     
     } else {
     ########
     # If bootstrapping not performed
     
     conf<-matrix(NA,2,2)
-    signal.strength<-data.frame(cbind(conf[1,],dtrue,conf[2,]))
+    signal.strength<-data.frame(cbind(conf[1,],c(d1,d2),conf[2,]))
     rownames(signal.strength)<-c("d1","d2")
     colnames(signal.strength)<-c("booted lower CI 95%","estimate","booted upper CI 95%")
-    return(list(MSE=MSEs,signal.strength=signal.strength,coefficients=data.frame(coefs),CI.boot=NULL,variates=data.frame(data.vecs),residuals=residuals,bootvalues=NULL))
+    output<-list(MSE=MSEs,signal.strength=signal.strength,coefficients=data.frame(coefs),CI.boot=NULL,variates=data.frame(data.vecs),predicted=predicted,residuals=residuals,bootvalues=NULL,phylocovs=phylocovs)
+    class(output)<-"pblm"
+    return(output)
     }
   }                                                                                                       
 }

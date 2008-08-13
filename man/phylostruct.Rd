@@ -4,8 +4,8 @@
 \description{ Randomize sample/community data matrices to create null distributions of given metrics
 }
 \usage{
-phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"), null.model=c("frequency","richness","both"),
-            runs=10, alpha=0.05, fam="binomial")
+phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"), null.model=c("frequency",
+            "richness","independentswap","trialswap"), runs=100, it=1000, alpha=0.05, fam="binomial")
 }
 \arguments{
   \item{samp}{ community data matrix, species as columns, communities as rows }
@@ -14,6 +14,7 @@ phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"), n
   \item{metric}{ if \code{metric="psv"}, \code{"psr"}, \code{"pse"}, or \code{"psc"} compares the observed mean of the respective metric to a null distribution at a given alpha; if \code{metric="sppregs"} compares the three correlations produced by \code{\link{sppregs}} to null distributions }
   \item{null.model}{ permutation procedure used to create the null distribution, see \code{\link{randomizeSample}}}
   \item{runs}{ the number of permutations to create the distribution, a rule of thumb is (number of communities)/alpha  }
+  \item{it}{ the number of swaps for the independent and trial-swap null models, see \code{\link{randomizeSample}} }
   \item{alpha}{ probability value to compare the observed mean/correlations to a null distribution }
   \item{fam}{ as in \code{\link{sppregs}} }
 }
@@ -24,6 +25,7 @@ phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"), n
 \item{metric}{ metric used }
 \item{null.model}{ permutation used }
 \item{runs}{ number of permutations }
+\item{it}{ number of swaps if applicable }
 \item{obs}{ observed mean value of a particular metric or the three observed correlations from \code{\link{sppregs}} }
 \item{mean.null}{ mean(s) of the null distribution(s) }
 \item{quantiles.null}{  quantiles of the null distribution(s) to compare to \code{obs}; determined by \code{alpha}}
@@ -43,4 +45,3 @@ Gotelli N.J. (2000) Null model analysis of species co-occurrence patterns. Ecolo
 \seealso{ \code{\link{psd}} ,\code{\link{sppregs}}, \code{\link{randomizeSample}} }
 
 \keyword{univar}
-
