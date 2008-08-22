@@ -3,7 +3,6 @@
 #include <math.h>
 #include <R.h>
 #include <Rmath.h>
-/*libraries to include*/
 
 /*This takes an integer n and returns one random integer*/
 int intrand(int n)

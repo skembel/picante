@@ -1,8 +1,8 @@
 Package: picante
 Type: Package
 Title: Tools for integrating phylogenies and ecology
-Version: 0.3-0
-Date: 2008-7-18
+Version: 0.4-0
+Date: 2008-8-22
 Author: Steve Kembel <skembel@berkeley.edu>, David Ackerly <dackerly@berkeley.edu>, Simon Blomberg <s.blomberg1@uq.edu.au>, Peter Cowan <pdc@berkeley.edu>, Matthew Helmus <mrhelmus@wisc.edu>, Cam Webb <cwebb@oeb.harvard.edu>
 Maintainer: Steve Kembel <skembel@berkeley.edu>
 Depends: ape, vegan

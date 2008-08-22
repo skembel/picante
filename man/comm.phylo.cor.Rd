@@ -6,11 +6,9 @@
   Calculates measures of community phylogenetic structure (correlation between co-occurrence and phylogenetic distance) to patterns expected under various null models
 }
 \usage{
-comm.phylo.cor(samp, phylo,
-    metric = c("cij", "checkerboard","jaccard", "roij"),
-    null.model = c("sample.taxa.labels", "pool.taxa.labels","frequency",
-    "richness", "weighted.sample.pool"), runs = 99)
-
+comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "roij"),
+    null.model = c("sample.taxa.labels", "pool.taxa.labels",
+        "frequency", "richness", "independentswap","trialswap"), runs = 999, ...)
 }
 \arguments{
   \item{samp}{ Community data matrix }
@@ -21,9 +19,11 @@ comm.phylo.cor(samp, phylo,
         \item{pool.taxa.labels}{Shuffle phylogeny tip labels (across all taxa included in phylogenetic tree)}
         \item{frequency}{Randomize community data matrix abundances within species (maintains species occurence frequency)}
         \item{richness}{Randomize community data matrix abundances within samples (maintains sample species richness)}
-        \item{weighted.sample.pool}{Randomize community data matrix by drawing species from sample pool with probability weighted by occurrence frequency}
+        \item{independentswap}{Randomize community data matrix maintaining species occurrence frequency and site richnessing using independent swap}
+        \item{trialswap}{Randomize community data matrix maintaining species occurrence frequency and site richnessing using trial swap}     
   }
   \item{runs}{ Number of runs (randomizations) }
+  \item{...}{ Additional arguments to \link{randomizeSample}}
 }
 \value{
     A list with elements:
@@ -36,7 +36,7 @@ comm.phylo.cor(samp, phylo,
 }
 \references{ Cavender-Bares J., D.A. Ackerly, D. Baum and F.A. Bazzaz. 2004. Phylogenetic overdispersion in Floridian oak communities, American Naturalist, 163(6):823-843. }
 \author{ Steve Kembel <skembel@berkeley.edu> }
-\section{Warning }{ Weighted null model currently only works with presence-absence data. Convert your data to presence-absence before using this null model (e.g. \code{decostand(x,method="pa")})}
+\seealso{ \code{\link{randomizeSample}} }
 \examples{
 data(phylocom)
 comm.phylo.cor(phylocom$sample, phylocom$phylo, metric="cij",null.model="sample.taxa.labels")}

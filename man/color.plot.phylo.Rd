@@ -4,14 +4,11 @@
 \description{
   Plots a phylogeny with tip labels colored to indicate continuous or discrete trait values}
 \usage{
-  color.plot.phylo(
-  phylo, df, trait, taxa.names,
-  num.breaks = ifelse(is.factor(df[,trait]),
-      length(levels(df[,trait])), 12),
-  col.names = rainbow(num.breaks),
-  leg.title = NULL,
-  main = trait,
-  ...)}
+  color.plot.phylo(phylo, df, trait, taxa.names,
+        num.breaks = ifelse(is.factor(df[, trait]), length(levels(df[,trait])), 12),
+        col.names = rainbow(ifelse(is.vector(num.breaks), length(num.breaks) - 1, num.breaks)),
+        cut.labs = NULL, leg.title = NULL, main = trait, leg.cex = 1,
+        tip.labs = NULL, ...)}
 \arguments{
   \item{phylo}{An object of class \code{phylo}}
   \item{df}{A dataframe containing the traits to be plotted}
@@ -21,6 +18,9 @@
   \item{col.names}{A vector of colors to use for tip labels}
   \item{leg.title}{A title for the tip color legend}
   \item{main}{A main title for the plot}
+  \item{cut.labs}{A main title for the plot}
+  \item{leg.cex}{A main title for the plot}
+  \item{tip.labs}{A main title for the plot}
   \item{...}{Additional argument to pass to the \code{plot.phylo} function}
 }
 \details{

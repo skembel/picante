@@ -1,8 +1,8 @@
 `comm.phylo.cor` <-
 function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 		null.model=c("sample.taxa.labels","pool.taxa.labels",
-					"frequency","richness","weighted.sample.pool"),
-					runs=99)
+					"frequency","richness","independentswap","trialswap"),
+					runs=999, ...)
 {
 	metric <- match.arg(metric)
 	null.model <- match.arg(null.model)
@@ -24,16 +24,9 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 		phylo.dist <- as.dist(taxaShuffle(as.matrix(pool.phylo.dist))[taxa.names,taxa.names])
 		results$random.corrs[run] <- cor(phylo.dist,samp.dist,use="pairwise")
 	}
-	else if (null.model=="weighted.sample.pool") for (run in 1:runs)
-	{
-		samp.dist <- species.dist(randomizeSample(samp,null.model="both"),metric)
-		phylo.dist <- as.dist(as.matrix(pool.phylo.dist)[rownames(as.matrix(samp.dist)),
-							colnames(as.matrix(samp.dist))])	
-		results$random.corrs[run] <- cor(phylo.dist,samp.dist,use="pairwise")
-	}
 	else for (run in 1:runs)
 	{
-		samp.dist <- species.dist(randomizeSample(samp,null.model),metric)
+		samp.dist <- species.dist(randomizeSample(samp,null.model,...),metric)
 		results$random.corrs[run] <- cor(phylo.dist,samp.dist,use="pairwise")
 	}
 	results$obs.rank <- rank(as.vector(c(results$obs.corr,results$random.corrs)))[1]
@@ -41,6 +34,15 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 	results
 }
 
+`taxaShuffle` <-
+function(x) {
+    #todo replace with vegan's permuted.index?
+    if (!is.matrix(x)) x <- as.matrix(x)
+	rand.names <- sample(rownames(x))
+	rownames(x) <- rand.names
+	colnames(x) <- rand.names
+	x
+}
 
 mpd <- function(samp, dis) 
 {
@@ -80,7 +82,7 @@ function(samp,dis) {
 
 `ses.mpd` <-
 function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
-    "phylogeny.pool", "weighted.sample.pool"), runs = 99) 
+    "phylogeny.pool", "independentswap", "trialswap"), runs = 999, iterations = 1000) 
 {
     dis <- as.matrix(dis)
     mpd.obs <- mpd(samp, dis)
@@ -90,8 +92,9 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
     	sample.pool = t(replicate(runs, mpd(randomizeSample(samp,null.model="richness"), dis))),
     	phylogeny.pool = t(replicate(runs, mpd(randomizeSample(samp,null.model="richness"),
     		taxaShuffle(dis)))),
-    	weighted.sample.pool = t(replicate(runs, mpd(randomizeSample(samp,
-    		null.model = "both"), dis))))
+    	independentswap = t(replicate(runs, mpd(randomizeSample(samp,null.model="independentswap", iterations), dis))),
+    	trialswap = t(replicate(runs, mpd(randomizeSample(samp,null.model="trialswap", iterations), dis)))
+    )
     mpd.obs.rank <- apply(X = rbind(mpd.obs, mpd.rand), MARGIN = 2, 
         FUN = rank)[1, ]
     mpd.rand.mean <- apply(X = mpd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)
@@ -103,7 +106,7 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
 
 `ses.mnnd` <-
 function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
-    "phylogeny.pool", "weighted.sample.pool"), runs = 99) 
+    "phylogeny.pool", "independentswap", "trialswap"), runs = 999, iterations = 1000) 
 {
     dis <- as.matrix(dis)
     mnnd.obs <- mnnd(samp, dis)
@@ -113,8 +116,9 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
     	sample.pool = t(replicate(runs, mnnd(randomizeSample(samp,null.model="richness"), dis))),
     	phylogeny.pool = t(replicate(runs, mnnd(randomizeSample(samp,null.model="richness"),
     		taxaShuffle(dis)))),
-    	weighted.sample.pool = t(replicate(runs, mnnd(randomizeSample(samp,
-    		null.model = "both"), dis))))
+    	independentswap = t(replicate(runs, mnnd(randomizeSample(samp,null.model="independentswap", iterations), dis))),
+    	trialswap = t(replicate(runs, mnnd(randomizeSample(samp,null.model="trialswap", iterations), dis)))
+    )
     mnnd.obs.rank <- apply(X = rbind(mnnd.obs, mnnd.rand), MARGIN = 2, 
         FUN = rank)[1, ]
     mnnd.rand.mean <- apply(X = mnnd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)
@@ -123,6 +127,7 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
     data.frame(ntaxa=specnumber(samp),mnnd.obs, mnnd.rand.mean, mnnd.rand.sd, mnnd.obs.rank, 
         mnnd.obs.z, mnnd.obs.p=mnnd.obs.rank/(runs+1),runs=runs, row.names = row.names(samp))
 }
+
 
 psv<-function(samp,tree,compute.var=TRUE){
   # Make samp matrix a pa matrix
@@ -446,7 +451,8 @@ psd<-function(samp,tree,compute.var=TRUE){
 
 pd<-function(samp,tree){
   
-  if(is.null(tree$edge.length)){tree<-compute.brlen(tree, 1)}  #If phylo has no given branch lengths
+    #If phylo has no given branch lengths
+  if(is.null(tree$edge.length)){tree<-compute.brlen(tree, 1)}
   # Make sure that the species line up
   tree<-prune.sample(samp,tree)
   samp<-samp[,tree$tip.label]
