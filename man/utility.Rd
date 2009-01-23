@@ -44,5 +44,5 @@ taxaShuffle(x)
   Various utility functions for manipulating trees, data, etc.
 }
 
-\author{ Steven Kembel <skembel@berkeley.edu>, Peter Cowan <pdc@berkeley.edu>, David Ackerly <dackerly@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu>, Peter Cowan <pdc@berkeley.edu>, David Ackerly <dackerly@berkeley.edu> }
 \keyword{manip}

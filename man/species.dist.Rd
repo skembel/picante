@@ -24,7 +24,7 @@ species.dist(x, metric = c("cij", "jaccard", "checkerboard", "roij"))
   A \code{dist} object with co-occurrences among all species pairs
 }
 
-\author{ Steve Kembel <skembel@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu> }
 \references{
 Hardy, O. In press. Testing the spatial phylogenetic structure of local communities : 
 statistical performances of different null models and test statistics on a locally neutral community. Journal of Ecology.

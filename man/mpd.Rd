@@ -17,6 +17,6 @@ mpd(samp, dis)
   Vector of MPD values for each community
 }
 \references{ Webb, C., D. Ackerly, M. McPeek, and M. Donoghue. 2002. Phylogenies and community ecology. Annual Review of Ecology and Systematics 33:475-505. }
-\author{ Steve Kembel <skembel@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu> }
 \seealso{ \code{\link{ses.mpd}}}
 \keyword{univar}

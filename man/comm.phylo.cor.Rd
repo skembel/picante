@@ -35,7 +35,7 @@ comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "roij")
     \item{random.corrs}{A vector of random correlation calculated for each run}
 }
 \references{ Cavender-Bares J., D.A. Ackerly, D. Baum and F.A. Bazzaz. 2004. Phylogenetic overdispersion in Floridian oak communities, American Naturalist, 163(6):823-843. }
-\author{ Steve Kembel <skembel@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu> }
 \seealso{ \code{\link{randomizeSample}} }
 \examples{
 data(phylocom)

@@ -16,5 +16,5 @@ multiPhylosignal(x, phy, ...)
   Returns a data frame with phylogenetic signal results for each trait
 }
 \section{Warning }{ Assumes that trait data are sorted in the same order as phylo tip.label }
-\author{ Steve Kembel <skembel@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu> }
 \keyword{univar}

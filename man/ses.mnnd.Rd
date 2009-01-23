@@ -38,7 +38,7 @@ ses.mnnd(samp, dis, null.model = c("taxa.labels","sample.pool", "phylogeny.pool"
   \item{runs}{Number of randomizations}  
 }
 \references{ Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. \url{http://www.phylodiversity.net/phylocom/}. }
-\author{ Steve Kembel <skembel@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu> }
 \seealso{ \code{\link{mnnd}}, \code{\link{randomizeSample}}  }
 \examples{
 data(phylocom)

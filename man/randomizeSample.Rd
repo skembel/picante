@@ -6,8 +6,7 @@
   Various null models for randomizing community data matrices
 }
 \usage{
-randomizeSample(samp, null.model = c("frequency", "richness", "independentswap", "trialswap"),
-                iterations = 1000)    
+randomizeSample(samp, null.model = c("frequency", "richness", "independentswap", "trialswap"),iterations = 1000)    
 }
 
 \arguments{
@@ -28,7 +27,7 @@ Gotelli, N.J. 2000. Null model analysis of species co-occurrence patterns. Ecolo
 
 Miklos I. & Podani J. 2004. Randomization of presence-absence matrices: Comments and new algorithms. Ecology 85: 86-92.
 }
-\author{ Steve Kembel <skembel@berkeley.edu> }
+\author{ Steven Kembel <skembel@uoregon.edu> }
 \examples{
 data(phylocom)
 randomizeSample(phylocom$sample, null.model="richness")}
