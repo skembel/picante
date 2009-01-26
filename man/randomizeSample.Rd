@@ -11,16 +11,21 @@ randomizeSample(samp, null.model = c("frequency", "richness", "independentswap",
 
 \arguments{
   \item{samp}{ Community data matrix }
-  \item{null.model}{ Null model
-    \item{frequency}{ Randomize community data matrix abundances within species (maintains species occurence frequency)}
-    \item{richness}{ Randomize community data matrix abundances within samples (maintains sample species richness)}
-    \item{independentswap}{ Randomize community data matrix with the independent swap algorithm (Gotelli 2000) maintaining species occurrence frequency and sample species richness }
-    \item{trialswap}{ Randomize community data matrix with the trial-swap algorithm (Miklos & Podani 2004) maintaining species occurrence frequency and sample species richness }
-  }
+  \item{null.model}{ Null model to use (see Details section for description) }
   \item{iterations}{ Number of independent or trial-swaps to perform }
 }
 \value{
   Randomized community data matrix
+}
+
+\details{
+Currently implemented null models (arguments to null.model):
+\describe{
+    \item{frequency}{ Randomize community data matrix abundances within species (maintains species occurence frequency)}
+    \item{richness}{ Randomize community data matrix abundances within samples (maintains sample species richness)}
+    \item{independentswap}{ Randomize community data matrix with the independent swap algorithm (Gotelli 2000) maintaining species occurrence frequency and sample species richness }
+    \item{trialswap}{ Randomize community data matrix with the trial-swap algorithm (Miklos & Podani 2004) maintaining species occurrence frequency and sample species richness }
+}
 }
 \references{
 Gotelli, N.J. 2000. Null model analysis of species co-occurrence patterns. Ecology 81: 2606-2621

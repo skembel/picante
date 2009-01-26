@@ -6,14 +6,14 @@
 Picante: Phylocom Integration, Community Analyses, Null-models, Traits, and Evolution in R
 }
 \description{
-Collection of functions for integrating ecology and evolutionary biology
+R tools for integrating phylogenies and ecology
 }
 \details{
 \tabular{ll}{
 Package: \tab picante\cr
 Type: \tab Package\cr
-Version: \tab 0.5-0\cr
-Date: \tab 2009-1-22\cr
+Version: \tab 0.5-1\cr
+Date: \tab 2009-1-26\cr
 License: \tab GPL-2\cr
 }
 }

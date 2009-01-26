@@ -1,5 +1,5 @@
 `species.dist` <-
-function (x, metric=c("cij","jaccard","checkerboard","roij")) {
+function (x, metric=c("cij","jaccard","checkerboard","doij")) {
 	metric <- match.arg(metric)
     if (identical(metric,"checkerboard")) {
         #Gotelli 2000: Checker = Sum (Si - Q)(Sk - Q) / ((R*(R-1))/2)
@@ -25,9 +25,9 @@ function (x, metric=c("cij","jaccard","checkerboard","roij")) {
     if (identical(metric,"jaccard")) {    
         return( 1 - vegdist(t(sortColumns(x)), method = "jaccard"))
     }
-    if (identical(metric,"roij")) {
+    if (identical(metric,"doij")) {
         #Hardy's standardized version of checkerboard
-        #roij = (Pij - Pi*Pj)/(Pi*Pj)
+        #doij = (Pij - Pi*Pj)/(Pi*Pj)
         x <- as.matrix(decostand(x,method="pa"))
         Nsites <- dim(x)[1]
         P <- apply(x,2,sum) / Nsites
