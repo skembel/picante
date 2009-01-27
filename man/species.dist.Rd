@@ -24,7 +24,7 @@ Currently implemented co-occurrence measures (arguments to metric):
     \item{cij}{ Schoener's index of co-occurrence }
     \item{jaccard}{ Jaccard index of co-occurrence }
     \item{checkerboard}{ Checkerboard index of co-occurrence }
-    \item{roij}{ DOij index of co-occurrence }    
+    \item{doij}{ DOij index of co-occurrence }    
     }
 }
 \author{ Steven Kembel <skembel@uoregon.edu> }
