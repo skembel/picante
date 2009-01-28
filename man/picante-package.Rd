@@ -12,8 +12,8 @@ R tools for integrating phylogenies and ecology
 \tabular{ll}{
 Package: \tab picante\cr
 Type: \tab Package\cr
-Version: \tab 0.5-2\cr
-Date: \tab 2009-1-26\cr
+Version: \tab 0.5-3\cr
+Date: \tab 2009-1-27\cr
 License: \tab GPL-2\cr
 }
 }

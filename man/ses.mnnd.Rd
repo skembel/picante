@@ -21,12 +21,12 @@ ses.mnnd(samp, dis, null.model = c("taxa.labels","sample.pool", "phylogeny.pool"
 \value{
   A data frame of results for each community
   \item{ntaxa}{Number of taxa in community}
-  \item{mpd.obs}{Observed MNND in community}
-  \item{mpd.rand.mean}{Mean MNND in null communities}
-  \item{mpd.rand.sd}{Standard deviation of MNND in null communities}
-  \item{mpd.obs.rank}{Rank of observed MNND vs. null communities}
-  \item{mpd.obs.z}{Standardized effect size of MNND vs. null communities (= (mpd.obs - mpd.rand.mean) / mpd.rand.sd, equivalent to -NTI)}
-  \item{mpd.obs.p}{P-value (quantile) of observed MNND vs. null communities (= mpd.obs.rank / runs + 1)}
+  \item{mnnd.obs}{Observed MNND in community}
+  \item{mnnd.rand.mean}{Mean MNND in null communities}
+  \item{mnnd.rand.sd}{Standard deviation of MNND in null communities}
+  \item{mnnd.obs.rank}{Rank of observed MNND vs. null communities}
+  \item{mnnd.obs.z}{Standardized effect size of MNND vs. null communities (= (mnnd.obs - mnnd.rand.mean) / mnnd.rand.sd, equivalent to -NTI)}
+  \item{mnnd.obs.p}{P-value (quantile) of observed MNND vs. null communities (= mnnd.obs.rank / runs + 1)}
   \item{runs}{Number of randomizations}  
 }
 \details{
