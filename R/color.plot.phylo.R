@@ -16,7 +16,7 @@ function(
                     phylo, df, trait, taxa.names,
                     num.breaks = ifelse(is.factor(df[,trait]),
                         length(levels(df[,trait])), 12),
-                    col.names = rainbow(ifelse(is.vector(num.breaks), length(num.breaks) - 1, num.breaks)),
+                    col.names = rainbow(ifelse(length(num.breaks) > 1, length(num.breaks) - 1, num.breaks)),
                     cut.labs = NULL,
                     leg.title = NULL,
                     main = trait,
@@ -61,7 +61,7 @@ function(
     }
     plot.phylo(
         phylo,
-        y.lim = c(0,80),
+        ## y.lim = c(0,80),
         cex = .8,
         tip.color = tip.color,
         main = main,
