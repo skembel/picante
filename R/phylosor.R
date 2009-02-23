@@ -1,5 +1,15 @@
-phylosor=function(samp,tree)
+phylosor <- function(samp,tree)
 {
+  
+    #If phylo has no given branch lengths
+    if(is.null(tree$edge.length)) {
+    stop("Tree has no branch lengths, cannot compute pd")
+    }
+    
+    # Make sure that the species line up
+    tree<-prune.sample(samp,tree)
+    samp<-samp[,tree$tip.label]
+
 	s=nrow(samp)
 	phylodist=matrix(NA,s,s)
 	rownames(phylodist)=rownames(samp)
@@ -14,11 +24,12 @@ phylosor=function(samp,tree)
 			pdtot=.pdshort((samp[l,]+samp[k,]),tree)
 			pdsharedlk=pdl+pdk-pdtot
 			phylodist[k,l]=2*pdsharedlk/(pdl+pdk)
-			}
-			}
+        }
+    }
 			return(as.dist(phylodist))
-}			
-phylosor.rnd=function(samp,tree,cstSor=TRUE,null.model=c("taxa.labels","frequency","richness","independentswap","trialswap"),runs=999,iterations=1000)
+}
+
+phylosor.rnd <- function(samp, tree, cstSor=TRUE, null.model=c("taxa.labels", "frequency", "richness", "independentswap", "trialswap"), runs=999, iterations=1000)
 
 {
 	
@@ -98,17 +109,51 @@ return(Res)
 
 #############################################################################################		
 	
-.pdshort=function(comm,tree)
+.pdshort=function(comm,tree,keep.root=TRUE)
 {
 
-	nbspecies=length(comm)
-	species = names(comm)
-	index = species[comm == 0]
-        if (length(index) >= (nbspecies - 1)) 
-        {PD <- NA}
+	nbspecies <- length(comm)
+	species <- names(comm)
+    absent <- species[comm==0]	#species not in sample
+    present <- species[comm>0]    #species in sample
+        if(length(present)==0)
+    {
+        #no species present
+        PD<-0
+    }
+    else if(length(present)==1)
+    {
+        #one species present - PD = length from root to that tip
+        if (!is.rooted(tree) || !keep.root) {
+            stop("Rooted tree and keep.root=TRUE required to calculate PD of single-species communities")
+        }
+        
+        PD <- node.age(tree)$ages[ which(tree$edge[,2] == 
+                                    which(tree$tip.label==present))]
+    }
+    else if(length(absent)==0)
+    {
+        #all species present
+        PD <- sum(tree$edge.length)
+    }
+    else
+    {
+        #subset of species present
+        sub.tree<-drop.tip(tree,absent) 
+        if (keep.root) {
+            if (!is.rooted(tree) || !is.ultrametric(tree)) {
+                stop("Rooted ultrametric tree required to calculate PD keeping root node")
+            }
+            #fixme - currently assumes ultrametric tree, could fix this
+            sub.tree.depth <- max(node.age(sub.tree)$ages)
+            orig.tree.depth <- max(node.age(tree)$ages)
+            PD<-sum(sub.tree$edge.length) + (orig.tree.depth-sub.tree.depth)        
+        }
         else {
-            sub.tree <- drop.tip(tree, index)
-            PD <- sum(sub.tree$edge.length)}
-            return(PD)}
+            PD<-sum(sub.tree$edge.length)
+        }
+    }
+    return(PD)
+}
 
 
