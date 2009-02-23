@@ -112,48 +112,41 @@ return(Res)
 .pdshort=function(comm,tree,keep.root=TRUE)
 {
 
+    if (!is.rooted(tree) || !is.ultrametric(tree)) {
+        stop("Rooted ultrametric tree required for phylosor calculation")
+    }
+
 	nbspecies <- length(comm)
 	species <- names(comm)
-    absent <- species[comm==0]	#species not in sample
-    present <- species[comm>0]    #species in sample
-        if(length(present)==0)
+    #fixme prune species properly but keeping track of root if needed
+
+    present <- species[comm>0]  #species in sample
+    commabsent <- species[comm==0]	#species not in sample
+    treeabsent <- tree$tip.label[which(!(tree$tip.label %in% present))]
+    
+    if(length(present)==0)
     {
         #no species present
         PD<-0
     }
     else if(length(present)==1)
     {
-        #one species present - PD = length from root to that tip
-        if (!is.rooted(tree) || !keep.root) {
-            stop("Rooted tree and keep.root=TRUE required to calculate PD of single-species communities")
-        }
-        
+        #one species present - PD = length from root to that tip        
         PD <- node.age(tree)$ages[ which(tree$edge[,2] == 
                                     which(tree$tip.label==present))]
     }
-    else if(length(absent)==0)
+    else if(length(treeabsent)==0)
     {
-        #all species present
+        #all species in tree present in community
         PD <- sum(tree$edge.length)
     }
     else
     {
-        #subset of species present
-        sub.tree<-drop.tip(tree,absent) 
-        if (keep.root) {
-            if (!is.rooted(tree) || !is.ultrametric(tree)) {
-                stop("Rooted ultrametric tree required to calculate PD keeping root node")
-            }
-            #fixme - currently assumes ultrametric tree, could fix this
-            sub.tree.depth <- max(node.age(sub.tree)$ages)
-            orig.tree.depth <- max(node.age(tree)$ages)
-            PD<-sum(sub.tree$edge.length) + (orig.tree.depth-sub.tree.depth)        
-        }
-        else {
-            PD<-sum(sub.tree$edge.length)
-        }
+        #subset of tree species present in community
+        sub.tree<-drop.tip(tree,treeabsent) 
+        sub.tree.depth <- max(node.age(sub.tree)$ages)
+        orig.tree.depth <- max(node.age(tree)$ages)
+        PD<-sum(sub.tree$edge.length) + (orig.tree.depth-sub.tree.depth)
     }
     return(PD)
 }
-
-
