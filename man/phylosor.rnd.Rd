@@ -34,7 +34,7 @@ Currently implemented null models (arguments to null.model):
     \item{trialswap}{ Randomize community data matrix with the trial-swap algorithm (Miklos & Podani 2004) maintaining species occurrence frequency and sample species richness. Can only be used with cstSor=FALSE}
     }
 }
-\references{Bryant, J.B., Lamanna, C., Morlon, H., Kerkhoff, A.J., Enquist, B.J., Green, J.L. 2008. Microbes on mountainsides: Contrasting elevational patterns of bacterial and plant diversity. Proceedings of the National Academy of Sciences 105 Supplement 1: 1505-11511}
+\references{Bryant, J.B., Lamanna, C., Morlon, H., Kerkhoff, A.J., Enquist, B.J., Green, J.L. 2008. Microbes on mountainsides: Contrasting elevational patterns of bacterial and plant diversity. Proceedings of the National Academy of Sciences 105 Supplement 1: 11505-11511}
 \author{ Helene Morlon <morlon.helene@gmail.com> and Steven Kembel <skembel@uoregon.edu> }
 \seealso{ \code{\link{phylosor}}, \code{\link{randomizeSample}}  }
 \examples{
