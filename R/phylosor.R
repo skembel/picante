@@ -118,10 +118,8 @@ return(Res)
 
 	nbspecies <- length(comm)
 	species <- names(comm)
-    #fixme prune species properly but keeping track of root if needed
 
     present <- species[comm>0]  #species in sample
-    commabsent <- species[comm==0]	#species not in sample
     treeabsent <- tree$tip.label[which(!(tree$tip.label %in% present))]
     
     if(length(present)==0)

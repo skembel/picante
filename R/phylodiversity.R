@@ -449,76 +449,76 @@ psd<-function(samp,tree,compute.var=TRUE){
   }
 }
 
-pd<-function(samp,tree,keep.root=TRUE) {
+pd<-function(samp, tree, include.root=TRUE) {
 
     #If phylo has no branch lengths
     if(is.null(tree$edge.length)) {
-    stop("Tree has no branch lengths, cannot compute pd")
+        stop("Tree has no branch lengths, cannot compute pd")
     }
-      
-  # Make sure that the species line up
-  tree<-prune.sample(samp,tree)
-  samp<-samp[,tree$tip.label]
-  species<-colnames(samp)
-  
-  # numbers of locations and species
-  SR<-rowSums(samp)
-  nlocations=dim(samp)[1]
-  nspecies=dim(samp)[2]
-
-  ##################################
-  # calculate observed PDs
-  #
-  PDs=NULL
-
-  for(i in 1:nlocations)
-  {  
-    absent<-species[samp[i,]==0]	#species not in sample
-    present<-species[samp[i,]>0]    #species in sample
     
-    if(length(present)==0)
-    {
-        #no species present
-        PD<-0
-    }
-    else if(length(present)==1)
-    {
-        #one species present - PD = length from root to that tip
-        if (!is.rooted(tree) || !keep.root) {
-            stop("Rooted tree and keep.root=TRUE required to calculate PD of single-species communities")
+    # numbers of locations and species
+    species<-colnames(samp)
+    SR<-rowSums(samp)
+    nlocations=dim(samp)[1]
+    nspecies=dim(samp)[2]
+    
+    ##################################
+    # calculate observed PDs
+    #
+    PDs=NULL
+    
+    for(i in 1:nlocations)
+    {  
+        
+        present<-species[samp[i,]>0]    #species in sample
+        treeabsent <- tree$tip.label[which(!(tree$tip.label %in% present))]    
+        
+        if(length(present)==0)
+        {
+            #no species present
+            PD<-0
+        }
+        else if(length(present)==1)
+        {
+        
+            #one species present - PD = length from root to that tip
+            if (!is.rooted(tree) || !include.root) {
+                warning("Rooted tree and include.root=TRUE argument required to calculate PD of single-species sampunities. Single species sampunity assigned PD value of NA.")
+                PD <- NA
+            }
+            else {
+                #one species present - PD = length from root to that tip        
+                PD <- node.age(tree)$ages[ which(tree$edge[,2] == 
+                                        which(tree$tip.label==present))]
+            }
+        }
+        else if(length(treeabsent)==0)
+        {
+            #all species in tree present in sampunity
+            PD <- sum(tree$edge.length)
+        }
+        else
+        {
+            #subset of tree species present in sampunity
+            sub.tree<-drop.tip(tree,treeabsent) 
+            if (include.root) {
+                if (!is.rooted(tree) || !is.ultrametric(tree)) {
+                    stop("Rooted ultrametric tree required to calculate PD with include.root=TRUE argument")
+                }
+                sub.tree.depth <- max(node.age(sub.tree)$ages)
+                orig.tree.depth <- max(node.age(tree)$ages)
+                PD<-sum(sub.tree$edge.length) + (orig.tree.depth-sub.tree.depth)        
+            }
+            else {
+                PD<-sum(sub.tree$edge.length)
+            }          
         }
         
-        PD <- node.age(tree)$ages[ which(tree$edge[,2] == 
-                                    which(tree$tip.label==present))]
+        PDs<-c(PDs,PD)
     }
-    else if(length(absent)==0)
-    {
-        #all species present
-        PD <- sum(tree$edge.length)
-    }
-    else
-    {
-        #subset of species present
-        sub.tree<-drop.tip(tree,absent) 
-        if (keep.root) {
-            if (!is.rooted(tree) || !is.ultrametric(tree)) {
-                stop("Rooted ultrametric tree required to calculate PD keeping root node")
-            }
-            #fixme - currently assumes ultrametric tree, could fix this
-            sub.tree.depth <- max(node.age(sub.tree)$ages)
-            orig.tree.depth <- max(node.age(tree)$ages)
-            PD<-sum(sub.tree$edge.length) + (orig.tree.depth-sub.tree.depth)        
-        }
-        else {
-            PD<-sum(sub.tree$edge.length)
-        }
-    }
+    
+    PDout<-data.frame(PD=PDs,SR=SR)
+    rownames(PDout)<-rownames(samp) 
+    return(PDout)
 
-    PDs<-c(PDs,PD)
-  }
-  
-  PDout<-data.frame(cbind(PDs,SR))
-  rownames(PDout)<-rownames(samp) 
-  return(PDout)
 }
-
