@@ -5,7 +5,8 @@
   Table of correlations with associated P-values and df, can be used with regular or independent contrast data
 }
 \usage{
-cor.table(x, cor.method = "pearson", cor.type=c("standard","contrast")) 
+cor.table(x, cor.method = c("pearson","spearman"),
+    cor.type=c("standard","contrast")) 
 }
 
 \arguments{

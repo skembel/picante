@@ -458,7 +458,7 @@ pd<-function(samp, tree, include.root=TRUE) {
     
     # numbers of locations and species
     species<-colnames(samp)
-    SR<-rowSums(samp)
+    SR <- rowSums(ifelse(samp>0,1,0))
     nlocations=dim(samp)[1]
     nspecies=dim(samp)[2]
     

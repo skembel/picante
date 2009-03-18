@@ -5,10 +5,16 @@
   Plots a phylogeny with tip labels colored to indicate continuous or discrete trait values}
 \usage{
   color.plot.phylo(phylo, df, trait, taxa.names,
-        num.breaks = ifelse(is.factor(df[, trait]), length(levels(df[,trait])), 12),
-        col.names = rainbow(ifelse(is.vector(num.breaks), length(num.breaks) - 1, num.breaks)),
-        cut.labs = NULL, leg.title = NULL, main = trait, leg.cex = 1,
-        tip.labs = NULL, ...)}
+                    num.breaks = ifelse(is.factor(df[,trait]),
+                        length(levels(df[,trait])), 12),
+                    col.names = rainbow(ifelse(length(num.breaks) > 1, length(num.breaks) - 1, num.breaks)),
+                    cut.labs = NULL,
+                    leg.title = NULL,
+                    main = trait,
+                    leg.cex = 1,
+                    tip.labs = NULL,
+                    ...)
+        }
 \arguments{
   \item{phylo}{An object of class \code{phylo}}
   \item{df}{A dataframe containing the traits to be plotted}
