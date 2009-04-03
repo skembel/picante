@@ -34,6 +34,66 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
 	results
 }
 
+
+`comm.phylo.qr` <-
+function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
+		null.model=c("sample.taxa.labels","pool.taxa.labels",
+					"frequency","richness","independentswap","trialswap"),
+					quant=0.75, runs=999, show.plot=FALSE, ...)
+{
+
+    if (!require(quantreg)) {
+        stop("The 'quantreg' package is required to use this function.")
+    }
+
+	metric <- match.arg(metric)
+	null.model <- match.arg(null.model)
+	results <- list("obs.qr.intercept"=NA,"obs.qr.slope"=NA,"obs.qr.slope.p"=NA,"obs.rank"=NA,"runs"=runs,
+			"random.qr.slopes"=vector(length=runs))
+	phylo.dist <- as.dist(cophenetic(prune.sample(samp,phylo)))
+	pool.phylo.dist <- as.dist(cophenetic(phylo))
+	taxa.names <- rownames(as.matrix(phylo.dist))
+	samp.dist <- as.dist(as.matrix(species.dist(samp,metric))[taxa.names,taxa.names])
+    results$quantile <- quant
+    qrres <- coef(rq(samp.dist~phylo.dist,tau=quant, na.action=na.omit))
+    names(qrres) <- NULL
+    results$obs.qr.intercept <- qrres[1] 
+	results$obs.qr.slope <- qrres[2]
+	
+	if (show.plot) {
+        plot(samp.dist~phylo.dist,xlab="Phylogenetic distance",ylab="Co-occurrence")   
+    }
+	
+	if (null.model=="sample.taxa.labels") for (run in 1:runs)
+	{
+		phylo.dist <- as.dist(taxaShuffle(as.matrix(phylo.dist))[taxa.names,taxa.names])
+		results$random.qr.slopes[run] <- coef(rq(samp.dist~phylo.dist,tau=quant,
+		    na.action=na.omit))[2]
+	}
+	else if (null.model=="pool.taxa.labels") for (run in 1:runs)
+	{
+		phylo.dist <- as.dist(taxaShuffle(as.matrix(pool.phylo.dist))[taxa.names,taxa.names])
+		results$random.qr.slopes[run] <- coef(rq(samp.dist~phylo.dist,tau=quant,
+		    na.action=na.omit))[2]
+	}
+	else for (run in 1:runs)
+	{
+		samp.dist <- species.dist(randomizeSample(samp,null.model,...),metric)
+		results$random.qr.slopes[run] <- coef(rq(samp.dist~phylo.dist,tau=quant,
+		    na.action=na.omit))[2]
+	}
+	results$obs.rank <- rank(as.vector(c(results$obs.qr.slope,results$random.qr.slopes)))[1]
+	results$obs.qr.slope.p <- results$obs.rank/(runs+1)
+
+	if (show.plot) {
+        abline(results$obs.qr.intercept,results$obs.qr.slope)   
+        legend("topleft",paste("q",as.character(quant),sep=""))
+    }
+
+	results
+}
+
+
 `taxaShuffle` <-
 function(x) {
     #todo replace with vegan's permuted.index?
@@ -44,7 +104,8 @@ function(x) {
 	x
 }
 
-mpd <- function(samp, dis) 
+
+mpd <- function(samp, dis, abundance.weighted=FALSE) 
 {
     N <- dim(samp)[1]
     mpd <- numeric(N)
@@ -52,80 +113,102 @@ mpd <- function(samp, dis)
         sppInSample <- names(samp[i, samp[i, ] > 0])
         if (length(sppInSample) > 1) {
             sample.dis <- dis[sppInSample, sppInSample]
-            mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])
+            if (abundance.weighted) {
+                sample.weights <- t(as.matrix(samp[i,sppInSample,drop=FALSE])) %*% as.matrix(samp[i,sppInSample,drop=FALSE])
+                mpd[i] <- weighted.mean(sample.dis,sample.weights)  
+
+            }
+            else {
+                mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])         
+            }
         }
         else{
-            mpd[i] <- 0
+            mpd[i] <- NA
         }
     }
     mpd
 }
 
 
-`mnnd` <-
-function(samp,dis) {
+mntd <- function(samp, dis, abundance.weighted=FALSE)
+{
 	N <- dim(samp)[1]
-	mnnd <- numeric(N)
+	mntd <- numeric(N)
 	for (i in 1:N) {
-		sppInSample <- names(samp[i,samp[i,]>0])
+		sppInSample <- names(samp[i,samp[i,] > 0])
 		if (length(sppInSample) > 1) {
             sample.dis <- dis[sppInSample,sppInSample]
             diag(sample.dis) <- NA
-		    mnnd[i] <- mean(apply(sample.dis,2,min,na.rm=TRUE))
+            if (abundance.weighted)
+            {
+                mntds <- apply(sample.dis,2,min,na.rm=TRUE)
+                sample.weights <- samp[i,sppInSample]
+                mntd[i] <- weighted.mean(mntds, sample.weights)
+            }
+            else
+            {
+		        mntd[i] <- mean(apply(sample.dis,2,min,na.rm=TRUE))
+		    }
 		}
 		else {
-		    mnnd[i] <- 0
+		    mntd[i] <- NA
 		}
 	}
-	mnnd
+	mntd
 }
+
 
 `ses.mpd` <-
 function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
-    "phylogeny.pool", "independentswap", "trialswap"), runs = 999, iterations = 1000) 
+    "phylogeny.pool", "independentswap", "trialswap"),
+    abundance.weighted = FALSE, runs = 999, iterations = 1000) 
 {
     dis <- as.matrix(dis)
-    mpd.obs <- mpd(samp, dis)
+    mpd.obs <- mpd(samp, dis, abundance.weighted = abundance.weighted)
     null.model <- match.arg(null.model)
     mpd.rand <- switch(null.model,
-    	taxa.labels = t(replicate(runs, mpd(samp, taxaShuffle(dis)))),
-    	sample.pool = t(replicate(runs, mpd(randomizeSample(samp,null.model="richness"), dis))),
+    	taxa.labels = t(replicate(runs, mpd(samp, taxaShuffle(dis), abundance.weighted=abundance.weighted))),
+    	sample.pool = t(replicate(runs, mpd(randomizeSample(samp,null.model="richness"), dis, abundance.weighted))),
     	phylogeny.pool = t(replicate(runs, mpd(randomizeSample(samp,null.model="richness"),
-    		taxaShuffle(dis)))),
-    	independentswap = t(replicate(runs, mpd(randomizeSample(samp,null.model="independentswap", iterations), dis))),
-    	trialswap = t(replicate(runs, mpd(randomizeSample(samp,null.model="trialswap", iterations), dis)))
+    		taxaShuffle(dis), abundance.weighted))),
+    	independentswap = t(replicate(runs, mpd(randomizeSample(samp,null.model="independentswap", iterations), dis, abundance.weighted))),
+    	trialswap = t(replicate(runs, mpd(randomizeSample(samp,null.model="trialswap", iterations), dis, abundance.weighted)))
     )
-    mpd.obs.rank <- apply(X = rbind(mpd.obs, mpd.rand), MARGIN = 2, 
-        FUN = rank)[1, ]
     mpd.rand.mean <- apply(X = mpd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)
     mpd.rand.sd <- apply(X = mpd.rand, MARGIN = 2, FUN = sd, na.rm=TRUE)
     mpd.obs.z <- (mpd.obs - mpd.rand.mean)/mpd.rand.sd
+    mpd.obs.rank <- apply(X = rbind(mpd.obs, mpd.rand), MARGIN = 2, 
+        FUN = rank)[1, ]
+    mpd.obs.rank <- ifelse(is.na(mpd.rand.mean),NA,mpd.obs.rank)    
     data.frame(ntaxa=specnumber(samp),mpd.obs, mpd.rand.mean, mpd.rand.sd, mpd.obs.rank, 
         mpd.obs.z, mpd.obs.p=mpd.obs.rank/(runs+1),runs=runs, row.names = row.names(samp))
 }
 
-`ses.mnnd` <-
+
+`ses.mntd` <-
 function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
-    "phylogeny.pool", "independentswap", "trialswap"), runs = 999, iterations = 1000) 
+    "phylogeny.pool", "independentswap", "trialswap"),
+    abundance.weighted = FALSE, runs = 999, iterations = 1000) 
 {
     dis <- as.matrix(dis)
-    mnnd.obs <- mnnd(samp, dis)
+    mntd.obs <- mntd(samp, dis, abundance.weighted)
     null.model <- match.arg(null.model)
-    mnnd.rand <- switch(null.model,
-    	taxa.labels = t(replicate(runs, mnnd(samp, taxaShuffle(dis)))),
-    	sample.pool = t(replicate(runs, mnnd(randomizeSample(samp,null.model="richness"), dis))),
-    	phylogeny.pool = t(replicate(runs, mnnd(randomizeSample(samp,null.model="richness"),
-    		taxaShuffle(dis)))),
-    	independentswap = t(replicate(runs, mnnd(randomizeSample(samp,null.model="independentswap", iterations), dis))),
-    	trialswap = t(replicate(runs, mnnd(randomizeSample(samp,null.model="trialswap", iterations), dis)))
+    mntd.rand <- switch(null.model,
+    	taxa.labels = t(replicate(runs, mntd(samp, taxaShuffle(dis), abundance.weighted))),
+    	sample.pool = t(replicate(runs, mntd(randomizeSample(samp,null.model="richness"), dis, abundance.weighted))),
+    	phylogeny.pool = t(replicate(runs, mntd(randomizeSample(samp,null.model="richness"),
+    		taxaShuffle(dis), abundance.weighted))),
+    	independentswap = t(replicate(runs, mntd(randomizeSample(samp,null.model="independentswap", iterations), dis, abundance.weighted))),
+    	trialswap = t(replicate(runs, mntd(randomizeSample(samp,null.model="trialswap", iterations), dis, abundance.weighted)))
     )
-    mnnd.obs.rank <- apply(X = rbind(mnnd.obs, mnnd.rand), MARGIN = 2, 
+    mntd.rand.mean <- apply(X = mntd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)
+    mntd.rand.sd <- apply(X = mntd.rand, MARGIN = 2, FUN = sd, na.rm=TRUE)
+    mntd.obs.z <- (mntd.obs - mntd.rand.mean)/mntd.rand.sd
+    mntd.obs.rank <- apply(X = rbind(mntd.obs, mntd.rand), MARGIN = 2, 
         FUN = rank)[1, ]
-    mnnd.rand.mean <- apply(X = mnnd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)
-    mnnd.rand.sd <- apply(X = mnnd.rand, MARGIN = 2, FUN = sd, na.rm=TRUE)
-    mnnd.obs.z <- (mnnd.obs - mnnd.rand.mean)/mnnd.rand.sd
-    data.frame(ntaxa=specnumber(samp),mnnd.obs, mnnd.rand.mean, mnnd.rand.sd, mnnd.obs.rank, 
-        mnnd.obs.z, mnnd.obs.p=mnnd.obs.rank/(runs+1),runs=runs, row.names = row.names(samp))
+    mntd.obs.rank <- ifelse(is.na(mntd.rand.mean),NA,mntd.obs.rank)     
+    data.frame(ntaxa=specnumber(samp),mntd.obs, mntd.rand.mean, mntd.rand.sd, mntd.obs.rank, 
+        mntd.obs.z, mntd.obs.p=mntd.obs.rank/(runs+1),runs=runs, row.names = row.names(samp))
 }
 
 
@@ -497,7 +580,7 @@ pd<-function(samp, tree, include.root=TRUE) {
             #all species in tree present in sampunity
             PD <- sum(tree$edge.length)
         }
-        else
+        else    
         {
             #subset of tree species present in sampunity
             sub.tree<-drop.tip(tree,treeabsent) 
@@ -511,7 +594,7 @@ pd<-function(samp, tree, include.root=TRUE) {
             }
             else {
                 PD<-sum(sub.tree$edge.length)
-            }          
+            }
         }
         
         PDs<-c(PDs,PD)

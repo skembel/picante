@@ -6,14 +6,16 @@
   Standardized effect size of mean pairwise distances in communities. When used with a phylogenetic distance matrix, equivalent to -1 times the Nearest Relative Index (NRI).
 }
 \usage{
-ses.mpd(samp, dis, null.model = c("taxa.labels","sample.pool", "phylogeny.pool",
-                    "independentswap","trialswap"), runs = 999, iterations = 1000)
+ses.mpd(samp, dis, null.model = c("taxa.labels", "sample.pool",
+            "phylogeny.pool", "independentswap", "trialswap"),
+            abundance.weighted = FALSE, runs = 999, iterations = 1000)
 }
 
 \arguments{
   \item{ samp }{ Community data matrix }
   \item{ dis }{ Distance matrix (generally a phylogenetic distance matrix)}
   \item{ null.model }{ Null model to use (see Details section for description) }
+  \item{ abundance.weighted }{ Should mean nearest taxon distances for each species be weighted by species abundance? (default = FALSE) }  
   \item{ runs }{ Number of randomizations }
   \item{ iterations }{ Number of iterations to use for each randomization (for independent swap and trial null models) }
 }
