@@ -32,13 +32,13 @@ function (x, metric=c("cij","jaccard","checkerboard","doij")) {
         Nsites <- dim(x)[1]
         P <- apply(x,2,sum) / Nsites
         N <- length(P)
-        roij <- matrix(nrow=N,ncol=N,dimnames=list(colnames(x),colnames(x)))
+        doij <- matrix(nrow=N,ncol=N,dimnames=list(colnames(x),colnames(x)))
         for (i in 1:N-1) {
             for (j in (i+1):N) {
                 Pij <- sum(x[,i]*x[,j])/Nsites
-                roij[i,j] <- ((Pij - (P[i]*P[j]))/(P[i]*P[j]))
+                doij[i,j] <- ((Pij - (P[i]*P[j]))/(P[i]*P[j]))
             }
         }
-        return(as.dist(t(roij)))
+        return(as.dist(t(doij)))
     }
 }

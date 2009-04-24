@@ -1,5 +1,5 @@
 `comm.phylo.cor` <-
-function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
+function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 		null.model=c("sample.taxa.labels","pool.taxa.labels",
 					"frequency","richness","independentswap","trialswap"),
 					runs=999, ...)
