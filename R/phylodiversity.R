@@ -36,7 +36,7 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 
 
 `comm.phylo.qr` <-
-function(samp,phylo,metric=c("cij","checkerboard","jaccard","roij"),
+function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 		null.model=c("sample.taxa.labels","pool.taxa.labels",
 					"frequency","richness","independentswap","trialswap"),
 					quant=0.75, runs=999, show.plot=FALSE, ...)
@@ -532,76 +532,54 @@ psd<-function(samp,tree,compute.var=TRUE){
   }
 }
 
-pd<-function(samp, tree, include.root=TRUE) {
-
-    #If phylo has no branch lengths
-    if(is.null(tree$edge.length)) {
+pd <- function (samp, tree, include.root = TRUE) 
+{
+    if (is.null(tree$edge.length)) {
         stop("Tree has no branch lengths, cannot compute pd")
     }
-    
-    # numbers of locations and species
-    species<-colnames(samp)
-    SR <- rowSums(ifelse(samp>0,1,0))
-    nlocations=dim(samp)[1]
-    nspecies=dim(samp)[2]
-    
-    ##################################
-    # calculate observed PDs
-    #
-    PDs=NULL
-    
-    for(i in 1:nlocations)
-    {  
-        
-        present<-species[samp[i,]>0]    #species in sample
-        treeabsent <- tree$tip.label[which(!(tree$tip.label %in% present))]    
-        
-        if(length(present)==0)
-        {
-            #no species present
-            PD<-0
+    species <- colnames(samp)
+    SR <- rowSums(ifelse(samp > 0, 1, 0))
+    nlocations = dim(samp)[1]
+    nspecies = dim(samp)[2]
+    PDs = NULL
+    for (i in 1:nlocations) {
+        present <- species[samp[i, ] > 0]
+        treeabsent <- tree$tip.label[which(!(tree$tip.label %in% 
+            present))]
+        if (length(present) == 0) {
+            PD <- 0
         }
-        else if(length(present)==1)
-        {
-        
-            #one species present - PD = length from root to that tip
+        else if (length(present) == 1) {
             if (!is.rooted(tree) || !include.root) {
                 warning("Rooted tree and include.root=TRUE argument required to calculate PD of single-species sampunities. Single species sampunity assigned PD value of NA.")
                 PD <- NA
             }
             else {
-                #one species present - PD = length from root to that tip        
-                PD <- node.age(tree)$ages[ which(tree$edge[,2] == 
-                                        which(tree$tip.label==present))]
+                PD <- node.age(tree)$ages[which(tree$edge[, 2] == 
+                  which(tree$tip.label == present))]
             }
         }
-        else if(length(treeabsent)==0)
-        {
-            #all species in tree present in sampunity
+        else if (length(treeabsent) == 0) {
             PD <- sum(tree$edge.length)
         }
-        else    
-        {
-            #subset of tree species present in sampunity
-            sub.tree<-drop.tip(tree,treeabsent) 
+        else {
+            sub.tree <- drop.tip(tree, treeabsent)
             if (include.root) {
-                if (!is.rooted(tree) || !is.ultrametric(tree)) {
-                    stop("Rooted ultrametric tree required to calculate PD with include.root=TRUE argument")
+                if (!is.rooted(tree)) {
+                  stop("Rooted tree required to calculate PD with include.root=TRUE argument")
                 }
                 sub.tree.depth <- max(node.age(sub.tree)$ages)
-                orig.tree.depth <- max(node.age(tree)$ages)
-                PD<-sum(sub.tree$edge.length) + (orig.tree.depth-sub.tree.depth)        
+                orig.tree.depth <- max(node.age(tree)$ages[which(tree$edge[,2] %in% which(tree$tip.label %in% present))])
+                PD <- sum(sub.tree$edge.length) + (orig.tree.depth - 
+                  sub.tree.depth)
             }
             else {
-                PD<-sum(sub.tree$edge.length)
+                PD <- sum(sub.tree$edge.length)
             }
         }
-        
-        PDs<-c(PDs,PD)
+        PDs <- c(PDs, PD)
     }
-    
-    PDout<-data.frame(PD=PDs,SR=SR)
-    rownames(PDout)<-rownames(samp) 
+    PDout <- data.frame(PD = PDs, SR = SR)
+    rownames(PDout) <- rownames(samp)
     return(PDout)
-
 }

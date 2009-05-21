@@ -7,7 +7,7 @@ traitgram = function(
 	xaxt='s',
 	underscore = FALSE,
 	show.names = TRUE,
-	show.xaxis.vals = TRUE,
+	show.xaxis.values = TRUE,
 	method = c('ace','pic'),
 	...) 
 	
@@ -35,7 +35,7 @@ traitgram = function(
 		} else umar = 0.1
 
 	lmar = 0.2
-	if (xaxt=='s') if (show.xaxis.vals) lmar = 1 else lmar = 0.5
+	if (xaxt=='s') if (show.xaxis.values) lmar = 1 else lmar = 0.5
 	if (method[1]=='ace') xanc = ace(xx,phy)$ace 
 		else xanc = pic3(xx,phy)[,3]
 	xall = c(xx,xanc)
@@ -54,7 +54,7 @@ traitgram = function(
 	plot(range(c(x0,x1)),range(c(a0,a1)),
 		type='n',xaxt='n',yaxt='n',
 		xlab='',ylab='',bty='n',ylim=ylim,cex.axis=0.8)
-	if (xaxt=='s') if (show.xaxis.vals) axis(1,labels=TRUE) 
+	if (xaxt=='s') if (show.xaxis.values) axis(1,labels=TRUE) 
 		else axis(1,labels=FALSE)
 	segments(x0,a0,x1,a1)
 	if (show.names) {

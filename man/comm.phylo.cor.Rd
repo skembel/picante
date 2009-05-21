@@ -6,7 +6,7 @@
   Calculates measures of community phylogenetic structure (correlation between co-occurrence and phylogenetic distance) to patterns expected under various null models
 }
 \usage{
-comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "roij"),
+comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "doij"),
     null.model = c("sample.taxa.labels", "pool.taxa.labels",
         "frequency", "richness", "independentswap","trialswap"), runs = 999, ...)
 }

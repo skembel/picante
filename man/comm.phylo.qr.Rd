@@ -6,7 +6,7 @@
   Calculates measures of community phylogenetic structure (quantile regression  between co-occurrence and phylogenetic distance) to patterns expected under various null models
 }
 \usage{
-comm.phylo.qr(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "roij"),
+comm.phylo.qr(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "doij"),
     null.model = c("sample.taxa.labels", "pool.taxa.labels",
         "frequency", "richness", "independentswap","trialswap"), 
         quant = 0.75, runs = 999, show.plot = FALSE, ...)
@@ -51,6 +51,5 @@ Slingsby, J. A. and G. A. Verboom. 2006. Phylogenetic relatedness limits coexist
 \seealso{ \code{\link{randomizeSample}} }
 \examples{
 data(phylocom)
-comm.phylo.qr(phylocom$sample, phylocom$phylo, metric="cij",null.model="sample.taxa.labels",
-show.plot=TRUE)}
+comm.phylo.qr(phylocom$sample, phylocom$phylo, metric="cij",null.model="sample.taxa.labels")}
 \keyword{univar}

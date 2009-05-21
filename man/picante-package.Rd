@@ -3,7 +3,7 @@
 \alias{picante}
 \docType{package}
 \title{
-Picante: Phylocom Integration, Community Analyses, Null-models, Traits, and Evolution in R
+picante: R tools for integrating phylogenies and ecology
 }
 \description{
 R tools for integrating phylogenies and ecology
@@ -13,7 +13,7 @@ R tools for integrating phylogenies and ecology
 Package: \tab picante\cr
 Type: \tab Package\cr
 Version: \tab 0.7-0\cr
-Date: \tab 2009-4-3\cr
+Date: \tab 2009-5-18\cr
 License: \tab GPL-2\cr
 }
 }
