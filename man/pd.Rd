@@ -20,7 +20,7 @@ pd(samp, tree, include.root=TRUE)
 }
 
 \note{
-The data sets need not be species-community data sets but may be any sample data set with an associated phylogeny. PD is not statistically independent of species richness, it positively correlates with species richness across samples.
+The data sets need not be species-community data sets but may be any sample data set with an associated phylogeny. PD is not statistically independent of species richness, it positively correlates with species richness across samples. The function \code{\link{ses.pd}} compares observed PD to the values expected under various randomizations and allows a way to standardize for unequal richness across samples.
 
 If the root is to be included in all calculations of PD (\code{include.root=TRUE}), the tree must be rooted. Single-species samples will be assigned a PD value equal to the distance from the root to the present.
 
@@ -34,6 +34,8 @@ If the root is to be included in all calculations (\code{include.root=TRUE}), th
 }
 \references{ Faith D.P. (1992) Conservation evaluation and phylogenetic diversity. Biological Conservation, 61, 1-10. }
 \author{ Matthew Helmus \email{mrhelmus@gmail.com}, Jonathan Davies \email{davies@nceas.ucsb.edu}, Steven Kembel \email{skembel@uoregon.edu}}
-\seealso{ \code{\link{psr}} }
-
+\seealso{ \code{\link{psr}}, \code{\link{ses.pd}} }
+\examples{
+data(phylocom)
+pd(phylocom$sample, phylocom$phylo)}
 \keyword{univar}

@@ -96,12 +96,18 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 
 `taxaShuffle` <-
 function(x) {
-    #todo replace with vegan's permuted.index?
+    #TODO replace with vegan's permuted.index?
     if (!is.matrix(x)) x <- as.matrix(x)
 	rand.names <- sample(rownames(x))
 	rownames(x) <- rand.names
 	colnames(x) <- rand.names
-	x
+	return(x)
+}
+
+`tipShuffle` <- 
+function(phy) {
+    phy$tip.label <- phy$tip.label[sample(length(phy$tip.label))]
+    return(phy)
 }
 
 
@@ -582,4 +588,28 @@ pd <- function (samp, tree, include.root = TRUE)
     PDout <- data.frame(PD = PDs, SR = SR)
     rownames(PDout) <- rownames(samp)
     return(PDout)
+}
+
+`ses.pd` <-
+function (samp, tree, null.model = c("taxa.labels", "sample.pool", 
+    "phylogeny.pool", "independentswap", "trialswap"), runs = 999, iterations = 1000, ...) 
+{
+    pd.obs <- as.vector(pd(samp, tree, ...)$PD)
+    null.model <- match.arg(null.model)
+    pd.rand <- switch(null.model,
+    	taxa.labels = t(replicate(runs, as.vector(pd(samp, tipShuffle(tree), ...)$PD))),
+    	sample.pool = t(replicate(runs, as.vector(pd(randomizeSample(samp,null.model="richness"), tree, ...)$PD))),
+    	phylogeny.pool = t(replicate(runs, as.vector(pd(randomizeSample(samp,null.model="richness"),
+    		tipShuffle(tree), ...)$PD))),
+    	independentswap = t(replicate(runs, as.vector(pd(randomizeSample(samp,null.model="independentswap", iterations), tree, ...)$PD))),
+    	trialswap = t(replicate(runs, as.vector(pd(randomizeSample(samp,null.model="trialswap", iterations), tree, ...)$PD)))
+    )
+    pd.rand.mean <- apply(X = pd.rand, MARGIN = 2, FUN = mean, na.rm=TRUE)
+    pd.rand.sd <- apply(X = pd.rand, MARGIN = 2, FUN = sd, na.rm=TRUE)
+    pd.obs.z <- (pd.obs - pd.rand.mean)/pd.rand.sd
+    pd.obs.rank <- apply(X = rbind(pd.obs, pd.rand), MARGIN = 2, 
+        FUN = rank)[1, ]
+    pd.obs.rank <- ifelse(is.na(pd.rand.mean),NA,pd.obs.rank)    
+    data.frame(ntaxa=specnumber(samp),pd.obs, pd.rand.mean, pd.rand.sd, pd.obs.rank, 
+        pd.obs.z, pd.obs.p=pd.obs.rank/(runs+1),runs=runs, row.names = row.names(samp))
 }

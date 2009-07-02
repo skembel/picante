@@ -6,6 +6,7 @@
 \alias{sortColumns}
 \alias{sortRows}
 \alias{taxaShuffle}
+\alias{tipShuffle}
 \title{ Picante utility functions }
 \description{
   Picante utility functions for tree and data manipulation
@@ -18,6 +19,7 @@ pic.variance(x, phy, scaled = TRUE)
 sortColumns(x)
 sortRows(x)
 taxaShuffle(x)
+tipShuffle(phy)
 }
 
 \arguments{
@@ -37,7 +39,8 @@ taxaShuffle(x)
   \item{pic.variance}{Variance of independent contrasts}
   \item{sortColumns}{A data.frame or matrix with columns sorted by name}
   \item{sortRows}{A data.frame or matrix with rows sorted by name}
-    \item{taxaShuffle}{Matrix with taxa names shuffled}
+   \item{taxaShuffle}{Matrix with taxa names shuffled}
+   \item{tipShuffle}{Phylo object with taxa names shuffled}
 }
 
 \details{
