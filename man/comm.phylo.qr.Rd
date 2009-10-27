@@ -31,7 +31,7 @@ comm.phylo.qr(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "doij"),
     \item{random.qr.slopes}{A vector of quantile regression slopes calculated for each randomization}
 }
 \details{
-This function fits a quantile regression of co-occurrence versus phylogenetic distances separating species, and compares observed patterns to the patterns expected under some null model. The quantile regressions are fit using the \code{\link[brglm]{rq}} function from the \code{quantreg} package.
+This function fits a quantile regression of co-occurrence versus phylogenetic distances separating species, and compares observed patterns to the patterns expected under some null model. The quantile regressions are fit using the \code{\link[quantreg]{rq}} function from the \code{quantreg} package.
 
 Currently implemented null models (arguments to null.model):
 \describe{

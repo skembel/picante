@@ -23,8 +23,6 @@ traitgram(x, phy, xaxt = 's', underscore = FALSE, show.names = TRUE,
 \value{
     Plots a traitgram, no values returned.
 }
-\references{ 
-}
 \author{ David Ackerly <dackerly@berkeley.edu> }
 \seealso{ \code{\link{pic3}} }
 \examples{
