@@ -2,7 +2,7 @@
   library.dynam("picante",pkg,lib)
 } 
 
-`randomizeSample` <-
+`randomizeMatrix` <-
 function(samp, null.model=c("frequency","richness","independentswap","trialswap"),
     iterations=1000)
 {

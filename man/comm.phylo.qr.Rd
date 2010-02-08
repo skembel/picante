@@ -19,7 +19,7 @@ comm.phylo.qr(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "doij"),
   \item{quant}{ Quantile of slope to be fit (using \code{\link[quantreg]{rq}}) }
   \item{runs}{ Number of runs (randomizations) }
   \item{show.plot}{ Option to display a plot of co-occurrence versus phylogenetic distance with quantile regression slope fit }
-  \item{...}{ Additional arguments to \link{randomizeSample}}
+  \item{...}{ Additional arguments to \link{randomizeMatrix}}
 }
 \value{
     A list with elements:
@@ -48,7 +48,7 @@ Cavender-Bares J., D.A. Ackerly, D. Baum and F.A. Bazzaz. 2004. Phylogenetic ove
 Slingsby, J. A. and G. A. Verboom. 2006. Phylogenetic relatedness limits coexistence at fine spatial scales: evidence from the schoenoid sedges (Cyperaceae: Schoeneae) of the Cape Floristic Region, South Africa. The American Naturalist 168:14-27.
 }
 \author{ Steven Kembel <skembel@uoregon.edu> }
-\seealso{ \code{\link{randomizeSample}} }
+\seealso{ \code{\link{randomizeMatrix}} }
 \examples{
 data(phylocom)
 comm.phylo.qr(phylocom$sample, phylocom$phylo, metric="cij",null.model="sample.taxa.labels")}

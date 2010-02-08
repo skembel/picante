@@ -48,7 +48,7 @@ Currently implemented null models (arguments to null.model):
 
 Proches, S., Wilson, J.R.U. and Cowling, R.M. 2006. How much evolutionary history in a 10 x 10m plot? Proceedings of Royal Society of London B, Biological Sciences 273:1143-1148.}
 \author{ Steven Kembel <skembel@uoregon.edu> }
-\seealso{ \code{\link{pd}}, \code{\link{randomizeSample}}  }
+\seealso{ \code{\link{pd}}, \code{\link{randomizeMatrix}}  }
 \examples{
 data(phylocom)
 ses.pd(phylocom$sample, phylocom$phylo, null.model="taxa.labels", runs=99)}

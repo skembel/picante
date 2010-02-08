@@ -36,7 +36,7 @@ Currently implemented null models (arguments to null.model):
 }
 \references{Bryant, J.B., Lamanna, C., Morlon, H., Kerkhoff, A.J., Enquist, B.J., Green, J.L. 2008. Microbes on mountainsides: Contrasting elevational patterns of bacterial and plant diversity. Proceedings of the National Academy of Sciences 105 Supplement 1: 11505-11511}
 \author{ Helene Morlon <morlon.helene@gmail.com> and Steven Kembel <skembel@uoregon.edu> }
-\seealso{ \code{\link{phylosor}}, \code{\link{randomizeSample}}  }
+\seealso{ \code{\link{phylosor}}, \code{\link{randomizeMatrix}}  }
 \examples{
 data(phylocom)
 phylosor.rnd(phylocom$sample,phylocom$phylo,cstSor=TRUE,null.model="richness",runs=5)

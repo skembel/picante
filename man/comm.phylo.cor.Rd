@@ -16,7 +16,7 @@ comm.phylo.cor(samp, phylo, metric = c("cij", "checkerboard", "jaccard", "doij")
   \item{metric}{ Metric of co-occurrence to use (see \code{\link{species.dist}})}
   \item{null.model}{ Null model to use (see Details section for description) }
   \item{runs}{ Number of runs (randomizations) }
-  \item{...}{ Additional arguments to \link{randomizeSample}}
+  \item{...}{ Additional arguments to \link{randomizeMatrix}}
 }
 \value{
     A list with elements:
@@ -40,7 +40,7 @@ Currently implemented null models (arguments to null.model):
 }
 \references{ Cavender-Bares J., D.A. Ackerly, D. Baum and F.A. Bazzaz. 2004. Phylogenetic overdispersion in Floridian oak communities, American Naturalist, 163(6):823-843. }
 \author{ Steven Kembel <skembel@uoregon.edu> }
-\seealso{ \code{\link{randomizeSample}} }
+\seealso{ \code{\link{randomizeMatrix}} }
 \examples{
 data(phylocom)
 comm.phylo.cor(phylocom$sample, phylocom$phylo, metric="cij",null.model="sample.taxa.labels")}

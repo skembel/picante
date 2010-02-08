@@ -12,9 +12,9 @@ phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"), n
   \item{tree}{ phylo tree object or a phylogenetic covariance matrix }
   \item{env}{ environmental data matrix }
   \item{metric}{ if \code{metric="psv"}, \code{"psr"}, \code{"pse"}, or \code{"psc"} compares the observed mean of the respective metric to a null distribution at a given alpha; if \code{metric="sppregs"} compares the three correlations produced by \code{\link{sppregs}} to null distributions }
-  \item{null.model}{ permutation procedure used to create the null distribution, see \code{\link{randomizeSample}}}
+  \item{null.model}{ permutation procedure used to create the null distribution, see \code{\link{randomizeMatrix}}}
   \item{runs}{ the number of permutations to create the distribution, a rule of thumb is (number of communities)/alpha  }
-  \item{it}{ the number of swaps for the independent and trial-swap null models, see \code{\link{randomizeSample}} }
+  \item{it}{ the number of swaps for the independent and trial-swap null models, see \code{\link{randomizeMatrix}} }
   \item{alpha}{ probability value to compare the observed mean/correlations to a null distribution }
   \item{fam}{ as in \code{\link{sppregs}} }
 }
@@ -42,6 +42,6 @@ Helmus M.R., Savage K., Diebel M.W., Maxted J.T. & Ives A.R. (2007b) Separating 
 Gotelli N.J. (2000) Null model analysis of species co-occurrence patterns. Ecology, 81, 2606-2621}
 
 \author{ Matthew Helmus \email{mrhelmus@gmail.com} }
-\seealso{ \code{\link{psd}} ,\code{\link{sppregs}}, \code{\link{randomizeSample}} }
+\seealso{ \code{\link{psd}} ,\code{\link{sppregs}}, \code{\link{randomizeMatrix}} }
 
 \keyword{univar}

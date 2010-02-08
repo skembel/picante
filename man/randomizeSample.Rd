@@ -1,12 +1,12 @@
-\name{randomizeSample}
-\alias{randomizeSample}
+\name{randomizeMatrix}
+\alias{randomizeMatrix}
 
 \title{ Null models for community data matrix randomization}
 \description{
   Various null models for randomizing community data matrices
 }
 \usage{
-randomizeSample(samp, null.model = c("frequency", "richness", "independentswap", "trialswap"),iterations = 1000)    
+randomizeMatrix(samp, null.model = c("frequency", "richness", "independentswap", "trialswap"),iterations = 1000)    
 }
 
 \arguments{
@@ -35,5 +35,5 @@ Miklos I. & Podani J. 2004. Randomization of presence-absence matrices: Comments
 \author{ Steven Kembel <skembel@uoregon.edu> }
 \examples{
 data(phylocom)
-randomizeSample(phylocom$sample, null.model="richness")}
+randomizeMatrix(phylocom$sample, null.model="richness")}
 \keyword{manip}

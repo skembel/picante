@@ -67,7 +67,7 @@ phylosor.rnd <- function(samp, tree, cstSor=TRUE, null.model=c("taxa.labels", "f
 			else
 			for (r in 1:runs)
 			{
-				Res<-c(Res,list(phylosor(randomizeSample(samp, null.model),tree)))
+				Res<-c(Res,list(phylosor(randomizeMatrix(samp, null.model),tree)))
 			}
 			}
 
