@@ -1,7 +1,7 @@
 
 #modified from a function by Walton Green, Gene Hunt, Scott Wing
 #found at http://bricol.net/research/extinctmodel/Rfunctions/lop.R
-node.desc<- function(tr, node)
+.node.desc<- function(tr, node)
 # returns vector of decendents for a particular node
 {
  ee<- tr$edge

@@ -18,7 +18,7 @@ License: \tab GPL-2\cr
 }
 }
 \author{
-Author: Steven W. Kembel <skembel@uoregon.edu>, David D. Ackerly <dackerly@berkeley.edu>, Simon P. Blomberg <s.blomberg1@uq.edu.au>, Peter D. Cowan <pdc@berkeley.edu>, Matthew R. Helmus <mrhelmus@wisc.edu>, Helene Morlon <morlon.helene@gmail.com>, Campbell O. Webb <cwebb@oeb.harvard.edu>
+Author: Steven W. Kembel <skembel@uoregon.edu>, David D. Ackerly <dackerly@berkeley.edu>, Simon P. Blomberg <s.blomberg1@uq.edu.au>, Will K. Cornwell <cornwell@zoology.ubc.ca>, Peter D. Cowan <pdc@berkeley.edu>, Matthew R. Helmus <mrhelmus@wisc.edu>, Helene Morlon <morlon.helene@gmail.com>, Campbell O. Webb <cwebb@oeb.harvard.edu>
 Maintainer: Steven W. Kembel <skembel@uoregon.edu>
 }
 \keyword{package}
