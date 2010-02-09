@@ -13,7 +13,7 @@ phylosor.rnd(samp,tree, cstSor=TRUE, null.model=c("taxa.labels",
 
 \arguments{
   \item{ samp }{ Community data matrix }
-  \item{ tree }{ Object of class phylo}
+  \item{ tree }{ Object of class phylo - a rooted phylogeny}
   \item{ cstSor }{ TRUE if the Sorensen similarity should be kept constant across communities. FALSE otherwise }
   \item{ null.model }{ Null model to use (see Details section) }
   \item{ runs }{ Number of randomizations }
