@@ -5,7 +5,7 @@
   Calculates MPD (mean pairwise distance) separating taxa in two communities, a measure of phylogenetic beta diversity
 }
 \usage{
-comdist(comm, dis, abundance.weighted = FALSE, exclude.conspecifics = FALSE)
+comdist(comm, dis, abundance.weighted = FALSE)
 
 }
 
@@ -13,7 +13,6 @@ comdist(comm, dis, abundance.weighted = FALSE, exclude.conspecifics = FALSE)
   \item{comm}{ Community data matrix }
   \item{dis}{ Interspecific distance matrix }
   \item{abundance.weighted}{ Should mean pairwise distances separating species in two communities be weighted by species abundances? (default = FALSE)}
-  \item{exclude.conspecifics}{ Should conspecific taxa in different communities be excluded from MPD calculations? (default = FALSE)}
 }  
 \value{
 	Distance object of MPD values separating each pair of communities.

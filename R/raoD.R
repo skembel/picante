@@ -29,17 +29,17 @@ raoD <- function (comm, phy=NULL)
 			sum ( tij * outer(as.vector(t(x[k,])),as.vector(t(x[k,]))) )
     res$Dkk <- D
 
-	H <- matrix(nrow=N,ncol=N)    
+	Dkl <- matrix(nrow=N,ncol=N)    
 	for (k in 1:N) {
 		for (l in 1:N) {
-			H[k,l] <-
+			Dkl[k,l] <-
 			sum ( tij * outer(as.vector(t(x[k,])),as.vector(t(x[l,]))) )
 		}
 	}
 
-    row.names(H) <- row.names(x)
-    colnames(H) <- row.names(x)
-	Dkl <- H
+    row.names(Dkl) <- row.names(x)
+    colnames(Dkl) <- row.names(x)
+	H <- Dkl
 	res$Dkl <- Dkl
 
 	for (k in 1:N) {

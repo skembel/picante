@@ -30,21 +30,13 @@ Rao's quadratic entropy (Rao 1982) is a measure of diversity in ecological commu
 
 If no phylogeny is supplied, Dkk is equivalent to Simpson's diversity (probability that two individuals drawn from a community are from different taxa), Dkl is a beta-diversity equivalent of Simpson's diversity (probability that individuals drawn from each of two communities belong to different taxa), and H is Dkl standardized to account for within-community diversity.
 
-If an ultrametric phylogeny is supplied, Dkk is equivalent to the mean pairwise phylogenetic distance (distance to MRCA) between two individuals from different species drawn from a community, Dkl is the mean pairwise phylogenetic distance between individuals drawn from each of two communities, and H is Dkl standardized to account for within-community diversity.
+If an ultrametric phylogeny is supplied, Dkk is equivalent to the mean pairwise phylogenetic distance (distance to MRCA) between two individuals drawn from a community, Dkl is the mean pairwise phylogenetic distance between individuals drawn from each of two communities, and H is Dkl standardized to account for within-community diversity.
 
-\emph{
-    D[kl] = sum(t[ij] * x[ki] * x[lj])
+\emph{D[kl] = sum(t[ij] * x[ki] * x[lj])}
     
-        where x[ki] is the relative abundance of taxon i in community k
-        
-        t[ij] is a matrix of weights for all pairs of taxa i,j
-        
-            Without a phylogeny, when i=j, t[ij]=0, otherwise t[ij]=1
+where \emph{x[ki]} is the relative abundance of taxon \emph{i} in community \emph{k} and \emph{t[ij]} is a matrix of weights for all pairs of taxa \emph{i,j}. Without a phylogeny, when \emph{i=j}, \emph{t[ij]=0}, otherwise \emph{t[ij]=1}. With a phylogeny, \emph{t[ij]} is the phylogenetic distance to MRCA for taxa \emph{i,j}.
             
-            With a phylogeny, t[ij] is the phylogenetic distance to MRCA for taxa i and j
-            
-    H[kl] = D[kl] - (D[kk] + D[ll])/2
-}
+\emph{H[kl] = D[kl] - (D[kk] + D[ll])/2}
 
 Alpha, beta and total measure the average diversity within, among, and across all communities based on Dkk and H values taking variation in number of individuals per community into account. A Fst-like measure is calculated by dividing beta by the total diversity across all samples.
 }
