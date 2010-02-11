@@ -51,7 +51,7 @@ raoD <- function (comm, phy=NULL)
     
     res$total <- sum ( tij * outer(as.vector(t(x.combined)),as.vector(t(x.combined))) )
 
-    res$alpha <- sum(res$D * samp.relabund)
+    res$alpha <- sum(res$Dkk * samp.relabund)
 
     res$beta <- res$total - res$alpha
     

@@ -36,9 +36,10 @@ If community data lack taxa names, the function will issue a warning and no resu
 
 If trait data or distance matrix lack names, a warning is issued and the data are assumed to be sorted in the same order as the phylogeny's tip labels or community's column labels.
 
-These utility functions are used by several of the functions that assume taxa labels in phylogeny and data match, including \code{\link{Kcalc}}, \code{\link{phylosignal}}, and \code{\link{raoD}}.
+These utility functions are used by several functions that assume taxa labels in phylogeny and data match, including \code{\link{Kcalc}}, \code{\link{phylosignal}}, and \code{\link{raoD}}.
 }
 \author{ Steven Kembel <skembel@uoregon.edu> }
+\seealso{\code{\link{prune.missing}}, \code{\link{prune.sample}}}
 \examples{
 data(phylocom)
 match.phylo.comm(phylocom$phylo, phylocom$sample)

@@ -1,4 +1,11 @@
-Kcalc <- function(x,phy) {
+Kcalc <- function(x, phy, checkdata=TRUE) {
+
+    if (checkdata) {
+        dat <- match.phylo.data(phy, x)
+        x <- dat$data
+        phy <- dat$phy
+    }
+    
 	mat <- vcv.phylo(phy, cor=TRUE) # correlation matrix
 	ntax = length(phy$tip.label)
 	ntax1 = ntax-1
@@ -23,14 +30,20 @@ Kcalc <- function(x,phy) {
 }
 
 pic.variance <- function(x,phy,scaled=TRUE) {
-	pics <- pic(x,phy,scaled)
+	pics <- pic(x, phy, scaled)
 	N <- length(pics)
-	sum(pics^2) / (N -1)
+	sum(pics^2) / (N-1)
 }
 
-phylosignal <- function(x,phy,reps=999,...) {
+phylosignal <- function(x, phy, reps=999, checkdata=TRUE, ...) {
 
-    K <- Kcalc(x,phy)
+    if (checkdata) {
+        dat <- match.phylo.data(phy, x)
+        x <- dat$data
+        phy <- dat$phy
+    }
+    
+    K <- Kcalc(x, phy, checkdata=FALSE)
 
     if (!is.vector(x)) {
         x.orig <- x
@@ -56,8 +69,11 @@ phylosignal <- function(x,phy,reps=999,...) {
 
 }
 
-'multiPhylosignal' <-
-function(x,phy,...) {
+multiPhylosignal <- function(x, phy, checkdata=TRUE, ...) {
+
+    if (!(is.data.frame(x) | is.matrix(x))) {
+        stop("Expecting trait data in data.frame or matrix format")
+    }
 	trait <- x[,1]
 	names(trait) <- row.names(x)
 	pruned <- prune.missing(trait,phy)
@@ -66,8 +82,9 @@ function(x,phy,...) {
 		for (i in 2:length(colnames(x))) {
 			trait <- x[,i]
 			names(trait) <- row.names(x)
-			pruned <- prune.missing(trait,phy)
-			output <- rbind(output,phylosignal(pruned$data,pruned$tree,...))
+			pruned <- prune.missing(trait, phy)
+			trait <- trait[phy$tip.label]
+			output <- rbind(output, phylosignal(pruned$data, pruned$tree, checkdata=FALSE, ...))
 		}
 	}
 	data.frame(output,row.names=colnames(x))
