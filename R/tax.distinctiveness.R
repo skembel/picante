@@ -1,11 +1,14 @@
 #Taxic diversity: Vane-Wright et al., 1991 and May 1990 which accounts for polytomies by counting the number of branches descending from each node that lies on the path from a spp tip to the root (not just counting the number of nodes.
 
-tax.distinctiveness<- function(tree, type=c("Vane-Wright", "May")){
+tax.distinctiveness<- function(tree, type=c("Vane-Wright", "May")) {
 
-if(is.rooted(tree)==FALSE)
-warning("A rooted phylogeny is required for meaningful output of this function", call.=FALSE)
+    type <- match.arg(type)
 
-n.nodes<- switch(type, "Vane-Wright"=.node.number(tree),
+    if(is.rooted(tree)==FALSE) {
+        warning("A rooted phylogeny is required for meaningful output of this function", call.=FALSE)
+    }
+
+    n.nodes<- switch(type, "Vane-Wright"=.node.number(tree),
 	"May"={edge<- tree$edge
 
 	for(i in 1:length(tree$tip.label)){

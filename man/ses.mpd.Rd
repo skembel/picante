@@ -1,7 +1,7 @@
 \name{ses.mpd}
 \alias{ses.mpd}
 
-\title{ Standardized effect size of mpd }
+\title{ Standardized effect size of MPD }
 \description{
   Standardized effect size of mean pairwise distances in communities. When used with a phylogenetic distance matrix, equivalent to -1 times the Nearest Relative Index (NRI).
 }

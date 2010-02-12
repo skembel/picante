@@ -6,6 +6,8 @@
 
 evol.distinct<- function(tree, type=c("equal.splits", "fair.proportion"), scale=FALSE, use.branch.lengths=TRUE){
 
+type <- match.arg(type)
+
 if(is.rooted(tree)==FALSE)
 warning("A rooted phylogeny is required for meaningful output of this function", call.=FALSE)
 
