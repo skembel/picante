@@ -8,6 +8,7 @@ phylosor <- function (samp, tree)
         stop("Rooted phylogeny required for phylosor calculation")
     }
     
+    samp <- as.matrix(samp)
     s <- nrow(samp)
     phylodist <- matrix(NA, s, s)
     rownames(phylodist) <- rownames(samp)
