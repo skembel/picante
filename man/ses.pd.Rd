@@ -6,9 +6,9 @@
   Standardized effect size of phylogenetic diversity (Faith's PD) in communities.
 }
 \usage{
-ses.pd(samp, tree, null.model = c("taxa.labels", "sample.pool",
-            "phylogeny.pool", "independentswap", "trialswap"),
-            runs = 999, iterations = 1000, ...)
+ses.pd(samp, tree, null.model = c("taxa.labels", "richness", "frequency",
+    "sample.pool", "phylogeny.pool", "independentswap", "trialswap"),
+    runs = 999, iterations = 1000, ...)
 }
 
 \arguments{
@@ -35,10 +35,10 @@ ses.pd(samp, tree, null.model = c("taxa.labels", "sample.pool",
 Currently implemented null models (arguments to null.model):
 \describe{
     \item{taxa.labels}{ Shuffle taxa labels across tips of phylogeny (across all taxa included in phylogeny)}
+    \item{richness}{ Randomize community data matrix abundances within samples (maintains sample species richness)}    
+    \item{frequency}{ Randomize community data matrix abundances within species (maintains species occurence frequency)}    
     \item{sample.pool}{ Randomize community data matrix by drawing species from pool of species occurring in at least one community (sample pool) with equal probability}  
     \item{phylogeny.pool}{ Randomize community data matrix by drawing species from pool of species occurring in the phylogeny (phylogeny pool) with equal probability}  
-    \item{frequency}{ Randomize community data matrix abundances within species (maintains species occurence frequency)}
-    \item{richness}{ Randomize community data matrix abundances within samples (maintains sample species richness)}
     \item{independentswap}{ Randomize community data matrix with the independent swap algorithm (Gotelli 2000) maintaining species occurrence frequency and sample species richness }
     \item{trialswap}{ Randomize community data matrix with the trial-swap algorithm (Miklos & Podani 2004) maintaining species occurrence frequency and sample species richness }
     }

@@ -6,7 +6,7 @@
   Standardized effect size of mean pairwise distances in communities. When used with a phylogenetic distance matrix, equivalent to -1 times the Nearest Relative Index (NRI).
 }
 \usage{
-ses.mpd(samp, dis, null.model = c("taxa.labels", "sample.pool",
+ses.mpd(samp, dis, null.model = c("taxa.labels", "richness", "frequency", "sample.pool",
             "phylogeny.pool", "independentswap", "trialswap"),
             abundance.weighted = FALSE, runs = 999, iterations = 1000)
 }
@@ -35,10 +35,10 @@ ses.mpd(samp, dis, null.model = c("taxa.labels", "sample.pool",
 Currently implemented null models (arguments to null.model):
 \describe{
     \item{taxa.labels}{ Shuffle distance matrix labels (across all taxa included in distance matrix)}
+    \item{richness}{ Randomize community data matrix abundances within samples (maintains sample species richness)}
+    \item{frequency}{ Randomize community data matrix abundances within species (maintains species occurence frequency)}
     \item{sample.pool}{ Randomize community data matrix by drawing species from pool of species occurring in at least one community (sample pool) with equal probability}  
     \item{phylogeny.pool}{ Randomize community data matrix by drawing species from pool of species occurring in the distance matrix (phylogeny pool) with equal probability}  
-    \item{frequency}{ Randomize community data matrix abundances within species (maintains species occurence frequency)}
-    \item{richness}{ Randomize community data matrix abundances within samples (maintains sample species richness)}
     \item{independentswap}{ Randomize community data matrix with the independent swap algorithm (Gotelli 2000) maintaining species occurrence frequency and sample species richness }
     \item{trialswap}{ Randomize community data matrix with the trial-swap algorithm (Miklos & Podani 2004) maintaining species occurrence frequency and sample species richness }
     }

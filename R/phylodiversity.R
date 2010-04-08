@@ -165,7 +165,7 @@ mntd <- function(samp, dis, abundance.weighted=FALSE)
 
 
 `ses.mpd` <-
-function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
+function (samp, dis, null.model = c("taxa.labels", "richness", "frequency", "sample.pool", 
     "phylogeny.pool", "independentswap", "trialswap"),
     abundance.weighted = FALSE, runs = 999, iterations = 1000) 
 {
@@ -174,6 +174,8 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
     null.model <- match.arg(null.model)
     mpd.rand <- switch(null.model,
     	taxa.labels = t(replicate(runs, mpd(samp, taxaShuffle(dis), abundance.weighted=abundance.weighted))),
+    	richness = t(replicate(runs, mpd(randomizeMatrix(samp,null.model="richness"), dis, abundance.weighted))),
+    	frequency = t(replicate(runs, mpd(randomizeMatrix(samp,null.model="frequency"), dis, abundance.weighted))),    	
     	sample.pool = t(replicate(runs, mpd(randomizeMatrix(samp,null.model="richness"), dis, abundance.weighted))),
     	phylogeny.pool = t(replicate(runs, mpd(randomizeMatrix(samp,null.model="richness"),
     		taxaShuffle(dis), abundance.weighted))),
@@ -192,7 +194,7 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
 
 
 `ses.mntd` <-
-function (samp, dis, null.model = c("taxa.labels", "sample.pool", 
+function (samp, dis, null.model = c("taxa.labels", "richness", "frequency", "sample.pool", 
     "phylogeny.pool", "independentswap", "trialswap"),
     abundance.weighted = FALSE, runs = 999, iterations = 1000) 
 {
@@ -201,6 +203,8 @@ function (samp, dis, null.model = c("taxa.labels", "sample.pool",
     null.model <- match.arg(null.model)
     mntd.rand <- switch(null.model,
     	taxa.labels = t(replicate(runs, mntd(samp, taxaShuffle(dis), abundance.weighted))),
+    	richness = t(replicate(runs, mntd(randomizeMatrix(samp,null.model="richness"), dis, abundance.weighted))),
+    	frequency = t(replicate(runs, mntd(randomizeMatrix(samp,null.model="frequency"), dis, abundance.weighted))),
     	sample.pool = t(replicate(runs, mntd(randomizeMatrix(samp,null.model="richness"), dis, abundance.weighted))),
     	phylogeny.pool = t(replicate(runs, mntd(randomizeMatrix(samp,null.model="richness"),
     		taxaShuffle(dis), abundance.weighted))),
@@ -591,13 +595,15 @@ pd <- function (samp, tree, include.root = TRUE)
 }
 
 `ses.pd` <-
-function (samp, tree, null.model = c("taxa.labels", "sample.pool", 
+function (samp, tree, null.model = c("taxa.labels", "richness", "frequency", "sample.pool", 
     "phylogeny.pool", "independentswap", "trialswap"), runs = 999, iterations = 1000, ...) 
 {
     pd.obs <- as.vector(pd(samp, tree, ...)$PD)
     null.model <- match.arg(null.model)
     pd.rand <- switch(null.model,
     	taxa.labels = t(replicate(runs, as.vector(pd(samp, tipShuffle(tree), ...)$PD))),
+    	richness = t(replicate(runs, as.vector(pd(randomizeMatrix(samp,null.model="richness"), tree, ...)$PD))),
+    	frequency = t(replicate(runs, as.vector(pd(randomizeMatrix(samp,null.model="frequency"), tree, ...)$PD))),    	
     	sample.pool = t(replicate(runs, as.vector(pd(randomizeMatrix(samp,null.model="richness"), tree, ...)$PD))),
     	phylogeny.pool = t(replicate(runs, as.vector(pd(randomizeMatrix(samp,null.model="richness"),
     		tipShuffle(tree), ...)$PD))),
