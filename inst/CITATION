@@ -1,0 +1,8 @@
+citHeader("To cite Picante in a publication:")
+
+citEntry(entry="Article",
+	title = "Picante: {R} tools for integrating phylogenies and ecology",
+        author = personList(as.person("S.W. Kembel"), as.person("P.D. Cowan"), as.person("M.R. Helmus"), as.person("W.K. Cornwell"), as.person("H. Morlon"), as.person("D.D. Ackerly"),as.person("S.P. Blomberg"), as.person("C.O. Webb")),
+	journal = "Bioinformatics",
+  	year = "In press",
+	textVersion = "S.W. Kembel, P.D. Cowan, M.R. Helmus, W.K. Cornwell, H. Morlon, D.D. Ackerly, S.P. Blomberg, and C.O. Webb. In press. Picante: R tools for integrating phylogenies and ecology. Bioinformatics." )
