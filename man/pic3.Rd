@@ -32,7 +32,7 @@ Garland T, Jr, Harvey PH & Ives AR (1992) Procedures for the analysis of compara
 \section{Warning }{ Assumes that trait data are sorted in the same order as phylo\$tip.label }
 \examples{
 randtree <- rcoal(20)
-randtraits <- evolve.brownian(randtree)
+randtraits <- rTraitCont(randtree)
 pic3(randtraits,randtree)
 }
 \keyword{univar}

@@ -31,7 +31,7 @@ Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for phylogenetic
 \seealso{ \code{\link{Kcalc}} }
 \examples{
 randtree <- rcoal(20)
-randtraits <- evolve.brownian(randtree)
+randtraits <- rTraitCont(randtree)
 phylosignal(randtraits[randtree$tip.label],randtree)
 }
 \keyword{univar}

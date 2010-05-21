@@ -27,7 +27,7 @@ traitgram(x, phy, xaxt = 's', underscore = FALSE, show.names = TRUE,
 \seealso{ \code{\link{pic3}} }
 \examples{
 randtree <- rcoal(20)
-randtraits <- evolve.brownian(randtree)
+randtraits <- rTraitCont(randtree)
 traitgram(randtraits,randtree)
 traitgram(randtraits,randtree,method='pic')
 }
