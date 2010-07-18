@@ -1,33 +1,33 @@
-Kcalc <- function(x, phy, checkdata=TRUE) {
+Kcalc <- function(x,phy, checkdata=TRUE) {
 
     if (checkdata) {
         dat <- match.phylo.data(phy, x)
         x <- dat$data
         phy <- dat$phy
     }
+    dat2 <- data.frame(x=x)
+    mat <- vcv.phylo(phy)
+    dat2$vars <- diag(mat)
+    matc <- vcv.phylo(phy, cor=TRUE) # correlation matrix
+    ntax <- length(phy$tip.label)
+
+    # calculate "phylogenetic" mean via gls
+    fit <- gls(x ~ 1, correlation=corSymm(matc[lower.tri(matc)], fixed=TRUE), 
+    weights=varFixed(~vars), data=dat2)
+    ahat <- coef(fit)
     
-	mat <- vcv.phylo(phy, cor=TRUE) # correlation matrix
-	ntax = length(phy$tip.label)
-	ntax1 = ntax-1
+    #observed
+    MSE <- fit$sigma^2
+    MSE0 <- t(x-ahat) %*% (x - ahat)/(ntax-1)
+    
+    #expected
+    MSE0.MSE <- 1/(ntax-1) * (sum(diag(mat))-ntax/sum(solve(mat)))
+    
+    K <- MSE0/MSE / MSE0.MSE
+    return(K)
 
-	dat = data.frame(x)
-	names(dat) = 'x'
-	# calculate "phylogenetic" mean via gls
-	fit <- gls(x ~ 1, data = dat, 	
-		correlation=corSymm(mat[lower.tri(mat)], fixed=TRUE))
-	ahat <- coef(fit)
-	
-	#observed
-	MSE <- fit$sigma^2
-	MSE0 <- t(dat$x - ahat) %*% (dat$x - ahat)/ ntax1
-
-	#expected
-	MSE0.MSE <- 1/ ntax1 * 	
-		(sum(diag(mat))- ntax/sum(solve(mat)))
-
-	K <- MSE0/MSE / MSE0.MSE
-	return(K)
 }
+
 
 pic.variance <- function(x,phy,scaled=TRUE) {
 	pics <- pic(x, phy, scaled)

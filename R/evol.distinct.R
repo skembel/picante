@@ -4,7 +4,8 @@
 #The scale option refers to whether or not the phylogeny should be scaled to a depth of 1 or, in the case of an ultrametric tree,  scaled such that branch lengths are relative.
 #If use.branch.lengths=FALSE, then all branch lengths are changed to 1.
 
-evol.distinct<- function(tree, type=c("equal.splits", "fair.proportion"), scale=FALSE, use.branch.lengths=TRUE){
+evol.distinct <- function(tree, type=c("equal.splits", "fair.proportion"),
+                            scale=FALSE, use.branch.lengths=TRUE){
 
 type <- match.arg(type)
 
@@ -33,15 +34,16 @@ for(i in 1:length(tree$tip.label)){
 
 #apportion internal branch lengths appropriately
 if(length(internal.brlen)!=0){
-internal.brlen<- internal.brlen*switch(type,
-	"equal.splits"=	sort(rep(.5,length(internal.brlen))^c(1:length(internal.brlen))),
-	"fair.proportion"= 1/for(j in 1:length(nodes)){
-		sons<-.node.desc(tree, nodes[j])
-		n.descendents<- length(sons$tips)
-		if(j==1)
-		portion<- n.descendents else
-		portion<- c(n.descendents, portion)
-		})}
+   internal.brlen <- internal.brlen * switch(type, equal.splits = sort(rep(0.5, 
+        length(internal.brlen))^c(1:length(internal.brlen))), 
+        fair.proportion = {for (j in 1:length(nodes)) {
+          sons <- .node.desc(tree, nodes[j])
+          n.descendents <- length(sons$tips)
+          if (j == 1) 
+            portion <- n.descendents
+          else portion <- c(n.descendents, portion)
+        }; 1/portion})
+}
 	
 	#sum internal branch lengths with the pendant edge
 	ED<- sum(internal.brlen, tree$edge.length[which.edge(tree, spp)])
@@ -52,7 +54,7 @@ internal.brlen<- internal.brlen*switch(type,
 	}
 results<- cbind(tree$tip.label, as.data.frame(w))
 names(results)<- c("Species", "w")
-results
+return(results)
 	
 	}
 	
