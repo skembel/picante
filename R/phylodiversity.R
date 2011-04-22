@@ -368,7 +368,7 @@ pse<-function(samp,tree){
     if(is.null(tree$edge.length)){tree<-compute.brlen(tree, 1)}  #If phylo has no given branch lengths
     tree<-prune.sample(samp,tree) 
     # Make sure that the species line up
-    samp<-samp[,tree$tip.label]
+    samp<-samp[,tree$tip.label, drop=FALSE]
     # Make a correlation matrix of the species pool phylogeny
     Cmatrix<-vcv.phylo(tree,cor=TRUE)
   } else {
@@ -377,7 +377,7 @@ pse<-function(samp,tree){
     preval<-colSums(samp)/sum(samp)
     species<-species[preval>0]
     Cmatrix<-Cmatrix[species,species]
-    samp<-samp[,colnames(Cmatrix)]
+    samp<-samp[,colnames(Cmatrix),drop=FALSE]
   }
   
   # numbers of locations and species
