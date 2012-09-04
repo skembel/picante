@@ -72,7 +72,7 @@ pblmpredict<-function(x,tree1.w.novel=NULL,tree2.w.novel=NULL,predict.originals=
   if(is(tree1.w.novel)[1]=="phylo")
   {
     if(is.null(tree1.w.novel$edge.length)){tree1.w.novel<-compute.brlen(tree1.w.novel, 1)}  #If phylo has no given branch lengths
-    V1<-vcv.phylo(tree1.w.novel,cor=TRUE)
+    V1<-vcv.phylo(tree1.w.novel,corr=TRUE)
   } else {
     V1<-tree1.w.novel
   }
@@ -80,7 +80,7 @@ pblmpredict<-function(x,tree1.w.novel=NULL,tree2.w.novel=NULL,predict.originals=
   if(is(tree2.w.novel)[1]=="phylo")
   {
     if(is.null(tree2.w.novel$edge.length)){tree2.w.novel<-compute.brlen(tree2.w.novel, 1)}  #If phylo has no given branch lengths
-    V2<-vcv.phylo(tree2.w.novel,cor=TRUE)
+    V2<-vcv.phylo(tree2.w.novel,corr=TRUE)
   } else {
     V2<-tree2.w.novel
   }

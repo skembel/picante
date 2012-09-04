@@ -8,7 +8,7 @@ Kcalc <- function(x,phy, checkdata=TRUE) {
     dat2 <- data.frame(x=x)
     mat <- vcv.phylo(phy)
     dat2$vars <- diag(mat)
-    matc <- vcv.phylo(phy, cor=TRUE) # correlation matrix
+    matc <- vcv.phylo(phy, corr=TRUE) # correlation matrix
     ntax <- length(phy$tip.label)
 
     # calculate "phylogenetic" mean via gls

@@ -240,7 +240,7 @@ psv<-function(samp,tree,compute.var=TRUE){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=TRUE)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -370,7 +370,7 @@ pse<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label, drop=FALSE]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=TRUE)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -430,7 +430,7 @@ psc<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=TRUE)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -486,7 +486,7 @@ psv.spp<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=TRUE)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)

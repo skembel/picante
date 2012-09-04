@@ -11,7 +11,7 @@ sppregs<-function(samp,env,tree=NULL,fam="gaussian"){
       # Make sure that the species line up
       samp<-samp[,tree$tip.label]
       # Make a correlation matrix of the species pool phylogeny
-      Cmatrix<-vcv.phylo(tree,cor=TRUE)
+      Cmatrix<-vcv.phylo(tree,corr=TRUE)
     } else {
       Cmatrix<-tree
       species<-colnames(samp)

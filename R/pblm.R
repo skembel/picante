@@ -181,7 +181,7 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
     if(is(tree1)[1]=="phylo")
     {
       if(is.null(tree1$edge.length)){tree1<-compute.brlen(tree1, 1)}  #If phylo has no given branch lengths
-      V1<-vcv.phylo(tree1,cor=TRUE)
+      V1<-vcv.phylo(tree1,corr=TRUE)
       V1<-V1[rownames(assocs),rownames(assocs)]
     } else {
       V1<-tree1[rownames(assocs),rownames(assocs)]
@@ -190,7 +190,7 @@ pblm<-function(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=
     if(is(tree2)[1]=="phylo")
     {
     if(is.null(tree2$edge.length)){tree2<-compute.brlen(tree2, 1)}  #If phylo has no given branch lengths
-      V2<-vcv.phylo(tree2,cor=TRUE)
+      V2<-vcv.phylo(tree2,corr=TRUE)
       V2<-V2[colnames(assocs),colnames(assocs)]
     } else {
       V2<-tree2[colnames(assocs),colnames(assocs)]

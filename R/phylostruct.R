@@ -4,7 +4,7 @@ phylostruct<-function(samp,tree,env=NULL,metric=c("psv","psr","pse","psc","sppre
   null.model<-match.arg(null.model)
   if(metric=="sppregs")
   {
-  nulls<-t(replicate(runs,sppregs(randomizeMatrix(samp,null.model=null.model,it=it),env,tree,fam=fam)$correlations))
+  nulls<-t(replicate(runs,sppregs(randomizeMatrix(samp,null.model=null.model,iterations=it),env,tree,fam=fam)$correlations))
   obs<-sppregs(samp,env,tree,fam=fam)$correlations
   mean.null<-apply(nulls,2,mean)
   quantiles.null<-t(apply(nulls,2,quantile,probs=c(alpha/2,1-(alpha/2))))
@@ -15,10 +15,10 @@ phylostruct<-function(samp,tree,env=NULL,metric=c("psv","psr","pse","psc","sppre
   } else {
 
     nulls<-switch(metric,
-                       psv = replicate(runs,mean(psv(as.matrix(randomizeMatrix(samp,null.model=null.model,it=it)),tree,compute.var=FALSE)[,1],na.rm=TRUE)),
-                       psr = replicate(runs,mean(psr(as.matrix(randomizeMatrix(samp,null.model=null.model,it=it)),tree,compute.var=FALSE)[,1],na.rm=TRUE)),
-                       pse = replicate(runs,mean(pse(as.matrix(randomizeMatrix(samp,null.model=null.model,it=it)),tree)[,1],na.rm=TRUE)),
-                       psc = replicate(runs,mean(psc(as.matrix(randomizeMatrix(samp,null.model=null.model,it=it)),tree)[,1],na.rm=TRUE)))
+                       psv = replicate(runs,mean(psv(as.matrix(randomizeMatrix(samp,null.model=null.model,iterations=it)),tree,compute.var=FALSE)[,1],na.rm=TRUE)),
+                       psr = replicate(runs,mean(psr(as.matrix(randomizeMatrix(samp,null.model=null.model,iterations=it)),tree,compute.var=FALSE)[,1],na.rm=TRUE)),
+                       pse = replicate(runs,mean(pse(as.matrix(randomizeMatrix(samp,null.model=null.model,iterations=it)),tree)[,1],na.rm=TRUE)),
+                       psc = replicate(runs,mean(psc(as.matrix(randomizeMatrix(samp,null.model=null.model,iterations=it)),tree)[,1],na.rm=TRUE)))
     quantiles.null<-quantile(nulls,probs=c(alpha/2,1-(alpha/2)))
     mean.null<-mean(nulls)
     mean.obs<-switch(metric,
