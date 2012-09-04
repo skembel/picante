@@ -79,7 +79,7 @@ correctly structured. Then increase \code{exitcountermax} to get convergence. It
 especially when designing complicated model structures. See Ives and Helmus (2011) for a discussion.
 }
 \examples{
-
+\dontrun{
 modelflag=1
 sim.dat<-pglmm.sim(stree(16, "balanced"),nsites=30,modelflag=modelflag,second.env=TRUE,compscale=1)
 str(sim.dat)
@@ -91,6 +91,7 @@ str(dat)
 out<-pglmm.fit(dat=dat,maxit=25,exitcountermax=30)
 str(out)
 out$s # The first row gives the estimate of phylogenetic signal and the second an estimate of how strongly species richness varies across communities. This later parameter is likely biologically uninformative for most research questions.
+}
 }
 
 \keyword{univar}

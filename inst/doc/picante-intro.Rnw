@@ -12,7 +12,7 @@
 \date{April 2010}
 
 \begin{document}
-\SweaveOpts{strip.white=TRUE}
+\SweaveOpts{strip.white=true}
 <<echo=FALSE>>=
 options(width=72)
 @
@@ -177,7 +177,6 @@ par(mfrow=c(1,1))
 <<fig=TRUE>>=
 comdist.result <- comdist(comm, phydist)
 comdist.result
-library(cluster)
 comdist.clusters <- hclust(comdist.result)
 plot(comdist.clusters)
 @

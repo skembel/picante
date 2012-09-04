@@ -28,7 +28,7 @@ traitgram(x, phy, xaxt = 's', underscore = FALSE, show.names = TRUE,
 \references{ 
 Ackerly, D. D. 2009. Conservatism and diversification of plant functional traits: Evolutionary rates versus phylogenetic signal. Proceedings of the National Academy of Sciences USA 106:19699-19706. doi: 10.1073/pnas.0901635106. 
 
-Evans, M. E. K., S. A. Smith, R. S. Flynn, and M. J. Donoghue. 2009. Climate, Niche Evolution, and Diversification of the \"bird-cage\" Evening Primroses (Oenothera, Sections Anogra and Kleinia). American Naturalist 173:225-240. 
+Evans, M. E. K., S. A. Smith, R. S. Flynn, and M. J. Donoghue. 2009. Climate, Niche Evolution, and Diversification of the "bird-cage" Evening Primroses (Oenothera, Sections Anogra and Kleinia). American Naturalist 173:225-240. 
 }
 \examples{
 randtree <- rcoal(20)

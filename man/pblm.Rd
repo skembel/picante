@@ -75,6 +75,7 @@ Blomberg S.P., Garland T.J. & Ives A.R. (2003) Testing for phylogenetic signal i
 
 \author{ Matthew Helmus \email{mrhelmus@gmail.com} }
 \examples{
+\dontrun{
 #load example data from Ives & Godfray (2006)
 data(IvesGodfray)
 
@@ -103,6 +104,6 @@ for (i in 1:q)
 pblm.A <- pblm(sqrt(A),tree1=host.cov.scaled,tree2=para.cov.scaled)
 pblm.A$signal.strength    #compare to Ives and Godfray (2006) Table 1 Line 1
 pblm.A$MSE
-
+}
 }
 \keyword{univar}

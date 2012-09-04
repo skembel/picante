@@ -51,5 +51,5 @@ Slingsby, J. A. and G. A. Verboom. 2006. Phylogenetic relatedness limits coexist
 \seealso{ \code{\link{randomizeMatrix}} }
 \examples{
 data(phylocom)
-comm.phylo.qr(phylocom$sample, phylocom$phylo, metric="cij",null.model="sample.taxa.labels")}
+comm.phylo.qr(phylocom$sample, phylocom$phylo, metric="cij", null.model="sample.taxa.labels", runs=99)}
 \keyword{univar}
