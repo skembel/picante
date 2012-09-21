@@ -33,7 +33,7 @@ pic3 = function (x, phy, scaled = TRUE, var.contrasts = TRUE)
     ans <- .C("pic", as.integer(nb.tip), as.integer(nb.node), 
         as.integer(phy$edge[, 1]), as.integer(phy$edge[, 2]), 
         as.double(phy$edge.length), as.double(phenotype), as.double(contr), 
-        as.double(var.con), as.integer(var.contrasts), as.integer(scaled), 
+        as.double(var.con), as.integer(var.contrasts), as.integer(scaled),
         PACKAGE = "ape")
     contr <- ans[[7]]
     if (var.contrasts) {
