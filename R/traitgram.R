@@ -1,18 +1,17 @@
+## draws a phylogeny with tips and nodes positioned
+## by trait value, and brownian ancestral value
+## node height by branch lengths
 traitgram = function(
-	## draws a phylogeny with tips and nodes positioned
-	## by trait value, and brownian ancestral value
-	## node height by branch lengths
-
-	x,phy,
+	x, phy,
 	xaxt='s',
 	underscore = FALSE,
 	show.names = TRUE,
 	show.xaxis.values = TRUE,
-	method = c('ace','pic'),
+	method = c('ML','pic'),
 	...) 
-	
 {
-	require(ape)
+
+	method <- match.arg(method)
 	Ntaxa = length(phy$tip.label)
 	Ntot = Ntaxa + phy$Nnode
 	phy = node.age(phy)
@@ -36,8 +35,9 @@ traitgram = function(
 
 	lmar = 0.2
 	if (xaxt=='s') if (show.xaxis.values) lmar = 1 else lmar = 0.5
-	if (method[1]=='ace') xanc = ace(xx,phy)$ace 
-		else xanc = pic3(xx,phy)[,3]
+	xanc <- ace(xx, phy, method=method)$ace
+	#if (method[1]=='ace') xanc = ace(xx,phy)$ace 
+	#	else xanc = pic3(xx,phy)[,3]
 	xall = c(xx,xanc)
 	
 	a0 = ages[phy$edge[,1]]

@@ -7,7 +7,7 @@
 }
 \usage{
 traitgram(x, phy, xaxt = 's', underscore = FALSE, show.names = TRUE,
-            show.xaxis.values = TRUE, method = c('ace','pic'), ...)
+            show.xaxis.values = TRUE, method = c('ML','pic'), ...)
 }
 
 \arguments{
