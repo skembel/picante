@@ -36,8 +36,6 @@ traitgram = function(
 	lmar = 0.2
 	if (xaxt=='s') if (show.xaxis.values) lmar = 1 else lmar = 0.5
 	xanc <- ace(xx, phy, method=method)$ace
-	#if (method[1]=='ace') xanc = ace(xx,phy)$ace 
-	#	else xanc = pic3(xx,phy)[,3]
 	xall = c(xx,xanc)
 	
 	a0 = ages[phy$edge[,1]]

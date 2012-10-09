@@ -17,14 +17,13 @@ traitgram(x, phy, xaxt = 's', underscore = FALSE, show.names = TRUE,
   \item{underscore}{ if FALSE remove underscore from taxonomic names }
   \item{show.names}{ if TRUE show taxon names across tips of phylogeny }
   \item{show.xaxis.values}{ if TRUE show values for trait on x=axis }
-  \item{method}{ method for calculation of internal trait values. 'ace' = ace maximum likelihood method from ape; 'pic' = independent contrasts method. pic option can be used when ace fails to converge or otherwise seems to fail to correctly reconstruct ancestral values}
+  \item{method}{ method for calculation of internal trait values. 'ML' = maximum likelihood method; 'pic' = independent contrasts method. pic option can be used when ML fails to converge or otherwise seems to fail to correctly reconstruct ancestral values}
   \item{...}{ Additional arguments passed to plot }
 }
 \value{
     Plots a traitgram, no values returned.
 }
 \author{ David Ackerly <dackerly@berkeley.edu> }
-\seealso{ \code{\link{pic3}} }
 \references{ 
 Ackerly, D. D. 2009. Conservatism and diversification of plant functional traits: Evolutionary rates versus phylogenetic signal. Proceedings of the National Academy of Sciences USA 106:19699-19706. doi: 10.1073/pnas.0901635106. 
 
