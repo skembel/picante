@@ -38,7 +38,7 @@ If trait data or distance matrix lack names, a warning is issued and the data ar
 
 These utility functions are used by several functions that assume taxa labels in phylogeny and data match, including \code{\link{Kcalc}}, \code{\link{phylosignal}}, and \code{\link{raoD}}.
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{\code{\link{prune.missing}}, \code{\link{prune.sample}}}
 \examples{
 data(phylocom)

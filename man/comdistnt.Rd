@@ -24,7 +24,7 @@ comdistnt(comm, dis, abundance.weighted = FALSE, exclude.conspecifics = FALSE)
     This function calculates a measure of phylogenetic beta diversity: the  average phylogenetic distance to the most similar taxon or individual in the other community for taxa or individuals in two communities.
 }
 \references{ C.O. Webb, D.D. Ackerly, and S.W. Kembel. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Bioinformatics 18:2098-2100. }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{mntd}}, \code{\link{ses.mntd}} }
 \examples{
 data(phylocom)

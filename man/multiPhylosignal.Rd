@@ -16,5 +16,5 @@ multiPhylosignal(x, phy, checkdata=TRUE, ...)
 \value{
   Returns a data frame with phylogenetic signal results for each trait
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \keyword{univar}

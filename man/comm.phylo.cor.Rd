@@ -39,7 +39,7 @@ Currently implemented null models (arguments to null.model):
     }
 }
 \references{ Cavender-Bares J., D.A. Ackerly, D. Baum and F.A. Bazzaz. 2004. Phylogenetic overdispersion in Floridian oak communities, American Naturalist, 163(6):823-843. }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{randomizeMatrix}} }
 \examples{
 data(phylocom)

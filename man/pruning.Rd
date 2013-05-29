@@ -19,5 +19,5 @@ prune.missing(x, phylo)
 \value{
   Returns a pruned phylo object
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \keyword{manip}

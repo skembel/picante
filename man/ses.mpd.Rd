@@ -45,7 +45,7 @@ Currently implemented null models (arguments to null.model):
 }
 
 \references{ Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. \url{http://www.phylodiversity.net/phylocom/}. }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{mpd}}, \code{\link{randomizeMatrix}}  }
 \examples{
 data(phylocom)

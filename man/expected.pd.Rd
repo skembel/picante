@@ -29,7 +29,7 @@ The function \code{ead} calculates the edge abundance distribution (EAD), the le
 
 \references{ O'Dwyer, Kembel, and Green. 2012. Phylogenetic diversity theory sheds light on the structure of microbial communities. }
 
-\author{ Steven Kembel <skembel@uoregon.edu> and James O'Dwyer <jodwyer@santafe.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> and James O'Dwyer <jodwyer@santafe.edu> }
 
 \seealso{ \code{\link{pd}} }
 

@@ -23,5 +23,5 @@ cor.table(x, cor.method = c("pearson","spearman"),
 
 \references{ Garland, T., Jr., P. H. Harvey, and A. R. Ives. 1992. Procedures for the analysis of comparative data using phylogenetically independent contrasts. Systematic Biology 41:18-32. }
 
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \keyword{univar}

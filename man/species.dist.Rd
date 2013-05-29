@@ -27,7 +27,7 @@ Currently implemented co-occurrence measures (arguments to metric):
     \item{doij}{ DOij index of co-occurrence }    
     }
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \references{
 Hardy, O.J. 2008. Testing the spatial phylogenetic structure of local communities: statistical performances of different null models and test statistics on a locally neutral community. Journal of Ecology 96:914-926.
 }

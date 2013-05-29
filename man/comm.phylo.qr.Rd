@@ -47,7 +47,7 @@ Currently implemented null models (arguments to null.model):
 Cavender-Bares J., D.A. Ackerly, D. Baum and F.A. Bazzaz. 2004. Phylogenetic overdispersion in Floridian oak communities, American Naturalist, 163(6):823-843.
 Slingsby, J. A. and G. A. Verboom. 2006. Phylogenetic relatedness limits coexistence at fine spatial scales: evidence from the schoenoid sedges (Cyperaceae: Schoeneae) of the Cape Floristic Region, South Africa. The American Naturalist 168:14-27.
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{randomizeMatrix}} }
 \examples{
 data(phylocom)

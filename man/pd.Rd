@@ -33,7 +33,7 @@ If the root is to be included in all calculations (\code{include.root=TRUE}), th
 \code{prunedTree <- prune.sample(sample,tree)}
 }
 \references{ Faith D.P. (1992) Conservation evaluation and phylogenetic diversity. Biological Conservation, 61, 1-10. }
-\author{ Matthew Helmus \email{mrhelmus@gmail.com}, Jonathan Davies \email{davies@nceas.ucsb.edu}, Steven Kembel \email{skembel@uoregon.edu}}
+\author{ Matthew Helmus \email{mrhelmus@gmail.com}, Jonathan Davies \email{davies@nceas.ucsb.edu}, Steven Kembel \email{steve.kembel@gmail.com}}
 \seealso{ \code{\link{psr}}, \code{\link{ses.pd}} }
 \examples{
 data(phylocom)

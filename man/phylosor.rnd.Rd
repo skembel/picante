@@ -35,7 +35,7 @@ Currently implemented null models (arguments to null.model):
     }
 }
 \references{Bryant, J.B., Lamanna, C., Morlon, H., Kerkhoff, A.J., Enquist, B.J., Green, J.L. 2008. Microbes on mountainsides: Contrasting elevational patterns of bacterial and plant diversity. Proceedings of the National Academy of Sciences 105 Supplement 1: 11505-11511}
-\author{ Helene Morlon <morlon.helene@gmail.com> and Steven Kembel <skembel@uoregon.edu> }
+\author{ Helene Morlon <morlon.helene@gmail.com> and Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{phylosor}}, \code{\link{randomizeMatrix}}  }
 \examples{
 data(phylocom)

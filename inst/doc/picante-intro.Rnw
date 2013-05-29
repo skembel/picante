@@ -8,7 +8,7 @@
 \usepackage{url}
 
 \title{An introduction to the picante package}
-\author{Steven Kembel (skembel@uoregon.edu)}
+\author{Steven Kembel (steve.kembel@gmail.com)}
 \date{April 2010}
 
 \begin{document}

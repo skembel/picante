@@ -21,7 +21,7 @@ comdist(comm, dis, abundance.weighted = FALSE)
     This function calculates a measure of phylogenetic beta diversity: the expected phylogenetic distance separating two individuals or taxa drawn randomly from different communities.
 }
 \references{ C.O. Webb, D.D. Ackerly, and S.W. Kembel. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Bioinformatics 18:2098-2100. }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{mpd}}, \code{\link{ses.mpd}}  }
 \examples{
 data(phylocom)

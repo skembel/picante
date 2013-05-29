@@ -21,7 +21,7 @@ mntd(samp, dis, abundance.weighted=FALSE)
     This metric has also been referred to as MNND (mean nearest neighbour distance), and the function was named \code{mnnd} in picante versions < 0.7.
 }
 \references{ Webb, C., D. Ackerly, M. McPeek, and M. Donoghue. 2002. Phylogenies and community ecology. Annual Review of Ecology and Systematics 33:475-505. }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{ses.mntd}} }
 \examples{
 data(phylocom)

@@ -32,7 +32,7 @@ Gotelli, N.J. 2000. Null model analysis of species co-occurrence patterns. Ecolo
 
 Miklos I. & Podani J. 2004. Randomization of presence-absence matrices: Comments and new algorithms. Ecology 85: 86-92.
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \examples{
 data(phylocom)
 randomizeMatrix(phylocom$sample, null.model="richness")}

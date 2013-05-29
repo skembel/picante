@@ -15,7 +15,7 @@ unifrac(comm, tree)
 \references{
 Lozupone, C., Hamady, M., and Knight, R. 2006. UniFrac - an online tool for comparing microbial community diversity in a phylogenetic context. BMC Bioinformatics 7:371.
 }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{\code{\link{pd}}}
 \note{
 The supplied tree must be rooted. Single-species samples will be assigned a PD value equal to the distance from the root to the present.

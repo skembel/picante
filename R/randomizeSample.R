@@ -1,7 +1,3 @@
-.First.lib <- function(lib,pkg) {
-  library.dynam("picante",pkg,lib)
-} 
-
 `randomizeMatrix` <-
 function(samp, null.model=c("frequency","richness","independentswap","trialswap"),
     iterations=1000)

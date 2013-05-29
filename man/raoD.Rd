@@ -56,7 +56,7 @@ Rao, C.R. 1982. Diversity and dissimilarity coefficients: a unified approach. Th
 Webb, C.O., Ackerly, D.D., and Kembel, S.W. 2008. Phylocom: software for the analysis of phylogenetic community structure and trait evolution. Version 4.0.1. \url{http://www.phylodiversity.net/phylocom/}.
 }
 \seealso{ \code{\link{mpd}}, \code{\link{comdist}}  }
-\author{ Steven Kembel <skembel@uoregon.edu> }
+\author{ Steven Kembel <steve.kembel@gmail.com> }
 \examples{
 data(phylocom)
 raoD(phylocom$sample)
