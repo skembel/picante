@@ -6,7 +6,8 @@
   Various null models for randomizing community data matrices
 }
 \usage{
-randomizeMatrix(samp, null.model = c("frequency", "richness", "independentswap", "trialswap"),iterations = 1000)    
+randomizeMatrix(samp, null.model = c("frequency", "richness",
+    "independentswap", "trialswap"), iterations = 1000)    
 }
 
 \arguments{

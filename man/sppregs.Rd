@@ -8,7 +8,8 @@
 \usage{
 sppregs(samp, env, tree=NULL, fam="gaussian")
 sppregs.plot(sppreg, rows=c(1,3), cex.mag=1, x.label="phylogenetic correlations", 
-y.label=c("occurrence correlations w/ env","occurrence correlations wo/ env","change in correlations"))
+    y.label=c("occurrence correlations w/ env", "occurrence correlations wo/ env",
+    "change in correlations"))
 }
 
 \arguments{

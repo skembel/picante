@@ -10,7 +10,8 @@ Species' evolutionary distinctiveness
 Calculates evolutionary distinctiveness measures for a suite of species by: a) equal splits (Redding and Mooers 2006) b) fair proportions (Isaac et al., 2007). Returns a datafram with species identifiers and species scores.
 }
 \usage{
-evol.distinct(tree, type = c("equal.splits", "fair.proportion"), scale = FALSE, use.branch.lengths = TRUE)
+evol.distinct(tree, type = c("equal.splits", "fair.proportion"),
+    scale = FALSE, use.branch.lengths = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

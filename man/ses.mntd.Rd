@@ -7,7 +7,8 @@
   Standardized effect size of mean nearest taxon distances in communities. When used with a phylogenetic distance matrix, equivalent to -1 times the Nearest Taxon Index (NTI).
 }
 \usage{
-ses.mntd(samp, dis, null.model = c("taxa.labels", "richness", "frequency", "sample.pool", "phylogeny.pool", "independentswap", "trialswap"),
+ses.mntd(samp, dis, null.model = c("taxa.labels", "richness", "frequency",
+    "sample.pool", "phylogeny.pool", "independentswap", "trialswap"),
     abundance.weighted=FALSE, runs = 999, iterations = 1000)
 }
 

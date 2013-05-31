@@ -6,8 +6,9 @@
   Fits a linear model to the association strengths of a bipartite data set with or without phylogenetic correlation among the interacting species
 }
 \usage{
-pblm(assocs,tree1=NULL,tree2=NULL,covars1=NULL,covars2=NULL,bootstrap=FALSE,nreps=10,maxit=10000,pstart=c(.5,.5))
-pblmpredict(x,tree1.w.novel=NULL,tree2.w.novel=NULL,predict.originals=FALSE)
+pblm(assocs, tree1=NULL, tree2=NULL, covars1=NULL, covars2=NULL, bootstrap=FALSE,
+    nreps=10, maxit=10000, pstart=c(.5,.5))
+pblmpredict(x, tree1.w.novel=NULL, tree2.w.novel=NULL, predict.originals=FALSE)
 
 }
 

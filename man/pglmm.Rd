@@ -87,10 +87,15 @@ str(sim.dat)
 dat<-pglmm.data(modelflag=modelflag,sim.dat=sim.dat)
 str(dat)
 
-#A low number of iterations, maxit = 25 is probably good for most data sets, but exitcountermax may need to be increased depending on matrix sizes
+#A low number of iterations, maxit = 25 is probably good for most data sets,
+# but exitcountermax may need to be increased depending on matrix sizes
 out<-pglmm.fit(dat=dat,maxit=25,exitcountermax=30)
+# The first row gives the estimate of phylogenetic signal,
+#  and the second an estimate of how strongly species
+#  richness varies across communities. This later parameter
+#  is likely biologically uninformative for most research questions.
 str(out)
-out$s # The first row gives the estimate of phylogenetic signal and the second an estimate of how strongly species richness varies across communities. This later parameter is likely biologically uninformative for most research questions.
+out$s 
 }
 }
 

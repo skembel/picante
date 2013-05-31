@@ -4,8 +4,9 @@
 \description{ Randomize sample/community data matrices to create null distributions of given metrics
 }
 \usage{
-phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"), null.model=c("frequency",
-            "richness","independentswap","trialswap"), runs=100, it=1000, alpha=0.05, fam="binomial")
+phylostruct(samp, tree, env=NULL, metric=c("psv","psr","pse","psc","sppregs"),
+    null.model=c("frequency", "richness","independentswap","trialswap"),
+    runs=100, it=1000, alpha=0.05, fam="binomial")
 }
 \arguments{
   \item{samp}{ community data matrix, species as columns, communities as rows }
