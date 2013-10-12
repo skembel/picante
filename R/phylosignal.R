@@ -77,13 +77,14 @@ multiPhylosignal <- function(x, phy, checkdata=TRUE, ...) {
 	trait <- x[,1]
 	names(trait) <- row.names(x)
 	pruned <- prune.missing(trait,phy)
-	output <- data.frame(phylosignal(pruned$data,pruned$tree,...))
+	attributes(pruned$data)$na.action<- NULL
+	output <- data.frame(phylosignal(pruned$data, pruned$tree, ...))
 	if(length(colnames(x))>1) {
 		for (i in 2:length(colnames(x))) {
 			trait <- x[,i]
 			names(trait) <- row.names(x)
 			pruned <- prune.missing(trait, phy)
-			trait <- trait[phy$tip.label]
+                        attributes(pruned$data)$na.action<- NULL
 			output <- rbind(output, phylosignal(pruned$data, pruned$tree, checkdata=FALSE, ...))
 		}
 	}
