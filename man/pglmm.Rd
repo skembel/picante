@@ -7,7 +7,7 @@
 \description{Fit the presence/absence of species across communities to environmental, trait and phylogenetic data with generalized linear mixed models.}
 \usage{
 
-pglmm.sim(tree,nsites=30,modelflag=1,figs=TRUE,second.env=TRUE,compscale = 1)
+pglmm.sim(tree,nsites=30,modelflag=1,second.env=TRUE,compscale = 1)
 pglmm.data(modelflag=1,sim.dat=NULL,samp=NULL,tree=NULL,traits=NULL,env=NULL,Vcomp=NULL)
 pglmm.fit(dat=NULL,Y=NULL,X=NULL,VV=NULL,sp.init=0.5,maxit=25,exitcountermax=50)
 
@@ -17,7 +17,6 @@ pglmm.fit(dat=NULL,Y=NULL,X=NULL,VV=NULL,sp.init=0.5,maxit=25,exitcountermax=50)
   \item{tree}{ Object of class phylo or a phylogenetic covariance matrix }
   \item{nsites}{ Number of sites to simulate }
   \item{modelflag}{ A number 1 - 5 indicating data set structure and corresponding to one of the models in Ives and Helmus (2011) }
-  \item{figs}{ Generate figures }
   \item{compscale}{ compscale }
   \item{second.env}{ Simulate community data with two environmental covariates }
   \item{sim.dat}{ Object from \code{pglmm.sim} }

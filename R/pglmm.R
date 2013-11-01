@@ -13,7 +13,7 @@
 # 6 September 2011 R CODE TRANSLATION - HELMUS
 #############################################################################################
 
-pglmm.sim <- function(tree,nsites=30,modelflag=1,figs=TRUE,second.env=TRUE,compscale = 1)
+pglmm.sim <- function(tree,nsites=30,modelflag=1,second.env=TRUE,compscale = 1)
 {
 
 
@@ -184,27 +184,27 @@ pglmm.sim <- function(tree,nsites=30,modelflag=1,figs=TRUE,second.env=TRUE,comps
     m <- length(mx)
   }
 
-  if(figs)
-  {
-    if (!require(plotrix))
-    {
-      stop("The 'plotrix' package is required to plot images from this function")
-    }
-
-    if(.Platform$OS.type == "unix") quartz() else windows()
-    par(mfrow=c(5,1),las=1,mar=c(2, 4, 2, 2) - 0.1)
-    matplot(Xsmooth,type="l",ylab="probability",main="Xsmooth")
-    matplot(X,type="l",ylab="probability",main="X")
-    hist(colSums(Y),main="spp per site")
-    hist(rowSums(Y),main="sites per spp")
-    plot(x=mx,y=rowSums(Y),main="SR across gradient",type="l")
-
-    if(.Platform$OS.type == "unix") quartz() else windows()
-    color2D.matplot(1-X/max(X),xlab="species",ylab="sites",main="probabilities")
-
-    if(.Platform$OS.type == "unix") quartz() else windows()
-    color2D.matplot(1-Y,xlab="species",ylab="sites",main="presence-absence")
-  }
+#   if(figs)
+#   {
+#     if (!require(plotrix))
+#     {
+#       stop("The 'plotrix' package is required to plot images from this function")
+#     }
+# 
+#     if(.Platform$OS.type == "unix") quartz() else windows()
+#     par(mfrow=c(5,1),las=1,mar=c(2, 4, 2, 2) - 0.1)
+#     matplot(Xsmooth,type="l",ylab="probability",main="Xsmooth")
+#     matplot(X,type="l",ylab="probability",main="X")
+#     hist(colSums(Y),main="spp per site")
+#     hist(rowSums(Y),main="sites per spp")
+#     plot(x=mx,y=rowSums(Y),main="SR across gradient",type="l")
+# 
+#     if(.Platform$OS.type == "unix") quartz() else windows()
+#     color2D.matplot(1-X/max(X),xlab="species",ylab="sites",main="probabilities")
+# 
+#     if(.Platform$OS.type == "unix") quartz() else windows()
+#     color2D.matplot(1-Y,xlab="species",ylab="sites",main="presence-absence")
+#   }
 
   return(list(Vphylo=V,Vcomp=Vcomp,Y=Y,X=X,u=mx,bspp1=bspp1,bspp2=bspp2))
 }
