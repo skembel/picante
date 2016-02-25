@@ -55,7 +55,7 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 	taxa.names <- rownames(as.matrix(phylo.dist))
 	samp.dist <- as.dist(as.matrix(species.dist(samp,metric))[taxa.names,taxa.names])
     results$quantile <- quant
-    qrres <- coef(rq(samp.dist~phylo.dist,tau=quant, na.action=na.omit))
+    qrres <- coef(quantreg::rq(samp.dist~phylo.dist,tau=quant, na.action=na.omit))
     names(qrres) <- NULL
     results$obs.qr.intercept <- qrres[1] 
 	results$obs.qr.slope <- qrres[2]
@@ -67,19 +67,19 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 	if (null.model=="sample.taxa.labels") for (run in 1:runs)
 	{
 		phylo.dist <- as.dist(taxaShuffle(as.matrix(phylo.dist))[taxa.names,taxa.names])
-		results$random.qr.slopes[run] <- coef(rq(samp.dist~phylo.dist,tau=quant,
+		results$random.qr.slopes[run] <- coef(quantreg::rq(samp.dist~phylo.dist,tau=quant,
 		    na.action=na.omit))[2]
 	}
 	else if (null.model=="pool.taxa.labels") for (run in 1:runs)
 	{
 		phylo.dist <- as.dist(taxaShuffle(as.matrix(pool.phylo.dist))[taxa.names,taxa.names])
-		results$random.qr.slopes[run] <- coef(rq(samp.dist~phylo.dist,tau=quant,
+		results$random.qr.slopes[run] <- coef(quantreg::rq(samp.dist~phylo.dist,tau=quant,
 		    na.action=na.omit))[2]
 	}
 	else for (run in 1:runs)
 	{
 		samp.dist <- species.dist(randomizeMatrix(samp,null.model,...),metric)
-		results$random.qr.slopes[run] <- coef(rq(samp.dist~phylo.dist,tau=quant,
+		results$random.qr.slopes[run] <- coef(quantreg::rq(samp.dist~phylo.dist,tau=quant,
 		    na.action=na.omit))[2]
 	}
 	results$obs.rank <- rank(as.vector(c(results$obs.qr.slope,results$random.qr.slopes)))[1]

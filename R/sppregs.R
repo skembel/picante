@@ -75,7 +75,7 @@ sppregs<-function(samp,env,tree=NULL,fam="gaussian"){
     for(i in 1:nspp)
     {
       y<-samp[,i]
-      mod<-brglm(formu,data=data.frame(cbind(y,env)))
+      mod<-brglm::brglm(formu,data=data.frame(cbind(y,env)))
       spp.resids<-cbind(spp.resids,mod$y-mod$fitted.values)
       spp.fits<-cbind(spp.fits,mod$fitted.values)
       spp.coef<-cbind(spp.coef,summary(mod)$coef[,1])
