@@ -62,6 +62,10 @@ psv.spp(samp,tree)
 \references{ Helmus M.R., Bland T.J., Williams C.K. & Ives A.R. (2007) Phylogenetic measures of biodiversity. American Naturalist, 169, E68-E83 }
 \author{ Matthew Helmus \email{mrhelmus@gmail.com} }
 \seealso{ \code{\link{mpd}} ,\code{\link{mnnd}}, \code{\link{specaccum.psr}} }
+\examples{
+data(phylocom)
+psd(phylocom$sample, phylocom$phylo)
+}
 
 \keyword{univar}
 
