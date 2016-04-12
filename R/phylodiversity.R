@@ -222,7 +222,7 @@ function (samp, dis, null.model = c("taxa.labels", "richness", "frequency", "sam
 }
 
 
-psv<-function(samp,tree,compute.var=TRUE){
+psv<-function(samp,tree,compute.var=TRUE,scale.vcv=TRUE){
   # Make samp matrix a pa matrix
   samp[samp>0]<-1
   
@@ -240,7 +240,7 @@ psv<-function(samp,tree,compute.var=TRUE){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,corr=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=scale.vcv)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -330,8 +330,8 @@ psv<-function(samp,tree,compute.var=TRUE){
   }
 }
 
-psr <- function(samp,tree,compute.var=TRUE){
-  PSVout<-psv(samp,tree,compute.var)
+psr <- function(samp,tree,compute.var=TRUE,scale.vcv=TRUE){
+  PSVout<-psv(samp,tree,compute.var,scale.vcv=scale.vcv)
   if(is.null(dim(PSVout))==TRUE) 
   {
     PSRout<-data.frame(cbind(PSVout[1]*PSVout[2],PSVout[2]))
@@ -353,7 +353,7 @@ psr <- function(samp,tree,compute.var=TRUE){
   }
 }
 
-pse<-function(samp,tree){
+pse<-function(samp,tree,scale.vcv=TRUE){
   flag=0
   if (is.null(dim(samp))) #if the samp matrix only has one site
   {
@@ -370,7 +370,7 @@ pse<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label, drop=FALSE]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,corr=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=scale.vcv)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -413,7 +413,7 @@ pse<-function(samp,tree){
 
 
 
-psc<-function(samp,tree){
+psc<-function(samp,tree,scale.vcv=TRUE){
   # Make samp matrix a pa matrix
   samp[samp>0]<-1
   flag=0
@@ -430,7 +430,7 @@ psc<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,corr=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=scale.vcv)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
