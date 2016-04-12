@@ -523,19 +523,19 @@ psv.spp<-function(samp,tree){
   return(spp.PSVout)
 }
 
-psd<-function(samp,tree,compute.var=TRUE){
+psd<-function(samp,tree,compute.var=TRUE,scale.vcv=TRUE){
   if (is.null(dim(samp))) #if the samp matrix only has one site
   {
-    PSDout<-data.frame(c(psv(samp,tree,compute.var)[1],psc(samp,tree)[1],psr(samp,tree,compute.var)[1],pse(samp,tree)))
+    PSDout<-data.frame(c(psv(samp,tree,compute.var,scale.vcv)[1],psc(samp,tree,scale.vcv)[1],psr(samp,tree,compute.var,scale.vcv)[1],pse(samp,tree,scale.vcv)))
     names(PSDout)<-c("PSV","PSC","PSR","PSE","SR")
     return(PSDout)
   } else {
     if (compute.var==TRUE)
     {
-      PSDout<-cbind(psv(samp,tree,compute.var)[,c(1,3)],psc(samp,tree)[,1],psr(samp,tree,compute.var)[,c(1,3)],pse(samp,tree))
+      PSDout<-cbind(psv(samp,tree,compute.var,scale.vcv)[,c(1,3)],psc(samp,tree,scale.vcv)[,1],psr(samp,tree,compute.var,scale.vcv)[,c(1,3)],pse(samp,tree,scale.vcv))
       colnames(PSDout)<-c("PSV","var.PSV","PSC","PSR","var.PSR","PSE","SR")
     } else {
-      PSDout<-cbind(psv(samp,tree,compute.var)[,1],psc(samp,tree)[,1],psr(samp,tree,compute.var)[,1],pse(samp,tree))
+      PSDout<-cbind(psv(samp,tree,compute.var,scale.vcv)[,1],psc(samp,tree,scale.vcv)[,1],psr(samp,tree,compute.var,scale.vcv)[,1],pse(samp,tree,scale.vcv))
       colnames(PSDout)<-c("PSV","PSC","PSR","PSE","SR")
     }
     return(data.frame(PSDout))
