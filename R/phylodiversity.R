@@ -458,7 +458,7 @@ psc<-function(samp,tree,scale.vcv=TRUE){
     {    
       C<-Cmatrix[index,index]	#C for individual locations
       diag(C)<--1
-      PSC<-sum(apply(C,1,max))/n
+      PSC<- 1-(sum(apply(C,1,max))/n)
     } else {PSC<-NA}
       PSCs<-c(PSCs,PSC)
   }
