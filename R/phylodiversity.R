@@ -222,7 +222,7 @@ function (samp, dis, null.model = c("taxa.labels", "richness", "frequency", "sam
 }
 
 
-psv<-function(samp,tree,compute.var=TRUE){
+psv<-function(samp,tree,compute.var=TRUE,scale.vcv=TRUE){
   # Make samp matrix a pa matrix
   samp[samp>0]<-1
   
@@ -240,7 +240,7 @@ psv<-function(samp,tree,compute.var=TRUE){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,corr=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=scale.vcv)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -330,8 +330,8 @@ psv<-function(samp,tree,compute.var=TRUE){
   }
 }
 
-psr <- function(samp,tree,compute.var=TRUE){
-  PSVout<-psv(samp,tree,compute.var)
+psr <- function(samp,tree,compute.var=TRUE,scale.vcv=TRUE){
+  PSVout<-psv(samp,tree,compute.var,scale.vcv=scale.vcv)
   if(is.null(dim(PSVout))==TRUE) 
   {
     PSRout<-data.frame(cbind(PSVout[1]*PSVout[2],PSVout[2]))
@@ -353,7 +353,7 @@ psr <- function(samp,tree,compute.var=TRUE){
   }
 }
 
-pse<-function(samp,tree){
+pse<-function(samp,tree,scale.vcv=TRUE){
   flag=0
   if (is.null(dim(samp))) #if the samp matrix only has one site
   {
@@ -370,7 +370,7 @@ pse<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label, drop=FALSE]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,corr=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=scale.vcv)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -413,7 +413,7 @@ pse<-function(samp,tree){
 
 
 
-psc<-function(samp,tree){
+psc<-function(samp,tree,scale.vcv=TRUE){
   # Make samp matrix a pa matrix
   samp[samp>0]<-1
   flag=0
@@ -430,7 +430,7 @@ psc<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,corr=TRUE)
+    Cmatrix<-vcv.phylo(tree,corr=scale.vcv)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)
@@ -458,7 +458,7 @@ psc<-function(samp,tree){
     {    
       C<-Cmatrix[index,index]	#C for individual locations
       diag(C)<--1
-      PSC<-sum(apply(C,1,max))/n
+      PSC<- 1-(sum(apply(C,1,max))/n)
     } else {PSC<-NA}
       PSCs<-c(PSCs,PSC)
   }
@@ -523,19 +523,19 @@ psv.spp<-function(samp,tree){
   return(spp.PSVout)
 }
 
-psd<-function(samp,tree,compute.var=TRUE){
+psd<-function(samp,tree,compute.var=TRUE,scale.vcv=TRUE){
   if (is.null(dim(samp))) #if the samp matrix only has one site
   {
-    PSDout<-data.frame(c(psv(samp,tree,compute.var)[1],psc(samp,tree)[1],psr(samp,tree,compute.var)[1],pse(samp,tree)))
+    PSDout<-data.frame(c(psv(samp,tree,compute.var,scale.vcv)[1],psc(samp,tree,scale.vcv)[1],psr(samp,tree,compute.var,scale.vcv)[1],pse(samp,tree,scale.vcv)))
     names(PSDout)<-c("PSV","PSC","PSR","PSE","SR")
     return(PSDout)
   } else {
     if (compute.var==TRUE)
     {
-      PSDout<-cbind(psv(samp,tree,compute.var)[,c(1,3)],psc(samp,tree)[,1],psr(samp,tree,compute.var)[,c(1,3)],pse(samp,tree))
+      PSDout<-cbind(psv(samp,tree,compute.var,scale.vcv)[,c(1,3)],psc(samp,tree,scale.vcv)[,1],psr(samp,tree,compute.var,scale.vcv)[,c(1,3)],pse(samp,tree,scale.vcv))
       colnames(PSDout)<-c("PSV","var.PSV","PSC","PSR","var.PSR","PSE","SR")
     } else {
-      PSDout<-cbind(psv(samp,tree,compute.var)[,1],psc(samp,tree)[,1],psr(samp,tree,compute.var)[,1],pse(samp,tree))
+      PSDout<-cbind(psv(samp,tree,compute.var,scale.vcv)[,1],psc(samp,tree,scale.vcv)[,1],psr(samp,tree,compute.var,scale.vcv)[,1],pse(samp,tree,scale.vcv))
       colnames(PSDout)<-c("PSV","PSC","PSR","PSE","SR")
     }
     return(data.frame(PSDout))

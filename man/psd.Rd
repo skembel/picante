@@ -10,11 +10,11 @@
   Calculate the bounded phylogenetic biodiversity metrics: phylogenetic species variability, richness, evenness and clustering for one or multiple samples.
 }
 \usage{
-psv(samp,tree,compute.var=TRUE)
-psr(samp,tree,compute.var=TRUE)
-pse(samp,tree)
-psc(samp,tree)
-psd(samp,tree,compute.var=TRUE)
+psv(samp,tree,compute.var=TRUE,scale.vcv=TRUE)
+psr(samp,tree,compute.var=TRUE,scale.vcv=TRUE)
+pse(samp,tree,scale.vcv=TRUE)
+psc(samp,tree,scale.vcv=TRUE)
+psd(samp,tree,compute.var=TRUE,scale.vcv=TRUE)
 psv.spp(samp,tree)
 }
 
@@ -22,12 +22,13 @@ psv.spp(samp,tree)
   \item{samp}{ Community data matrix }
   \item{tree}{ A phylo tree object or a phylogenetic covariance matrix }
   \item{compute.var}{ Computes the expected variances for PSV and PSR for each community }
+  \item{scale.vcv}{ Scale the phylogenetic covariance matrix to bound the metric between 0 and 1 }
 }
 \details{
  \emph{Phylogenetic species variability (PSV)} quantifies how phylogenetic relatedness decreases the variance of a hypothetical unselected/neutral trait
  shared by all species in a community. The expected value of PSV is statistically independent of species richness, is one when all species in a sample
- are unrelated (i.e., a star phylogeny) and approaches zero as species become more related. PSV is directly related to mean phylogenetic distance. The 
- expected variance around PSV for any sample of a particular species richness can be approximated. 
+ are unrelated (i.e., a star phylogeny) and approaches zero as species become more related. PSV is directly related to mean phylogenetic distance, except
+ except calculated on a scaled phylogenetic covariance matrix. The expected variance around PSV for any sample of a particular species richness can be approximated. 
  To address how individual species contribute to the mean PSV of a data set, the function \code{psv.spp} gives signed proportions of the total deviation 
  from the mean PSV that occurs when all species are removed from the data set one at a time. The absolute values of these \dQuote{species effects} 
  tend to positively correlate with species prevalence. 
@@ -61,6 +62,10 @@ psv.spp(samp,tree)
 \references{ Helmus M.R., Bland T.J., Williams C.K. & Ives A.R. (2007) Phylogenetic measures of biodiversity. American Naturalist, 169, E68-E83 }
 \author{ Matthew Helmus \email{mrhelmus@gmail.com} }
 \seealso{ \code{\link{mpd}} ,\code{\link{mnnd}}, \code{\link{specaccum.psr}} }
+\examples{
+data(phylocom)
+psd(phylocom$sample, phylocom$phylo)
+}
 
 \keyword{univar}
 
