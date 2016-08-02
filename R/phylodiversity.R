@@ -121,8 +121,9 @@ mpd <- function(samp, dis, abundance.weighted=FALSE)
             sample.dis <- dis[sppInSample, sppInSample]
             if (abundance.weighted) {
                 sample.weights <- t(as.matrix(samp[i,sppInSample,drop=FALSE])) %*% as.matrix(samp[i,sppInSample,drop=FALSE])
-                mpd[i] <- weighted.mean(sample.dis,sample.weights)  
-
+                diag(sample.weights) <- as.numeric(samp[i,sppInSample]*(samp[i,sppInSample]-1)/2)
+                mpd[i] <- weighted.mean(sample.dis[lower.tri(sample.dis, diag=TRUE)], 
+                                        sample.weights[lower.tri(sample.weights, diag=TRUE)])
             }
             else {
                 mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])         
