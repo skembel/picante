@@ -546,7 +546,13 @@ pd <- function (samp, tree, include.root = TRUE) {
     if (is.null(tree$edge.length)) {
         stop("Tree has no branch lengths, cannot compute pd")
     }
-    tree <- node.age(tree)
+		if (include.root) {
+				# Make sure tree is rooted if needed
+				if (!is.rooted(tree)) {
+					stop("Rooted tree required to calculate PD with include.root=TRUE argument")
+					}
+    		tree <- node.age(tree)
+				}
     species <- colnames(samp)
     SR <- rowSums(ifelse(samp > 0, 1, 0))
     nlocations <- dim(samp)[1]
