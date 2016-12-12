@@ -144,9 +144,9 @@ match.comm.dist <- function(comm, dis) {
     }
     
     if (disclass == "dist") {
-        res$dist <- as.dist(dis[colnames(comm),colnames(comm)])
+        res$dist <- as.dist(dis[colnames(res$comm),colnames(res$comm)])
     } else {
-        res$dist <- dis[colnames(comm),colnames(comm)]
+        res$dist <- dis[colnames(res$comm),colnames(res$comm)]
     }
     return(res)   
 
