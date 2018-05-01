@@ -1,11 +1,11 @@
 Package: picante
 Type: Package
-Title: R Tools for Integrating Phylogenies and Ecology
+Title: Integrating Phylogenies and Ecology
 Version: 1.7
 Date: 2018-05-01
 Author: Steven W. Kembel <steve.kembel@gmail.com>, David D. Ackerly <dackerly@berkeley.edu>, Simon P. Blomberg <s.blomberg1@uq.edu.au>, Will K. Cornwell <cornwell@zoology.ubc.ca>, Peter D. Cowan <pdc@berkeley.edu>, Matthew R. Helmus <mrhelmus@wisc.edu>, Helene Morlon <morlon.helene@gmail.com>, Campbell O. Webb <cwebb@oeb.harvard.edu>
 Maintainer: Steven W. Kembel <steve.kembel@gmail.com>
 Depends: ape, vegan, nlme, methods
 Suggests: brglm, circular, corpcor, quantreg
-Description: Phylocom integration, community analyses, null-models, traits and evolution in R.
+Description: Phylocom integration, community analyses, null-models, traits and evolution. Ecophylogenetic approaches including measures of community phylogenetic and trait diversity. Phylogenetic signal. Estimation of trait values for unobserved taxa. Null models for community and phylogeny randomizations. Utility functions for data input/output and phylogeny plotting.
 License: GPL-2
