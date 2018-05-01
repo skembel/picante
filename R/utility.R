@@ -32,8 +32,7 @@ function(phy,int.node,return.names=FALSE) {
 	Ntaxa = length(phy$tip.label)
 	Nnode = phy$Nnode
 	if ((Ntaxa+Nnode-1)!=nrow(phy$edge)) {
-		print('tree structure error')
-		break
+		stop('tree structure error')
 	}
 
 	# if necessary convert int.node to a node number for an internal node

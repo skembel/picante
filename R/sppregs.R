@@ -67,7 +67,7 @@ sppregs<-function(samp,env,tree=NULL,fam="gaussian"){
 
   } else {
   
-    if (!require(brglm)) {
+    if (!requireNamespace("brglm")) {
         stop("The 'brglm' package is required to use this function with argument fam=binomial.")
     }
 

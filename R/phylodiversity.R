@@ -42,7 +42,7 @@ function(samp,phylo,metric=c("cij","checkerboard","jaccard","doij"),
 					quant=0.75, runs=999, show.plot=FALSE, ...)
 {
 
-    if (!require(quantreg)) {
+    if (!requireNamespace("quantreg")) {
         stop("The 'quantreg' package is required to use this function.")
     }
 
