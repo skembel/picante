@@ -26,7 +26,7 @@ Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for phylogenetic
 
 \seealso{ \code{\link{phylosignal}} }
 \examples{
-\dontrun{
+\donttest{
 randtree <- rcoal(20)
 randtraits <- rTraitCont(randtree)
 Kcalc(randtraits[randtree$tip.label],randtree)

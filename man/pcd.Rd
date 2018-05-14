@@ -43,7 +43,7 @@ The function returns a list with items:
 The sampling procedure used to standardize \emph{PCD} and produce \code{PSVmncd} and \code{PSVpool} can be slow.
 }
 \examples{
-\dontrun{
+\donttest{
 data(phylocom)
 pcd(phylocom$sample, phylocom$phylo)
 }

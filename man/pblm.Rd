@@ -76,7 +76,7 @@ Blomberg S.P., Garland T.J. & Ives A.R. (2003) Testing for phylogenetic signal i
 
 \author{ Matthew Helmus \email{mrhelmus@gmail.com} }
 \examples{
-\dontrun{
+\donttest{
 #load example data from Ives & Godfray (2006)
 data(IvesGodfray)
 

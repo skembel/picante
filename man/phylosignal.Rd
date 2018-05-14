@@ -30,7 +30,7 @@ Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for phylogenetic
 \author{ Steven Kembel <steve.kembel@gmail.com> }
 \seealso{ \code{\link{Kcalc}} }
 \examples{
-\dontrun{
+\donttest{
 randtree <- rcoal(20)
 randtraits <- rTraitCont(randtree)
 phylosignal(randtraits[randtree$tip.label],randtree)
