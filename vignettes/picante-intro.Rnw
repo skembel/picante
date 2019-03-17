@@ -143,9 +143,11 @@ Several different null models can be used to generate the null communities that 
 
 <<>>=
 phydist <- cophenetic(phy)
-ses.mpd.result <- ses.mpd(comm, phydist, null.model="taxa.labels", abundance.weighted=FALSE, runs=99)
+ses.mpd.result <- ses.mpd(comm, phydist, null.model="taxa.labels",
+                          abundance.weighted=FALSE, runs=99)
 ses.mpd.result
-ses.mntd.result <- ses.mntd(comm, phydist, null.model="taxa.labels", abundance.weighted=FALSE, runs=99)
+ses.mntd.result <- ses.mntd(comm, phydist, null.model="taxa.labels",
+                            abundance.weighted=FALSE, runs=99)
 ses.mntd.result
 @
 
