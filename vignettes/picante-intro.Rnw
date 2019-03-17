@@ -97,7 +97,8 @@ The following commands set up the layout of the plot to have 2 rows and 3 column
 par(mfrow = c(2, 3))
 for (i in row.names(comm)) {
 plot(prunedphy, show.tip.label = FALSE, main = i)
-tiplabels(tip = which(prunedphy$tip.label %in% names(which(comm [i, ] > 0))) , pch=19, cex=2)
+tiplabels(tip = which(prunedphy$tip.label %in% names(which(comm [i, ] > 0))),
+          pch=19, cex=2)
 }
 @
 
