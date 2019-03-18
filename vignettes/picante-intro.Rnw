@@ -97,7 +97,8 @@ The following commands set up the layout of the plot to have 2 rows and 3 column
 par(mfrow = c(2, 3))
 for (i in row.names(comm)) {
 plot(prunedphy, show.tip.label = FALSE, main = i)
-tiplabels(tip = which(prunedphy$tip.label %in% names(which(comm [i, ] > 0))) , pch=19, cex=2)
+tiplabels(tip = which(prunedphy$tip.label %in% names(which(comm [i, ] > 0))),
+          pch=19, cex=2)
 }
 @
 
@@ -142,9 +143,11 @@ Several different null models can be used to generate the null communities that 
 
 <<>>=
 phydist <- cophenetic(phy)
-ses.mpd.result <- ses.mpd(comm, phydist, null.model="taxa.labels", abundance.weighted=FALSE, runs=99)
+ses.mpd.result <- ses.mpd(comm, phydist, null.model="taxa.labels",
+                          abundance.weighted=FALSE, runs=99)
 ses.mpd.result
-ses.mntd.result <- ses.mntd(comm, phydist, null.model="taxa.labels", abundance.weighted=FALSE, runs=99)
+ses.mntd.result <- ses.mntd(comm, phydist, null.model="taxa.labels",
+                            abundance.weighted=FALSE, runs=99)
 ses.mntd.result
 @
 
