@@ -25,4 +25,9 @@ Thanks to Jonathan Davies, Kyle Dexter, Catherine Graham, Nathaniel Hallinan, Ni
 News
 ----
 
-From version 1.6 onwards, development of picante will primarily happen on Github
+From version 1.6 onwards, development of picante takes place on Github.
+
+Bug reports and feature requests
+--------------------------------
+
+Please use the Github Issues page for picante to submit bug reports and feature requests. Pull requests are welcomed but are more likely to be accepted if you first submit them as an issue.
