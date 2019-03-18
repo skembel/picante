@@ -17,7 +17,7 @@ comdist <- function(comm, dis, abundance.weighted=FALSE) {
 
 	comdist <- matrix(nrow=N,ncol=N)    
 	for (l in 1:(N-1)) {
-		for (k in 2:N) {
+		for (k in (l+1):N) {
 			comdist[k,l] <-
 			sum ( dis * outer(as.vector(t(x[k,])),as.vector(t(x[l,]))) )
 		}
