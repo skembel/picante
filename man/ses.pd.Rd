@@ -8,7 +8,7 @@
 \usage{
 ses.pd(samp, tree, null.model = c("taxa.labels", "richness", "frequency",
     "sample.pool", "phylogeny.pool", "independentswap", "trialswap"),
-    runs = 999, iterations = 1000, ...)
+    runs = 999, iterations = 1000, include.root=TRUE)
 }
 
 \arguments{
@@ -17,7 +17,7 @@ ses.pd(samp, tree, null.model = c("taxa.labels", "richness", "frequency",
   \item{ null.model }{ Null model to use (see Details section for description) }
   \item{ runs }{ Number of randomizations }
   \item{ iterations }{ Number of iterations to use for each randomization (for independent swap and trial null models) }
-  \item{ ... }{ Additional arguments to \code{\link{pd}} function }
+  \item{ include.root }{ Include distance to root node in calculation of PD (see documentation in \code{\link{pd}} function }
 }
 
 \value{
