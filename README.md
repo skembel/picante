@@ -3,8 +3,6 @@ picante
 
 R tools for integrating phylogenies and ecology
 
-http://picante.r-forge.r-project.org/
-
 About
 -----
 
@@ -20,12 +18,12 @@ Contributors: David Ackerly, Simon Blomberg, Will Cornwell, Peter Cowan, Matthew
 
 Development of picante has been supported by NSERC, NESCent, the Google Summer of Code, and the Gordon and Betty Moore Foundation.
 
-Thanks to Jonathan Davies, Kyle Dexter, Catherine Graham, Nathaniel Hallinan, Nick Matzke, Alain Paquette, Emmanuel Paradis, Juan Parra, Dan Rabosky, and Marten Winter for feedback and bug reports. Thanks to R-Forge for hosting the project.
+Thanks to Jonathan Davies, Kyle Dexter, Catherine Graham, Nathaniel Hallinan, Nick Matzke, Alain Paquette, Emmanuel Paradis, Juan Parra, Dan Rabosky, and Marten Winter for feedback and bug reports. Thanks to R-Forge for hosting the project up to version 1.5.
 
 News
 ----
 
-From version 1.6 onwards, development of picante takes place on Github.
+There was a bug in the ses.pd function in picante versions <=1.7. Please see [this issue](https://github.com/skembel/picante/issues/17) for more details.
 
 Bug reports and feature requests
 --------------------------------
