@@ -114,14 +114,14 @@ match.comm.dist <- function(comm, dis) {
         stop("Community data set lacks taxa (column) names, these are required to match distance matrix and community data")
     }
 
-    disclass <- class(dis)
+    disclass <- dis
     dis <- as.matrix(dis)
 
     distaxa <- rownames(dis)
 
     if(is.null(distaxa)) {
         warning("Distance matrix lacks taxa names, these are required to match community and distance matrix. Data are returned unsorted. Assuming that distance matrix and community data taxa columns are in the same order!")
-        if (disclass == "dist") {
+        if (inherits(disclass, "dist")) {
             return(list(comm=comm,dist=as.dist(dis))) 
         } else {
             return(list(comm=comm,dist=dis))             
@@ -143,7 +143,7 @@ match.comm.dist <- function(comm, dis) {
         res$comm <- comm
     }
     
-    if (disclass == "dist") {
+    if (inherits(disclass, "dist")) {
         res$dist <- as.dist(dis[colnames(comm),colnames(comm)])
     } else {
         res$dist <- dis[colnames(comm),colnames(comm)]

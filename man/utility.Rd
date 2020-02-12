@@ -29,7 +29,6 @@ tipShuffle(phy)
     \item{int.node}{ internal node number }
     \item{return.names}{ TRUE or FALSE }
     \item{scaled}{ Scale contrasts by branch length }
-    \item{...}{Additional arguments}
 }
 
 \value{
