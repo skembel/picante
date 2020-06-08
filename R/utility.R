@@ -51,9 +51,10 @@ function(phy,int.node,return.names=FALSE) {
 
 `node.age` <-
 function(phy) {
-	#if (phy$edge[1,1]=='-1') rootN=-1 else rootN = phy$Nnode+2
-	rootN = phy$edge[1,1]
-
+  if(!is.rooted(phy)) {stop("function node.age only works with a rooted phylo object")}
+  
+  rootN = length(phy$tip.label) + 1
+	
 	nEdges = nrow(phy$edge)
 	
 	ages=rep(NA,nEdges)
