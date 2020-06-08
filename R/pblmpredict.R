@@ -16,6 +16,7 @@ pblmpredict<-function(x,tree1.w.novel=NULL,tree2.w.novel=NULL,predict.originals=
     obs.novels1<-NULL
     pairnames<-rownames(x$variates)
     for(i in 1:n.novels1)
+    V <- kronecker(x$phylocovs$V2,x$phylocovs$V1)  
     {
       novel.assocs<-grep(novel.spp1[i],pairnames)
       A<-x$variates[-1*novel.assocs,]
