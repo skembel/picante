@@ -12,8 +12,8 @@ Functions for phylocom integration, community analyses, null-models, traits and 
 \tabular{ll}{
 Package: \tab picante\cr
 Type: \tab Package\cr
-Version: \tab 1.8.2\cr
-Date: \tab 2020-06-08\cr
+Version: \tab 1.8.3\cr
+Date: \tab 2023-07-10\cr
 License: \tab GPL-2\cr
 }
 }
