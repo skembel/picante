@@ -72,11 +72,6 @@ When trait data are contained in a data.frame, taxa are in rows and different tr
 
 When trait data are contained in a vector, the vector must be labelled, or it will be assumed that the elements of the vector are in the same order as the tip labels of the phylogeny. There is a utility function in picante that will turn columns of a data frame into vectors maintaining taxa labels that you can use if you have a data.frame and need a vector for a particular analysis:
 
-<<>>=
-head(traits)
-traitA <- df2vec(traits, "traitA")
-traitA
-@
 
 \section{Visualizing trees and data}
 
@@ -84,7 +79,7 @@ One of the main advantages of using R is that a suite of graphical and statistic
 
 Most functions in \texttt{picante} assume that the community, trait and phylogeny data sets contain the same taxa arranged in the same order. Functions that are affected by this assumption will attempt to automatically match the taxa labels in different data sets, and will report taxa that are not present in both data sets.
 
-Let's see how taxa from the six communities in the Phylocom example data set are arranged on the tree. To do this, we first need to prune the phylogeny to include only the species that actually occurred in some community. 
+Let's see how taxa from the six communities in the Phylocom example data set are arranged on the tree. To do this, we first need to prune the phylogeny to include only the species that actually occurred in some community.
 
 <<>>=
 prunedphy <- prune.sample(comm, phy)

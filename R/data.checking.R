@@ -1,153 +1,233 @@
+##' Match taxa in phylogeny and data
+##' 
+##' Match taxa in phylogeny and data
+##' 
+##' 
+##' @param phy A phylogeny object of class phylo
+##' @param comm Community data matrix
+##' match.phylo.comm(phy = phylocom$phylo,comm = phylocom$sample)
+##' 
+##' @export match.phylo.comm
 match.phylo.comm <- function(phy, comm) {
+  if (!(is.data.frame(comm) || is.matrix(comm))) {
+    stop("Community data should be a data.frame or matrix with
+     samples in rows and taxa in columns")
+  }
+  
+  
+  res <- list()
 
-    if(!(is.data.frame(comm) | is.matrix(comm))) {
-        stop("Community data should be a data.frame or matrix with samples in rows and taxa in columns")
-    }
+  phytaxa <- phy$tip.label
+  commtaxa <- colnames(comm)
 
-    res <- list()
+  if (is.null(commtaxa)) {
+    stop("Community data set lacks taxa (column) names,
+    these are required to match phylogeny and community data")
+  }
 
-    phytaxa <- phy$tip.label
+  if (!all(commtaxa %in% phytaxa)) {
+    print("Dropping taxa from the community because
+     they are not present in the phylogeny:")
+    print(setdiff(commtaxa, phytaxa))
+    comm <- comm[, intersect(commtaxa, phytaxa)]
     commtaxa <- colnames(comm)
+  }
 
-    if(is.null(commtaxa)) {
-        stop("Community data set lacks taxa (column) names, these are required to match phylogeny and community data")
-    }
+  if (any(!(phytaxa %in% commtaxa))) {
+    print("Dropping tips from the tree
+     because they are not present in the community data:")
+    print(setdiff(phytaxa, commtaxa))
+    res$phy <- prune.sample(comm, phy)
+  } else {
+    res$phy <- phy
+  }
 
-    if(!all(commtaxa %in% phytaxa)) {
-        print("Dropping taxa from the community because they are not present in the phylogeny:")
-        print(setdiff(commtaxa,phytaxa))
-        comm <- comm[,intersect(commtaxa,phytaxa)]
-        commtaxa <- colnames(comm)
-    }
-    
-    if(any(!(phytaxa %in% commtaxa))) {
-        print("Dropping tips from the tree because they are not present in the community data:")
-        print(setdiff(phytaxa,commtaxa))
-        res$phy <- prune.sample(comm, phy)
-    } else {
-        res$phy <- phy
-    }
-    
-    res$comm <- comm[,res$phy$tip.label]
-    return(res)
-
+  res$comm <- comm[, res$phy$tip.label]
+  return(res)
 }
 
+## function match.phylo.data fails if the supplied data is a data.frame with a single column
+
+
+
+
+##' Match taxa in phylogeny and data
+##' 
+##' These functions compare taxa present in phylogenies with community or trait
+##' data sets, pruning and sorting the two kinds of data to match one another
+##' for subsequent analysis.
+##' 
+##' A common pitfall in comparative analyses in R is that taxa labels are
+##' assumed to match between phylogenetic and other data sets. These functions
+##' prune a phylogeny and community or trait data set to match one another,
+##' reporting taxa that are missing from one data set or the other.
+##' 
+##' Taxa names for phylogeny objects are taken from the phylogeny's tip labels.
+##' Taxa names for community data are taken from the column names. Taxa names
+##' for trait data are taken from the element names (vector) or row names
+##' (data.frame or matrix). Taxa names for distance data are taken from
+##' column/row names of the distance matrix/dist object.
+##' 
+##' If community data lack taxa names, the function will issue a warning and no
+##' result will be returned, since the community-phylogenetic analyses in
+##' \code{picante} require named taxa in the community data set.
+##' 
+##' If trait data or distance matrix lack names, a warning is issued and the
+##' data are assumed to be sorted in the same order as the phylogeny's tip
+##' labels or community's column labels.
+##' 
+##' These utility functions are used by several functions that assume taxa
+##' labels in phylogeny and data match, including \code{\link{Kcalc}},
+##' \code{\link{phylosignal}}, and \code{\link{raoD}}.
+##' 
+##' @aliases match.phylo.data match.phylo.comm match.comm.dist
+##' @param phy A phylogeny object of class phylo
+##' @param comm Community data matrix
+##' @param data A data object - a vector (with names matching phy) or a
+##' data.frame or matrix (with row names matching phy)
+##' @param dis A distance matrix - a dist or matrix object
+##' @return A list containing the following elements, pruned and sorted to
+##' match one another: \item{phy}{ A phylogeny object of class phylo }
+##' \item{comm}{ Community data matrix } \item{data}{ A data object (vector,
+##' data.frame or matrix) } \item{dist}{ A distance matrix - a dist or matrix
+##' object }
+##' @author Steven Kembel <steve.kembel@@gmail.com>
+##' @seealso \code{\link{prune.missing}}, \code{\link{prune.sample}}
+##' @keywords univar
+##' @examples
+##' data(phylocom)
+##' match.phylo.comm(phylocom$phylo, phylocom$sample)
+##' match.phylo.data(phylocom$phylo, phylocom$traits[1:10,])
+##' 
+##' @export match.phylo.data
 match.phylo.data <- function(phy, data) {
+  res <- list()
+  phytaxa <- phy$tip.label
 
-    res <- list()
-
-    phytaxa <- phy$tip.label
-
-    if(is.vector(data)) {
-        datataxa <- names(data)
-    
-        if(is.null(datataxa)) {
-            warning("Data set lacks taxa names, these are required to match phylogeny and data. Data are returned unsorted. Assuming that data and phy$tip.label are in the same order!")
-            return(list(phy=phy,data=data))
-        }
-    
-        if(!all(datataxa %in% phytaxa)) {
-            print("Dropping taxa from the data because they are not present in the phylogeny:")
-            print(setdiff(datataxa,phytaxa))
-            data <- data[intersect(datataxa,phytaxa)]
-            datataxa <- names(data)
-        }
-        
-        if(any(!(phytaxa %in% datataxa))) {
-            print("Dropping tips from the tree because they are not present in the data:")
-            print(setdiff(phytaxa,datataxa))
-            res$phy <- drop.tip(phy, setdiff(phytaxa,datataxa))
-        } else {
-            res$phy <- phy 
-        }
-        
-        res$data <- data[res$phy$tip.label]
-        return(res)   
-        
-    } else if(is.data.frame(data) | is.matrix(data)) {
-        dataclass <- class(data)
-        data <- as.matrix(data)
-
-        datataxa <- rownames(data)
-    
-        if(is.null(datataxa)) {
-            warning("Data set lacks taxa (row) names, these are required to match phylogeny and data. Data are returned unsorted. Assuming that data rows and phy$tip.label are in the same order!")
-            return(list(phy=phy,data=data))
-        }
-    
-        if(!all(datataxa %in% phytaxa)) {
-            print("Dropping taxa from the data because they are not present in the phylogeny:")
-            print(setdiff(datataxa,phytaxa))
-            data <- data[intersect(datataxa,phytaxa),]
-            datataxa <- rownames(data)
-        }
-        
-        if(any(!(phytaxa %in% datataxa))) {
-            print("Dropping tips from the tree because they are not present in the data:")
-            print(setdiff(phytaxa,datataxa))
-            res$phy <- drop.tip(phy, setdiff(phytaxa,datataxa))
-        } else {
-            res$phy <- phy
-        }
-        
-        if (dataclass == "data.frame") {
-            res$data <- as.data.frame(data[res$phy$tip.label,])
-        } else {
-            res$data <- data[res$phy$tip.label,]
-        }
-        return(res)   
-             
-    } else {
-        stop("Data must be a vector, data.frame, or matrix")
+  if (is.vector(data)) {
+    datataxa <- names(data)
+    if (is.null(datataxa)) {
+      warning("Data set lacks taxa names, these are
+       required to match phylogeny and data. Data are returned unsorted.
+        Assuming that data and phy$tip.label are in the same order!")
+      return(list(phy = phy, data = data))
     }
+
+    if (!all(datataxa %in% phytaxa)) {
+      print("Dropping taxa from the data because
+       they are not present in the phylogeny:")
+      print(setdiff(datataxa, phytaxa))
+      data <- data[intersect(datataxa, phytaxa)]
+      datataxa <- names(data)
+    }
+
+    if (any(!(phytaxa %in% datataxa))) {
+      print("Dropping tips from the tree because
+       they are not present in the data:")
+      print(setdiff(phytaxa, datataxa))
+      res$phy <- drop.tip(phy, setdiff(phytaxa, datataxa))
+    } else {
+      res$phy <- phy
+    }
+
+    res$data <- data[res$phy$tip.label]
+    return(res)
+
+    ## if they are not vector
+
+  } else if (is.data.frame(data) || is.matrix(data)) {
+    dataclass <- class(data)
+    data <- as.matrix(data)
+    datataxa <- rownames(data)
+
+    if (is.null(datataxa)) {
+      warning("Data set lacks taxa (row) names,
+       these are required to match phylogeny and data.
+        Data are returned unsorted. Assuming that data rows
+         and phy$tip.label are in the same order!")
+      return(list(phy = phy, data = data))
+    }
+
+    if (!all(datataxa %in% phytaxa)) {
+      print("Dropping taxa from the data because
+       they are not present in the phylogeny:")
+      print(setdiff(datataxa, phytaxa))
+      data <- data[intersect(datataxa, phytaxa)]
+      datataxa <- rownames(data)
+
+    }
+
+    if (any(!(phytaxa %in% datataxa))) {
+      print("Dropping tips from the tree because
+       they are not present in the data:")
+      print(setdiff(phytaxa, datataxa))
+      res$phy <- drop.tip(phy, setdiff(phytaxa, datataxa))
+    } else {
+      res$phy <- phy
+    }
+
+    if (dataclass == "data.frame") {
+
+      res$data <- data[res$phy$tip.label, ]
+
+    } else {
+      res$data <- data[res$phy$tip.label, ]
+    }
+    return(res)
+  } else {
+    stop("Data must be a vector, data.frame, or matrix")
+  }
 }
 
 
 match.comm.dist <- function(comm, dis) {
+  res <- list()
 
-    res <- list()
+  commtaxa <- colnames(comm)
 
-    commtaxa <- colnames(comm)
+  if (is.null(commtaxa)) {
+    stop("Community data set lacks taxa (column) names,
+     these are required to match distance matrix and community data")
+  }
 
-     if(is.null(commtaxa)) {
-        stop("Community data set lacks taxa (column) names, these are required to match distance matrix and community data")
-    }
+  disclass <- dis
+  dis <- as.matrix(dis)
 
-    disclass <- dis
-    dis <- as.matrix(dis)
+  distaxa <- rownames(dis)
 
-    distaxa <- rownames(dis)
-
-    if(is.null(distaxa)) {
-        warning("Distance matrix lacks taxa names, these are required to match community and distance matrix. Data are returned unsorted. Assuming that distance matrix and community data taxa columns are in the same order!")
-        if (inherits(disclass, "dist")) {
-            return(list(comm=comm,dist=as.dist(dis))) 
-        } else {
-            return(list(comm=comm,dist=dis))             
-        }
-    }
-
-    if(!all(distaxa %in% commtaxa)) {
-        print("Dropping taxa from the distance matrix because they are not present in the community data:")
-        print(setdiff(distaxa,commtaxa))
-        dis <- dis[intersect(distaxa,commtaxa), intersect(distaxa,commtaxa)]
-        distaxa <- rownames(dis)
-    }
-    
-    if(any(!(commtaxa %in% distaxa))) {
-        print("Dropping taxa from the community because they are not present in the distance matrix:")
-        print(setdiff(commtaxa,distaxa))
-        res$comm <- comm[,intersect(commtaxa,distaxa)]
-    } else {
-        res$comm <- comm
-    }
-    
+  if (is.null(distaxa)) {
+    warning("Distance matrix lacks taxa names, these are required
+     to match community and distance matrix. Data are returned unsorted.
+      Assuming that distance matrix and community data taxa columns
+       are in the same order!")
     if (inherits(disclass, "dist")) {
-        res$dist <- as.dist(dis[colnames(comm),colnames(comm)])
+      return(list(comm = comm, dist = as.dist(dis)))
     } else {
-        res$dist <- dis[colnames(comm),colnames(comm)]
+      return(list(comm = comm, dist = dis))
     }
-    return(res)   
+  }
 
+  if (!all(distaxa %in% commtaxa)) {
+    print("Dropping taxa from the distance matrix because
+     they are not present in the community data:")
+    print(setdiff(distaxa, commtaxa))
+    dis <- dis[intersect(distaxa, commtaxa), intersect(distaxa, commtaxa)]
+    distaxa <- rownames(dis)
+  }
+
+  if (any(!(commtaxa %in% distaxa))) {
+    print("Dropping taxa from the community because
+     they are not present in the distance matrix:")
+    print(setdiff(commtaxa, distaxa))
+    res$comm <- comm[, intersect(commtaxa, distaxa)]
+  } else {
+    res$comm <- comm
+  }
+
+  if (inherits(disclass, "dist")) {
+    res$dist <- as.dist(dis[colnames(comm), colnames(comm)])
+  } else {
+    res$dist <- dis[colnames(comm), colnames(comm)]
+  }
+  return(res)
 }
