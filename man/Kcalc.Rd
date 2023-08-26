@@ -7,7 +7,7 @@
 Kcalc(x, phy, checkdata = TRUE)
 }
 \arguments{
-\item{x}{Vector or data.frame of trait data (in phylo\$tip.label order)}
+\item{x}{Vector or data.frame of trait data (in phylo$tip.label order)}
 
 \item{phy}{phylo object}
 

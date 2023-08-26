@@ -7,6 +7,8 @@
 \title{Expected PD, PD Variance, and Edge Abundance Distribution of a phylogeny}
 \usage{
 expected.pd(phy)
+
+variance.pd(phy, upper.bound = TRUE)
 }
 \arguments{
 \item{phy}{phylo object}
@@ -40,6 +42,11 @@ the upper bound solution.
 The function \code{ead} calculates the edge abundance distribution (EAD),
 the length of edges with different numbers of descendant tips.
 }
+\section{Functions}{
+\itemize{
+\item \code{variance.pd()}: expected variance of PD
+
+}}
 \examples{
 randtree <- rcoal(300)
 randtree.pd.ub <- variance.pd(randtree, upper.bound=TRUE)

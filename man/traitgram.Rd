@@ -16,7 +16,7 @@ traitgram(
 )
 }
 \arguments{
-\item{x}{Trait vector (same order as phy\$tip.label, or with taxon names in
+\item{x}{Trait vector (same order as phy$tip.label, or with taxon names in
 names)}
 
 \item{phy}{phylo object}

@@ -6,6 +6,15 @@
 \title{Regressions to Separate Phylogenetic Attraction and Repulsion}
 \usage{
 sppregs(samp, env, tree = NULL, fam = "gaussian")
+
+sppregs.plot(
+  sppreg,
+  rows = c(1, 3),
+  cex.mag = 1,
+  x.label = "phylogenetic correlations",
+  y.label = c("occurrence correlations w/ env", "occurrence correlations wo/ env",
+    "change in correlations")
+)
 }
 \arguments{
 \item{samp}{community data matrix, species as columns, communities as rows}
@@ -64,6 +73,11 @@ once the environmental variables are taken into account). The significance
 of these correlations can be tested via permutation with the function
 \code{\link{phylostruct}}.
 }
+\section{Functions}{
+\itemize{
+\item \code{sppregs.plot()}: description
+
+}}
 \note{
 The function requires the library \code{\link[brglm]{brglm}} to
 perform logistic regressions

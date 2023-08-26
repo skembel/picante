@@ -6,6 +6,8 @@
 \title{Prune tree to match community data or trait data}
 \usage{
 prune.sample(samp, phylo)
+
+prune.missing(x, phylo)
 }
 \arguments{
 \item{samp}{Community data matrix}
@@ -21,6 +23,12 @@ Returns a pruned phylo object
 Prune a phylogenetic tree to include only species present in a community
 data set or with non-missing trait data
 }
+\section{Functions}{
+\itemize{
+\item \code{prune.missing()}: Prune a phylogenetic tree to include non-missing
+trait data
+
+}}
 \author{
 Steven Kembel \href{mailto:steve.kembel@gmail.com}{steve.kembel@gmail.com}
 }

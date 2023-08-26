@@ -37,15 +37,6 @@
 ##' @param maxit as in \code{\link{optim}}
 ##' @param pstart starting values of the two phylogenetic signal strength
 ##' parameters passed to \code{\link{optim}}
-##' @param x object of class \code{pblm}
-##' @param tree1.w.novel A phylo tree object or a phylogenetic covariance
-##' matrix which corresponds to \code{tree1} of \code{x} with species to
-##' predict associations
-##' @param tree2.w.novel A phylo tree object or a phylogenetic covariance
-##' matrix which corresponds to \code{tree2} of \code{x} with species to
-##' predict associations
-##' @param predict.originals if \code{TRUE} then the associations of each
-##' original species in the two phylogenies is predicted
 ##' @return \item{MSE}{ total, full (each \emph{d} estimated), star
 ##' (\emph{d=0}), and base (\emph{d=1}) mean squared errors }
 ##' \item{signal.strength}{ two estimates of phylogenetic signal strength }

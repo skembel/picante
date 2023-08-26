@@ -43,19 +43,6 @@ CIs}
 
 \item{pstart}{starting values of the two phylogenetic signal strength
 parameters passed to \code{\link{optim}}}
-
-\item{x}{object of class \code{pblm}}
-
-\item{tree1.w.novel}{A phylo tree object or a phylogenetic covariance
-matrix which corresponds to \code{tree1} of \code{x} with species to
-predict associations}
-
-\item{tree2.w.novel}{A phylo tree object or a phylogenetic covariance
-matrix which corresponds to \code{tree2} of \code{x} with species to
-predict associations}
-
-\item{predict.originals}{if \code{TRUE} then the associations of each
-original species in the two phylogenies is predicted}
 }
 \value{
 \item{MSE}{ total, full (each \emph{d} estimated), star

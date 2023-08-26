@@ -1,13 +1,56 @@
-##' Match taxa in phylogeny and data
+##' @title match.phylo...
+##' @aliases match.phylo.data match.phylo.comm match.phylo.dist match.comm.dist
+##' @description
+##' These functions compare taxa present in phylogenies with community or
+##' trait data sets, pruning and sorting the two kinds of data to match one 
+##' another for subsequent analysis.
 ##' 
-##' Match taxa in phylogeny and data
+##' @usage 
 ##' 
+##' match.phylo.comm(phy, comm)
+##' match.phylo.data(phy, data)
+##' match.comm.dist(comm, dist)
 ##' 
 ##' @param phy A phylogeny object of class phylo
 ##' @param comm Community data matrix
-##' match.phylo.comm(phy = phylocom$phylo,comm = phylocom$sample)
+##' @param data A data object - a vector (with names matching phy) or a
+##' data.frame or matrix (with row names matching phy)
+##' @param dist A distance matrix - a dist or matrix object
 ##' 
+##' @details
+##' A common pitfall in comparative analyses in R is that taxa labels
+##' are assumed to match between phylogenetic and other data sets.
+##' These functions prune a phylogeny and community or trait data set
+##' to match one another, reporting taxa that are missing from one data
+##' set or the other.Taxa names for phylogeny objects are taken from
+##' the phylogeny's tip labels. Taxa names for community data are taken
+##' from the column names. Taxa names for trait data are taken from the element
+##' names (vector) or row names (data.frame or matrix).
+##' Taxa names for distance data are taken from column/row names of
+##' the distance matrix/dist object. If community data lack taxa names, 
+##' the function will issue a warning
+##' and no result will be returned, since the community-phylogenetic
+##' analyses in \code{picante} require named taxa in the community data set. 
+##' If trait data or distance matrix lack names, a warning is issued and
+##' the data are assumed to be sorted in the same order as the phylogeny's tip 
+##' labels or community's column labels.These utility functions are used
+##' by several functions that assume taxa labels
+##' in phylogeny and data match, including \code{\link{Kcalc}},
+##' \code{\link{phylosignal}}, and \code{\link{raoD}}.
+##'
+##' @author{ Steven Kembel <steve.kembel@gmail.com> }
+##' @seealso \code{\link{prune.missing}}, \code{\link{prune.sample}}
+##' 
+##' @examples
+##' data(phylocom)
+##' match.phylo.comm(phylocom$phylo, phylocom$sample)
+##' match.phylo.data(phylocom$phylo, phylocom$traits[1:10,])
+##' @keywords univar
 ##' @export match.phylo.comm
+##' @export match.phylo.data
+
+
+
 match.phylo.comm <- function(phy, comm) {
   if (!(is.data.frame(comm) || is.matrix(comm))) {
     stop("Community data should be a data.frame or matrix with
@@ -46,60 +89,6 @@ match.phylo.comm <- function(phy, comm) {
   return(res)
 }
 
-## function match.phylo.data fails if the supplied data is a data.frame with a single column
-
-
-
-
-##' Match taxa in phylogeny and data
-##' 
-##' These functions compare taxa present in phylogenies with community or trait
-##' data sets, pruning and sorting the two kinds of data to match one another
-##' for subsequent analysis.
-##' 
-##' A common pitfall in comparative analyses in R is that taxa labels are
-##' assumed to match between phylogenetic and other data sets. These functions
-##' prune a phylogeny and community or trait data set to match one another,
-##' reporting taxa that are missing from one data set or the other.
-##' 
-##' Taxa names for phylogeny objects are taken from the phylogeny's tip labels.
-##' Taxa names for community data are taken from the column names. Taxa names
-##' for trait data are taken from the element names (vector) or row names
-##' (data.frame or matrix). Taxa names for distance data are taken from
-##' column/row names of the distance matrix/dist object.
-##' 
-##' If community data lack taxa names, the function will issue a warning and no
-##' result will be returned, since the community-phylogenetic analyses in
-##' \code{picante} require named taxa in the community data set.
-##' 
-##' If trait data or distance matrix lack names, a warning is issued and the
-##' data are assumed to be sorted in the same order as the phylogeny's tip
-##' labels or community's column labels.
-##' 
-##' These utility functions are used by several functions that assume taxa
-##' labels in phylogeny and data match, including \code{\link{Kcalc}},
-##' \code{\link{phylosignal}}, and \code{\link{raoD}}.
-##' 
-##' @aliases match.phylo.data match.phylo.comm match.comm.dist
-##' @param phy A phylogeny object of class phylo
-##' @param comm Community data matrix
-##' @param data A data object - a vector (with names matching phy) or a
-##' data.frame or matrix (with row names matching phy)
-##' @param dis A distance matrix - a dist or matrix object
-##' @return A list containing the following elements, pruned and sorted to
-##' match one another: \item{phy}{ A phylogeny object of class phylo }
-##' \item{comm}{ Community data matrix } \item{data}{ A data object (vector,
-##' data.frame or matrix) } \item{dist}{ A distance matrix - a dist or matrix
-##' object }
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @seealso \code{\link{prune.missing}}, \code{\link{prune.sample}}
-##' @keywords univar
-##' @examples
-##' data(phylocom)
-##' match.phylo.comm(phylocom$phylo, phylocom$sample)
-##' match.phylo.data(phylocom$phylo, phylocom$traits[1:10,])
-##' 
-##' @export match.phylo.data
 match.phylo.data <- function(phy, data) {
   res <- list()
   phytaxa <- phy$tip.label
@@ -180,7 +169,7 @@ match.phylo.data <- function(phy, data) {
 }
 
 
-match.comm.dist <- function(comm, dis) {
+match.comm.dist <- function(comm, dist) {
   res <- list()
 
   commtaxa <- colnames(comm)
@@ -190,10 +179,10 @@ match.comm.dist <- function(comm, dis) {
      these are required to match distance matrix and community data")
   }
 
-  disclass <- dis
-  dis <- as.matrix(dis)
+  disclass <- dist
+  dist <- as.matrix(dist)
 
-  distaxa <- rownames(dis)
+  distaxa <- rownames(dist)
 
   if (is.null(distaxa)) {
     warning("Distance matrix lacks taxa names, these are required
@@ -201,9 +190,9 @@ match.comm.dist <- function(comm, dis) {
       Assuming that distance matrix and community data taxa columns
        are in the same order!")
     if (inherits(disclass, "dist")) {
-      return(list(comm = comm, dist = as.dist(dis)))
+      return(list(comm = comm, dist = as.dist(dist)))
     } else {
-      return(list(comm = comm, dist = dis))
+      return(list(comm = comm, dist = dist))
     }
   }
 
@@ -211,8 +200,8 @@ match.comm.dist <- function(comm, dis) {
     print("Dropping taxa from the distance matrix because
      they are not present in the community data:")
     print(setdiff(distaxa, commtaxa))
-    dis <- dis[intersect(distaxa, commtaxa), intersect(distaxa, commtaxa)]
-    distaxa <- rownames(dis)
+    dist <- dist[intersect(distaxa, commtaxa), intersect(distaxa, commtaxa)]
+    distaxa <- rownames(dist)
   }
 
   if (any(!(commtaxa %in% distaxa))) {
@@ -225,9 +214,9 @@ match.comm.dist <- function(comm, dis) {
   }
 
   if (inherits(disclass, "dist")) {
-    res$dist <- as.dist(dis[colnames(comm), colnames(comm)])
+    res$dist <- as.dist(dist[colnames(comm), colnames(comm)])
   } else {
-    res$dist <- dis[colnames(comm), colnames(comm)]
+    res$dist <- dist[colnames(comm), colnames(comm)]
   }
   return(res)
 }

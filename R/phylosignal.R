@@ -3,7 +3,7 @@
 ##' Calculates K statistic of phylogenetic signal
 ##' 
 ##' 
-##' @param x Vector or data.frame of trait data (in phylo\$tip.label order)
+##' @param x Vector or data.frame of trait data (in phylo$tip.label order)
 ##' @param phy phylo object
 ##' @param checkdata Check for match between trait and phylogeny taxa labels
 ##' using \code{\link{match.phylo.data}}? (default=TRUE)

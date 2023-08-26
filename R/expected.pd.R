@@ -23,7 +23,6 @@
 ##' 
 ##' @aliases expected.pd variance.pd ead
 ##' @param phy phylo object
-##' @param upper.bound Calculate upper bound of PD variance? (default = TRUE)
 ##' @return \item{n}{ Expected Number of tips sampled } \item{expected.pd}{
 ##' Expected PD for a given n } \item{variance.pd}{ Variance of PD for a given
 ##' n } \item{num.children}{ Number of tips descended from an edge }
@@ -49,7 +48,9 @@
 ##' legend("bottomright", lty=c(1,2,3), legend=c("Expected PD",
 ##'     "95 percent CI (exact)","95 percent CI (upper bound)"))
 ##' 
-##' @export expected.pd variance.pd ead
+##' @export expected.pd 
+##' @export variance.pd 
+##' @export ead
 ##' 
 expected.pd <- function(phy) {
   ead <- ead(phy)
@@ -80,6 +81,9 @@ ead <- function(phy) {
   colnames(byclass)[2] <- "edge.length"
   return(byclass)
 }
+
+##' @describeIn expected.pd expected variance of PD
+##' @param upper.bound Calculate upper bound of PD variance? (default = TRUE)
 
 # expected variance of PD
 variance.pd <- function(phy, upper.bound = TRUE) {

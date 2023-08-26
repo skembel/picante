@@ -27,12 +27,7 @@
 ##' @param fam with \code{fam = "gaussian"} fits with \code{\link[stats]{glm}};
 ##' with \code{fam = "binomial"} fit logistic regressions with Firth's
 ##' bias-reduction using \code{\link[brglm]{brglm}}
-##' @param sppreg object from function \code{\link[picante]{sppregs}}
-##' @param rows \code{rows = c(1,3)} plots in a row; \code{rows = c(3,1)} in a
-##' column
-##' @param cex.mag value for \code{cex} in \code{par}
-##' @param x.label x axis labels
-##' @param y.label y axis labels
+##' 
 ##' @return \item{family}{ the regression error distribution }
 ##' \item{residuals}{ the residuals from each species regression }
 ##' \item{coefficients}{ the estimated coefficients from each species
@@ -52,7 +47,8 @@
 ##' (2007) Separating the determinants of phylogenetic community structure.
 ##' Ecology Letters, 10, 917-925
 ##' @keywords univar
-##' @export sppregs
+##' @export sppregs 
+##' @export sppregs.plot
 sppregs <- function(samp, env, tree = NULL, fam = "gaussian") {
   if (is.null(tree)) {
     cors.phylo <- NULL
@@ -178,6 +174,14 @@ sppregs <- function(samp, env, tree = NULL, fam = "gaussian") {
   ))
 }
 
+##' @describeIn sppregs description
+##' @param sppreg object from function \code{\link[picante]{sppregs}}
+##' @param rows \code{rows = c(1,3)} plots in a row; \code{rows = c(3,1)} in a
+##' column
+##' @param cex.mag value for \code{cex} in \code{par}
+##' @param x.label x axis labels
+##' @param y.label y axis labels
+##' 
 sppregs.plot <- function(sppreg, rows = c(1, 3), cex.mag = 1, x.label = "phylogenetic correlations", y.label = c("occurrence correlations w/ env", "occurrence correlations wo/ env", "change in correlations")) {
   par(mfrow = rows, las = 1, cex = cex.mag)
   plot(sppreg$cors.phylo, sppreg$cors.pa, xlab = x.label, ylab = y.label[1], main = paste("cor =", round(cor(sppreg$cors.phylo, sppreg$cors.pa, use = "pairwise.complete.obs"), 4)))

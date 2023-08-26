@@ -17,7 +17,6 @@
 ##' @param dis Interspecific distance matrix
 ##' @param abundance.weighted Should mean pairwise distances separating species
 ##' in two communities be weighted by species abundances? (default = FALSE)
-##' @param threads is an interger of number of threads for parallel processing
 ##' @return Distance object of MPD values separating each pair of communities.
 ##' @author Steven Kembel <steve.kembel@@gmail.com>
 ##' @seealso \code{\link{mpd}}, \code{\link{ses.mpd}}
@@ -30,35 +29,33 @@
 ##' data(phylocom)
 ##' comdist(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
 ##' @export comdist
-comdist <- function(comm, dis, abundance.weighted = FALSE, Rcpp = TRUE, threads = 1) {
+comdist <- function(comm, dis, abundance.weighted=FALSE) {
+  
+  x <- as.matrix(comm)
   dat <- match.comm.dist(comm, dis)
   x <- dat$comm
   dis <- as.matrix(dat$dist)
-
   if (!abundance.weighted) {
-    x <- decostand(x, method = "pa")
+    x <- decostand(x, method="pa")
   }
   N <- dim(x)[1]
-  x <- decostand(x, method = "total", MARGIN = 1)
-
-
-if(Rcpp){
-  comdist <- matrix(nrow = N, ncol = N)
-  for (l in 1:(N - 1)) {
-    for (k in (l + 1):N) {
-      comdist[k, l] <-
-        sum(dis * outer(as.vector(t(x[k, ])), as.vector(t(x[l, ]))))
+  S <- dim(x)[2]
+  x <- decostand(x, method="total", MARGIN=1)
+  
+  comdist <- matrix(nrow=N,ncol=N)    
+  for (l in 1:(N-1)) {
+    for (k in (l+1):N) {
+      comdist[k,l] <-
+        sum ( dis * outer(as.vector(t(x[k,])),as.vector(t(x[l,]))) )
     }
   }
-
-} else {
-  comdist <- distmat_rcpp(as.matrix(x), dis, threads = threads)
-}
-
+  
   row.names(comdist) <- row.names(x)
   colnames(comdist) <- row.names(x)
   return(as.dist(comdist))
+  
 }
+
 
 
 # comdistnt

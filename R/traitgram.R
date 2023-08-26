@@ -10,7 +10,7 @@
 ##' (i.e. age).
 ##' 
 ##' 
-##' @param x Trait vector (same order as phy\$tip.label, or with taxon names in
+##' @param x Trait vector (same order as phy$tip.label, or with taxon names in
 ##' names)
 ##' @param phy phylo object
 ##' @param xaxt x axis default type

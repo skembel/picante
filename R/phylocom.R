@@ -2,7 +2,6 @@
 ##' 
 ##' Convert a Phylocom database-format sample to community data matrix.
 ##' 
-##' 
 ##' @param x Phylocom sample formatted data frame, a data frame with three
 ##' 
 ##' |  Community name  |  Species abundance  | Species name |
@@ -152,3 +151,11 @@
       row.names = TRUE, col.names = FALSE
     )
   }
+
+#' @title  phylocom
+#' @name phylocom
+#' @description one row with NA
+#' @docType data
+#' @usage data(phylocom)
+#' @keywords datasets
+NULL

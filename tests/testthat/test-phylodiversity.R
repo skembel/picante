@@ -2,12 +2,6 @@
 
 test_that('mpd',
 {
-  data(phylocom)
-  data("dummy_normal")
-  data("dummy_all_NA.rda")
-  data("dummy_one_na.rda")
-  
-  
   expect_equal(mpd(dummy_normal, cophenetic(phylocom$phylo), abundance.weighted=TRUE),  expected = c(7.954789, 7.895544, 7.978408, 7.946582, 7.917633, 7.987820)
     ,tolerance = 1e-5 )
   ##  expect_identical(mpd(dummy_all_NA, cophenetic(phylocom$phylo), abundance.weighted=TRUE),  expected = c(NA, NA, NA, NA, NA, NA))

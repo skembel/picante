@@ -6,6 +6,8 @@
 \title{Phylogenetic estimation of traits for unobserved taxa}
 \usage{
 phyEstimate(phy, trait, method = "pic", ...)
+
+phyEstimateDisc(phy, trait, best.state = TRUE, cutoff = 0.5, ...)
 }
 \arguments{
 \item{phy}{phylo object}
@@ -55,6 +57,11 @@ reported if argument \code{best.state=TRUE}. If the best-supported state's
 support is less than the specified \code{cutoff}, no best state is reported
 and a \code{NA} value will be returned.
 }
+\section{Functions}{
+\itemize{
+\item \code{phyEstimateDisc()}: for discrete traits
+
+}}
 \examples{
 
 #generate random phylogeny
@@ -63,7 +70,12 @@ randtree <- rcoal(50)
 randtraits <- sample(rTraitCont(randtree, sigma=10, root.value=100), 40)
 #estimate trait values for "missing" taxa using PIC method
 phyEstimate(randtree, randtraits, method="pic")
-
+randtree <- ape::rcoal(100)
+db <- data.frame(
+Category = sample(0:1, size = 89, replace = TRUE),
+label = randtree$tip.label[1:89])
+data<- setNames(db$Category, db$label)
+result <- phyEstimateDisc(trait = data, phy=randtree, best.state = TRUE, cutoff = 0.5)
 }
 \references{
 T. Garland Jr., and A.R. Ives. 2000. Using the past to predict

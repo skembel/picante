@@ -4,7 +4,7 @@
 \alias{comdist}
 \title{Calculates inter-community mean pairwise distance}
 \usage{
-comdist(comm, dis, abundance.weighted = FALSE, Rcpp = TRUE, threads = 1)
+comdist(comm, dis, abundance.weighted = FALSE)
 }
 \arguments{
 \item{comm}{Community data matrix}
@@ -13,8 +13,6 @@ comdist(comm, dis, abundance.weighted = FALSE, Rcpp = TRUE, threads = 1)
 
 \item{abundance.weighted}{Should mean pairwise distances separating species
 in two communities be weighted by species abundances? (default = FALSE)}
-
-\item{threads}{is an interger of number of threads for parallel processing}
 }
 \value{
 Distance object of MPD values separating each pair of communities.

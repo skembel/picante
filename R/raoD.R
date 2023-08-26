@@ -23,15 +23,16 @@
 ##' between individuals drawn from each of two communities, and H is Dkl
 ##' standardized to account for within-community diversity.
 ##' 
-##' \emph{D[kl] = sum(t[ij] * x[ki] * x[lj])}
-##' 
-##' where \emph{x[ki]} is the relative abundance of taxon \emph{i} in community
-##' \emph{k} and \emph{t[ij]} is a matrix of weights for all pairs of taxa
-##' \emph{i,j}. Without a phylogeny, when \emph{i=j}, \emph{t[ij]=0}, otherwise
-##' \emph{t[ij]=1}. With a phylogeny, \emph{t[ij]} is the phylogenetic distance
+##' \deqn{Dkl = sum(tij * xki * xli)}
+##'
+##' where \emph{xki} is the relative abundance of taxon \emph{i} in community
+##' \emph{k} and \emph{tij} is a matrix of weights for all pairs of taxa
+##' \emph{i,j}. Without a phylogeny, when \emph{i=j}, \emph{tij=0}, otherwise
+##' \emph{tij=1}. With a phylogeny, \emph{tij} is the phylogenetic distance
 ##' to MRCA for taxa \emph{i,j}.
 ##' 
-##' \emph{H[kl] = D[kl] - (D[kk] + D[ll])/2}
+##' 
+##' \deqn{Hkl = Dkl-(Dkk + Dll)/2}
 ##' 
 ##' Alpha, beta and total measure the average diversity within, among, and
 ##' across all communities based on Dkk and H values taking variation in number
