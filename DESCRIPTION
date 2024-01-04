@@ -19,3 +19,5 @@ RoxygenNote: 7.2.3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 LazyData: true
+URL: https://github.com/skembel/picante
+BugReports : https://github.com/skembel/picante/issues

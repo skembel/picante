@@ -4,31 +4,31 @@
 # mean pairwise distance among taxa from two communities
 
 
-##' Calculates inter-community mean pairwise distance
-##' 
-##' Calculates MPD (mean pairwise distance) separating taxa in two communities,
-##' a measure of phylogenetic beta diversity
-##' 
-##' This function calculates a measure of phylogenetic beta diversity: the
-##' expected phylogenetic distance separating two individuals or taxa drawn
-##' randomly from different communities.
-##' 
-##' @param comm Community data matrix
-##' @param dis Interspecific distance matrix
-##' @param abundance.weighted Should mean pairwise distances separating species
-##' in two communities be weighted by species abundances? (default = FALSE)
-##' @return Distance object of MPD values separating each pair of communities.
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @seealso \code{\link{mpd}}, \code{\link{ses.mpd}}
-##' @references C.O. Webb, D.D. Ackerly, and S.W. Kembel. 2008. Phylocom:
-##' software for the analysis of phylogenetic community structure and trait
-##' evolution. Bioinformatics 18:2098-2100.
-##' @keywords univar
-##' @examples
-##' 
-##' data(phylocom)
-##' comdist(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
-##' @export comdist
+#' Calculates inter-community mean pairwise distance
+#' 
+#' Calculates MPD (mean pairwise distance) separating taxa in two communities,
+#' a measure of phylogenetic beta diversity
+#' 
+#' This function calculates a measure of phylogenetic beta diversity: the
+#' expected phylogenetic distance separating two individuals or taxa drawn
+#' randomly from different communities.
+#' 
+#' @param comm Community data matrix
+#' @param dis Interspecific distance matrix
+#' @param abundance.weighted Should mean pairwise distances separating species
+#' in two communities be weighted by species abundances? (default = FALSE)
+#' @return Distance object of MPD values separating each pair of communities.
+#' @author Steven Kembel <steve.kembel@@gmail.com>
+#' @seealso \code{\link{mpd}}, \code{\link{ses.mpd}}
+#' @references C.O. Webb, D.D. Ackerly, and S.W. Kembel. 2008. Phylocom:
+#' software for the analysis of phylogenetic community structure and trait
+#' evolution. Bioinformatics 18:2098-2100.
+#' @keywords univar
+#' @examples
+#' 
+#' data(phylocom)
+#' comdist(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
+#' @export comdist
 comdist <- function(comm, dis, abundance.weighted=FALSE) {
   
   x <- as.matrix(comm)
@@ -62,38 +62,38 @@ comdist <- function(comm, dis, abundance.weighted=FALSE) {
 # mean distance to closest relative between taxa from two communities
 
 
-##' Calculates inter-community mean nearest taxon distance
-##' 
-##' Calculates MNTD (mean nearest taxon distance) separating taxa in two
-##' communities, a measure of phylogenetic beta diversity
-##' 
-##' This metric has also been referred to as MNND (mean nearest neighbour
-##' distance).
-##' 
-##' This function calculates a measure of phylogenetic beta diversity: the
-##' average phylogenetic distance to the most similar taxon or individual in
-##' the other community for taxa or individuals in two communities.
-##' 
-##' @aliases comdistnt comdistnn
-##' @param comm Community data matrix
-##' @param dis Interspecific distance matrix
-##' @param abundance.weighted Should mean nearest taxon distances from each
-##' species to species in the other community be weighted by species abundance?
-##' (default = FALSE)
-##' @param exclude.conspecifics Should conspecific taxa in different
-##' communities be exclude from MNTD calculations? (default = FALSE)
-##' @return Distance object of MNTD values separating each pair of communities.
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @seealso \code{\link{mntd}}, \code{\link{ses.mntd}}
-##' @references C.O. Webb, D.D. Ackerly, and S.W. Kembel. 2008. Phylocom:
-##' software for the analysis of phylogenetic community structure and trait
-##' evolution. Bioinformatics 18:2098-2100.
-##' @keywords univar
-##' @examples
-##' 
-##' data(phylocom)
-##' comdistnt(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=FALSE)
-##' @export comdistnt
+#' Calculates inter-community mean nearest taxon distance
+#' 
+#' Calculates MNTD (mean nearest taxon distance) separating taxa in two
+#' communities, a measure of phylogenetic beta diversity
+#' 
+#' This metric has also been referred to as MNND (mean nearest neighbour
+#' distance).
+#' 
+#' This function calculates a measure of phylogenetic beta diversity: the
+#' average phylogenetic distance to the most similar taxon or individual in
+#' the other community for taxa or individuals in two communities.
+#' 
+#' @aliases comdistnt comdistnn
+#' @param comm Community data matrix
+#' @param dis Interspecific distance matrix
+#' @param abundance.weighted Should mean nearest taxon distances from each
+#' species to species in the other community be weighted by species abundance?
+#' (default = FALSE)
+#' @param exclude.conspecifics Should conspecific taxa in different
+#' communities be exclude from MNTD calculations? (default = FALSE)
+#' @return Distance object of MNTD values separating each pair of communities.
+#' @author Steven Kembel <steve.kembel@@gmail.com>
+#' @seealso \code{\link{mntd}}, \code{\link{ses.mntd}}
+#' @references C.O. Webb, D.D. Ackerly, and S.W. Kembel. 2008. Phylocom:
+#' software for the analysis of phylogenetic community structure and trait
+#' evolution. Bioinformatics 18:2098-2100.
+#' @keywords univar
+#' @examples
+#' 
+#' data(phylocom)
+#' comdistnt(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=FALSE)
+#' @export comdistnt
 comdistnt <- function(comm, dis, abundance.weighted = FALSE, exclude.conspecifics = FALSE) {
   dat <- match.comm.dist(comm, dis)
   comm <- dat$comm
@@ -148,38 +148,38 @@ comdistnt <- function(comm, dis, abundance.weighted = FALSE, exclude.conspecific
 # unifrac
 
 
-##' Unweighted UniFrac distance between communities
-##' 
-##' Calculates unweighted UniFrac, a phylogenetic beta diversity metric of the
-##' the unique (non-shared) fraction of total phylogenetic diversity
-##' (branch-length) between two communities.
-##' 
-##' 
-##' @param comm Community data matrix
-##' @param tree Object of class phylo - a rooted phylogeny
-##' @return A dist object of the unweighted UniFrac distances between
-##' communities (the unique (non-shared) fraction of total phylogenetic
-##' diversity (branch-length) between two communities).
-##' @note The supplied tree must be rooted. Single-species samples will be
-##' assigned a PD value equal to the distance from the root to the present.
-##' @section Warning : The UniFrac distance between samples will include the
-##' branch length connecting taxa in those samples and the root of the supplied
-##' tree. The root of the supplied tree may not be spanned by any taxa in the
-##' sample. If you want the root of your tree to correspond to the most recent
-##' ancestor of the taxa actually present in your samples, you should prune the
-##' tree before running \code{unifrac}: \code{prunedTree <-
-##' prune.sample(sample,tree)}
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @seealso \code{\link{pd}}
-##' @references Lozupone, C., Hamady, M., and Knight, R. 2006. UniFrac - an
-##' online tool for comparing microbial community diversity in a phylogenetic
-##' context. BMC Bioinformatics 7:371.
-##' @keywords univar
-##' @examples
-##' 
-##' data(phylocom)
-##' unifrac(phylocom$sample, phylocom$phylo)
-##' @export unifrac
+#' Unweighted UniFrac distance between communities
+#' 
+#' Calculates unweighted UniFrac, a phylogenetic beta diversity metric of the
+#' the unique (non-shared) fraction of total phylogenetic diversity
+#' (branch-length) between two communities.
+#' 
+#' 
+#' @param comm Community data matrix
+#' @param tree Object of class phylo - a rooted phylogeny
+#' @return A dist object of the unweighted UniFrac distances between
+#' communities (the unique (non-shared) fraction of total phylogenetic
+#' diversity (branch-length) between two communities).
+#' @note The supplied tree must be rooted. Single-species samples will be
+#' assigned a PD value equal to the distance from the root to the present.
+#' @section Warning : The UniFrac distance between samples will include the
+#' branch length connecting taxa in those samples and the root of the supplied
+#' tree. The root of the supplied tree may not be spanned by any taxa in the
+#' sample. If you want the root of your tree to correspond to the most recent
+#' ancestor of the taxa actually present in your samples, you should prune the
+#' tree before running \code{unifrac}: \code{prunedTree <-
+#' prune.sample(sample,tree)}
+#' @author Steven Kembel <steve.kembel@@gmail.com>
+#' @seealso \code{\link{pd}}
+#' @references Lozupone, C., Hamady, M., and Knight, R. 2006. UniFrac - an
+#' online tool for comparing microbial community diversity in a phylogenetic
+#' context. BMC Bioinformatics 7:371.
+#' @keywords univar
+#' @examples
+#' 
+#' data(phylocom)
+#' unifrac(phylocom$sample, phylocom$phylo)
+#' @export unifrac
 unifrac <- function(comm, tree) {
   if (is.null(tree$edge.length)) {
     stop("Tree has no branch lengths, cannot compute UniFrac")

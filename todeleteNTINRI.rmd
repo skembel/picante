@@ -1,0 +1,44 @@
+**NTI**
+```{r}
+NTI<-function(
+  samp, dis, null.model = c(
+    "taxa.labels", "richness", "frequency", "sample.pool",
+    "phylogeny.pool", "independentswap", "trialswap"
+  ),
+  abundance.weighted = FALSE, runs = 999, iterations = 1000){
+  mntd.result <-picante::ses.mntd(samp,dis,null.model,abundance.weighted, runs, iterations)
+
+  NTI.result <- as.matrix(
+    -1 *
+      ((mntd.result[,2]-mntd.result[,3])/
+        mntd.result[,4]))
+  rownames(NTI.result) <- row.names(mntd.result)
+  colnames(NTI.result) <- 'NTI'
+NTI.result
+}
+```
+***NRI***
+```{r}
+NRI<-function(
+        samp, dis, null.model = c(
+                "taxa.labels", "richness", "frequency", "sample.pool",
+                "phylogeny.pool", "independentswap", "trialswap"
+        ),
+        abundance.weighted = FALSE, runs = 999, iterations = 1000){
+  mpd.result <-picante::ses.mpd(samp,dis,null.model,abundance.weighted, runs, iterations)
+
+  NRI.result <- as.matrix(-1 *
+                  ((mpd.result[,2]-mpd.result[,3])/
+                          mpd.result[,4]))
+  rownames(NRI.result) <- row.names(mpd.result)
+  colnames(NRI.result) <- 'NRI'
+  as.data.frame(NRI.result)
+  NRI.result
+
+}
+iCAMP:: mpdn()
+```
+```{r}
+
+NTI(samp = phylocom$sample, dis = cophenetic(phylocom$phylo),null.model="taxa.labels")
+```

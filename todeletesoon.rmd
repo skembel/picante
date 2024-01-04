@@ -1,0 +1,154 @@
+```{r}
+library("microbenchmark")
+
+library(ape)
+n <- 750
+
+tree <- rtree(n)
+clump1 <- sample(0:1, n, replace = TRUE)
+clump2a <- sample(0:1, n, replace = TRUE)
+clump2b <- sample(0:1, n, replace = TRUE)
+clump4 <- sample(0:1, n, replace = TRUE)
+even <- sample(0:1, n, replace = TRUE)
+random <- sample(0:1, n, replace = TRUE)
+samp <- data.frame(
+  clump1,
+  clump2a,
+  clump2b,
+  clump4,
+  even,
+  random
+)
+samp <- t(samp)
+
+colnames(samp) <- tree$tip.label
+
+coph <-cophenetic(tree)
+
+
+```
+
+```{r}
+mpd.ori <- function(samp, dis, abundance.weighted = FALSE) {
+  N <- dim(samp)[1] ## le nombre de row
+  mpd <- numeric(N) ## N en liste de N objets
+  for (i in 1:N) {
+    sppInSample <- names(samp[i, samp[i,] > 0]) ## prend les rows avec des espèces présentes
+    if (length(sppInSample) > 1) { ## si plus de 1
+      sample.dis <- dis[sppInSample, sppInSample] ##les distances en tableau croisé
+      if (abundance.weighted) {
+        sample.weights <- t(as.matrix(samp[i, sppInSample, drop = FALSE])) %*% as.matrix(samp[i, sppInSample, drop = FALSE])
+        mpd[i] <- weighted.mean(sample.dis, sample.weights)
+      } else {
+        mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])
+      }
+    } else {
+      mpd[i] <- NA
+    }
+  }
+  mpd
+}
+##system.time(mpd.ori(samp, cophenetic(tree), abundance.weighted = FALSE))
+result <- mpd.ori(samp, cophenetic(tree), abundance.weighted = TRUE)
+print(result)
+```
+```{r}
+mpdn<-function(sample, distance, abundance.weighted = FALSE)
+{
+  if(sum(colnames(sample)!=rownames(distance))>0)
+  {
+    sp.name <- intersect(colnames(sample), rownames(distance))
+    sample <- sample[, match(sp.name, colnames(sample))]
+    distance <- distance[match(sp.name, rownames(distance)), match(sp.name, rownames(distance))]
+  }
+
+  comt <- sample
+  if(!abundance.weighted)
+  {
+    comt[comt>0] <- 1
+    num <- rowSums(comt)
+  }
+
+  comt <- comt/rowSums(comt)
+
+  comt <- as.matrix(comt)
+  distance <- as.matrix(distance)
+
+  comd <- comt %*% distance
+  res <- comd * comt
+  res <- rowSums(res)
+
+     if(!abundance.weighted)
+  {
+    res <- res*(num/(num-1))
+  }
+
+  names(res)<-NULL
+  res
+}
+
+mpdn(samp, cophenetic(tree), abundance.weighted = FALSE)
+```
+
+```{r}
+
+library("profvis")
+
+profvis({
+sample <- samp
+distance <- cophenetic(tree)
+abundance.weighted <- FALSE
+  if(sum(colnames(sample)!=rownames(distance))>0)
+  {
+    sp.name <- intersect(colnames(sample), rownames(distance))
+    sample <- sample[, match(sp.name, colnames(sample))]
+    distance <- distance[match(sp.name, rownames(distance)), match(sp.name, rownames(distance))]
+  }
+
+  comt <- sample
+  if(!abundance.weighted)
+  {
+    comt[comt>0] <- 1
+    num <- rowSums(comt)
+  }
+
+  comt <- comt/rowSums(comt)
+
+  comt <- as.matrix(comt)
+  distance <- as.matrix(distance)
+
+  comd <- comt %*% distance
+  res <- comd * comt
+  res <- rowSums(res)
+
+  if(!abundance.weighted)
+  {
+    res <- res*(num/(num-1))
+  }
+  names(res)<-NULL
+  res
+}
+)
+
+```
+```{r}
+bench<-
+  microbenchmark(
+    'nouvelle version' = mpdn(samp, cophenetic(tree), abundance.weighted = FALSE),
+    'originale' =   mpd.2024(samp, cophenetic(tree), abundance.weighted = FALSE)
+  )
+
+bench
+```
+```{r}
+
+df_filtered <- samp[names(samp) %in% rownames(samp)]
+df_filtered
+
+```
+```{r}
+microbenchmark(
+'picante' = mntd(samp, dis = cophenetic(tree), abundance.weighted = FALSE),
+'icamp' = mntd.new(samp, pd = cophenetic(tree), abundance.weighted = FALSE)
+)
+```

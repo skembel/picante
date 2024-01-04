@@ -27,7 +27,6 @@ distance), and the function was named \code{mnnd} in picante versions <
 0.7.
 }
 \examples{
-
 data(phylocom)
 mntd(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
 

@@ -1,25 +1,28 @@
-##' Species co-occurrence distances
-##' 
-##' Compute interspecific distances based on patterns of species co-occurrence
-##' in communities.
-##' 
-##' Currently implemented co-occurrence measures (arguments to metric):
-##' \describe{ \item{cij}{ Schoener's index of co-occurrence } \item{jaccard}{
-##' Jaccard index of co-occurrence } \item{checkerboard}{ Checkerboard index of
-##' co-occurrence } \item{doij}{ DOij index of co-occurrence } }
-##' 
-##' @param x Community data matrix
-##' @param metric Co-occurrence metric to use (see Details section for
-##' description)
-##' @return A \code{dist} object with co-occurrences among all species pairs
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @seealso \code{\link[vegan]{vegdist}}
-##' @references Hardy, O.J. 2008. Testing the spatial phylogenetic structure of
-##' local communities: statistical performances of different null models and
-##' test statistics on a locally neutral community. Journal of Ecology
-##' 96:914-926.
-##' @keywords univar
-##' @export species.dist
+#' Species co-occurrence distances
+#' 
+#' Compute interspecific distances based on patterns of species co-occurrence
+#' in communities.
+#' 
+#' Currently implemented co-occurrence measures (arguments to metric):
+#' \describe{ \item{cij}{ Schoener's index of co-occurrence } \item{jaccard}{
+#' Jaccard index of co-occurrence } \item{checkerboard}{ Checkerboard index of
+#' co-occurrence } \item{doij}{ DOij index of co-occurrence } }
+#' 
+#' @param x Community data matrix
+#' @param metric Co-occurrence metric to use (see Details section for
+#' description)
+#' @return A \code{dist} object with co-occurrences among all species pairs
+#' @author Steven Kembel <steve.kembel@@gmail.com>
+#' @seealso \code{\link[vegan]{vegdist}}
+#' @references Hardy, O.J. 2008. Testing the spatial phylogenetic structure of
+#' local communities: statistical performances of different null models and
+#' test statistics on a locally neutral community. Journal of Ecology
+#' 96:914-926.
+#' @examples
+#' data(varespec)
+#' species.dist(varespec,metric = 'cij')
+#' @keywords univar
+#' @export species.dist
 `species.dist` <-
   function(x, metric = c("cij", "jaccard", "checkerboard", "doij")) {
     metric <- match.arg(metric)

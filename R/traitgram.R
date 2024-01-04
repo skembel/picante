@@ -3,45 +3,45 @@
 ## node height by branch lengths
 
 
-##' Draw phylogeny with nodes at trait positions
-##' 
-##' Draws a phylogeny where x position of nodes and tips corresponds to value
-##' of a continuous trait variable, and y position corresponds to node depth
-##' (i.e. age).
-##' 
-##' 
-##' @param x Trait vector (same order as phy$tip.label, or with taxon names in
-##' names)
-##' @param phy phylo object
-##' @param xaxt x axis default type
-##' @param underscore if FALSE remove underscore from taxonomic names
-##' @param show.names if TRUE show taxon names across tips of phylogeny
-##' @param show.xaxis.values if TRUE show values for trait on x=axis
-##' @param method method for calculation of internal trait values. 'ML' =
-##' maximum likelihood method; 'pic' = independent contrasts method. pic option
-##' can be used when ML fails to converge or otherwise seems to fail to
-##' correctly reconstruct ancestral values
-##' @param ...  Additional arguments passed to plot
-##' @return Plots a traitgram, no values returned.
-##' @author David Ackerly <dackerly@@berkeley.edu>
-##' @references Ackerly, D. D. 2009. Conservatism and diversification of plant
-##' functional traits: Evolutionary rates versus phylogenetic signal.
-##' Proceedings of the National Academy of Sciences USA 106:19699-19706. doi:
-##' 10.1073/pnas.0901635106.
-##' 
-##' Evans, M. E. K., S. A. Smith, R. S. Flynn, and M. J. Donoghue. 2009.
-##' Climate, Niche Evolution, and Diversification of the "bird-cage" Evening
-##' Primroses (Oenothera, Sections Anogra and Kleinia). American Naturalist
-##' 173:225-240.
-##' @keywords univar
-##' @examples
-##' 
-##' randtree <- rcoal(20)
-##' randtraits <- rTraitCont(randtree)
-##' traitgram(randtraits,randtree)
-##' traitgram(randtraits,randtree,method='pic')
-##' 
-##' @export traitgram
+#' Draw phylogeny with nodes at trait positions
+#' 
+#' Draws a phylogeny where x position of nodes and tips corresponds to value
+#' of a continuous trait variable, and y position corresponds to node depth
+#' (i.e. age).
+#' 
+#' 
+#' @param x Trait vector (same order as phy$tip.label, or with taxon names in
+#' names)
+#' @param phy phylo object
+#' @param xaxt x axis default type
+#' @param underscore if FALSE remove underscore from taxonomic names
+#' @param show.names if TRUE show taxon names across tips of phylogeny
+#' @param show.xaxis.values if TRUE show values for trait on x=axis
+#' @param method method for calculation of internal trait values. 'ML' =
+#' maximum likelihood method; 'pic' = independent contrasts method. pic option
+#' can be used when ML fails to converge or otherwise seems to fail to
+#' correctly reconstruct ancestral values
+#' @param ...  Additional arguments passed to plot
+#' @return Plots a traitgram, no values returned.
+#' @author David Ackerly <dackerly@@berkeley.edu>
+#' @references Ackerly, D. D. 2009. Conservatism and diversification of plant
+#' functional traits: Evolutionary rates versus phylogenetic signal.
+#' Proceedings of the National Academy of Sciences USA 106:19699-19706. doi:
+#' 10.1073/pnas.0901635106.
+#' 
+#' Evans, M. E. K., S. A. Smith, R. S. Flynn, and M. J. Donoghue. 2009.
+#' Climate, Niche Evolution, and Diversification of the "bird-cage" Evening
+#' Primroses (Oenothera, Sections Anogra and Kleinia). American Naturalist
+#' 173:225-240.
+#' @keywords univar
+#' @examples
+#' 
+#' randtree <- rcoal(20)
+#' randtraits <- rTraitCont(randtree)
+#' traitgram(randtraits,randtree)
+#' traitgram(randtraits,randtree,method='pic')
+#' 
+#' @export traitgram
 traitgram <- function(x, phy,
                       xaxt = "s",
                       underscore = FALSE,

@@ -17,6 +17,10 @@ polytomies by counting the number of branches descending from each node
 that lies on the path from a spp tip to the root (not just counting the
 number of nodes).
 }
+\examples{
+data(phylocom)
+tax.distinctiveness(phylocom$phylo,type = 'Vane-Wright')
+}
 \references{
 Vane-Wright, R.I., Humphries, C.J. and Williams, P.H. (1991).
 What to protect? - Systematics and the agony of choice. Biological

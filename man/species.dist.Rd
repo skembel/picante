@@ -25,6 +25,10 @@ Currently implemented co-occurrence measures (arguments to metric):
 Jaccard index of co-occurrence } \item{checkerboard}{ Checkerboard index of
 co-occurrence } \item{doij}{ DOij index of co-occurrence } }
 }
+\examples{
+data(varespec)
+species.dist(varespec,metric = 'cij')
+}
 \references{
 Hardy, O.J. 2008. Testing the spatial phylogenetic structure of
 local communities: statistical performances of different null models and

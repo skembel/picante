@@ -1,33 +1,33 @@
-##' K statistic of phylogenetic signal
-##' 
-##' Calculates K statistic of phylogenetic signal
-##' 
-##' 
-##' @param x Vector or data.frame of trait data (in phylo$tip.label order)
-##' @param phy phylo object
-##' @param checkdata Check for match between trait and phylogeny taxa labels
-##' using \code{\link{match.phylo.data}}? (default=TRUE)
-##' @return \item{K }{K statistic}
-##' @author Simon Blomberg <s.blomberg1@@uq.edu.au> and David Ackerly
-##' <dackerly@@berkeley.edu>
-##' @seealso \code{\link{phylosignal}}
-##' @references Blomberg, S. P., and T. Garland, Jr. 2002. Tempo and mode in
-##' evolution: phylogenetic inertia, adaptation and comparative methods.
-##' Journal of Evolutionary Biology 15:899-910.
-##' 
-##' Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for
-##' phylogenetic signal in comparative data: behavioral traits are more labile.
-##' Evolution 57:717-745.
-##' @keywords univar
-##' @examples
-##' 
-##' \donttest{
-##' randtree <- rcoal(20)
-##' randtraits <- rTraitCont(randtree)
-##' Kcalc(randtraits[randtree$tip.label],randtree)
-##' }
-##' 
-##' @export Kcalc
+#' K statistic of phylogenetic signal
+#' 
+#' Calculates K statistic of phylogenetic signal
+#' 
+#' 
+#' @param x Vector or data.frame of trait data (in phylo$tip.label order)
+#' @param phy phylo object
+#' @param checkdata Check for match between trait and phylogeny taxa labels
+#' using \code{\link{match.phylo.data}}? (default=TRUE)
+#' @return \item{K }{K statistic}
+#' @author Simon Blomberg <s.blomberg1@@uq.edu.au> and David Ackerly
+#' <dackerly@@berkeley.edu>
+#' @seealso \code{\link{phylosignal}}
+#' @references Blomberg, S. P., and T. Garland, Jr. 2002. Tempo and mode in
+#' evolution: phylogenetic inertia, adaptation and comparative methods.
+#' Journal of Evolutionary Biology 15:899-910.
+#' 
+#' Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for
+#' phylogenetic signal in comparative data: behavioral traits are more labile.
+#' Evolution 57:717-745.
+#' @keywords univar
+#' @examples
+#' 
+#' \donttest{
+#' randtree <- rcoal(20)
+#' randtraits <- rTraitCont(randtree)
+#' Kcalc(randtraits[randtree$tip.label],randtree)
+#' }
+#' 
+#' @export Kcalc
 Kcalc <- function(x, phy, checkdata = TRUE) {
   if (checkdata) {
     dat <- match.phylo.data(phy, x)
@@ -66,42 +66,42 @@ pic.variance <- function(x, phy, scaled = TRUE) {
 
 
 
-##' Measure phylogenetic signal
-##' 
-##' Calculates K statistic of phylogenetic signal as well as P-value based on
-##' variance of phylogenetically independent contrasts relative to tip
-##' shuffling randomization.
-##' 
-##' 
-##' @param x Trait vector (same order as phy\$tip.label)
-##' @param phy phylo object
-##' @param reps Number of randomizations
-##' @param checkdata Check for match between trait and phylogeny taxa labels
-##' using \code{\link{match.phylo.data}}? (default=TRUE)
-##' @param ...  Additional arguments passed to pic
-##' @return Data frame with columns: \item{K }{K statistic} \item{PIC.variance
-##' }{Mean observed PIC variance} \item{PIC.variance.P }{P-value of observed
-##' vs. random variance of PICs} \item{PIC.variance.z }{Z-score of observed vs.
-##' random variance of PICs}
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @seealso \code{\link{Kcalc}}
-##' @references Blomberg, S. P., and T. Garland, Jr. 2002. Tempo and mode in
-##' evolution: phylogenetic inertia, adaptation and comparative methods.
-##' Journal of Evolutionary Biology 15:899-910.
-##' 
-##' Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for
-##' phylogenetic signal in comparative data: behavioral traits are more labile.
-##' Evolution 57:717-745.
-##' @keywords univar
-##' @examples
-##' 
-##' \donttest{
-##' randtree <- rcoal(20)
-##' randtraits <- rTraitCont(randtree)
-##' phylosignal(randtraits[randtree$tip.label],randtree)
-##' }
-##' 
-##' @export phylosignal
+#' Measure phylogenetic signal
+#' 
+#' Calculates K statistic of phylogenetic signal as well as P-value based on
+#' variance of phylogenetically independent contrasts relative to tip
+#' shuffling randomization.
+#' 
+#' 
+#' @param x Trait vector (same order as phy\$tip.label)
+#' @param phy phylo object
+#' @param reps Number of randomizations
+#' @param checkdata Check for match between trait and phylogeny taxa labels
+#' using \code{\link{match.phylo.data}}? (default=TRUE)
+#' @param ...  Additional arguments passed to pic
+#' @return Data frame with columns: \item{K }{K statistic} \item{PIC.variance
+#' }{Mean observed PIC variance} \item{PIC.variance.P }{P-value of observed
+#' vs. random variance of PICs} \item{PIC.variance.z }{Z-score of observed vs.
+#' random variance of PICs}
+#' @author Steven Kembel <steve.kembel@@gmail.com>
+#' @seealso \code{\link{Kcalc}}
+#' @references Blomberg, S. P., and T. Garland, Jr. 2002. Tempo and mode in
+#' evolution: phylogenetic inertia, adaptation and comparative methods.
+#' Journal of Evolutionary Biology 15:899-910.
+#' 
+#' Blomberg, S. P., T. Garland, Jr., and A. R. Ives. 2003. Testing for
+#' phylogenetic signal in comparative data: behavioral traits are more labile.
+#' Evolution 57:717-745.
+#' @keywords univar
+#' @examples
+#' 
+#' \donttest{
+#' randtree <- rcoal(20)
+#' randtraits <- rTraitCont(randtree)
+#' phylosignal(randtraits[randtree$tip.label],randtree)
+#' }
+#' 
+#' @export phylosignal
 phylosignal <- function(x, phy, reps = 999, checkdata = TRUE, ...) {
   if (checkdata) {
     dat <- match.phylo.data(phy, x)
@@ -136,24 +136,24 @@ phylosignal <- function(x, phy, reps = 999, checkdata = TRUE, ...) {
 
 
 
-##' Calculates phylogenetic signal for data.frame of traits
-##' 
-##' Calculates phylogenetic signal for data.frame of traits. Traits may have
-##' missing values in which case the tree will be pruned prior to calculating
-##' phylogenetic signal for each trait.
-##' 
-##' 
-##' @param x Data frame of trait data (traits in columns) with row names
-##' corresponding to tip.labels
-##' @param phy phylo object
-##' @param checkdata Check for match between trait and phylogeny taxa labels
-##' using \code{\link{match.phylo.data}}? (default=TRUE)
-##' @param ...  Additional arguments to \link{phylosignal}
-##' @return Returns a data frame with phylogenetic signal results for each
-##' trait
-##' @author Steven Kembel <steve.kembel@@gmail.com>
-##' @keywords univar
-##' @export multiPhylosignal
+#' Calculates phylogenetic signal for data.frame of traits
+#' 
+#' Calculates phylogenetic signal for data.frame of traits. Traits may have
+#' missing values in which case the tree will be pruned prior to calculating
+#' phylogenetic signal for each trait.
+#' 
+#' 
+#' @param x Data frame of trait data (traits in columns) with row names
+#' corresponding to tip.labels
+#' @param phy phylo object
+#' @param checkdata Check for match between trait and phylogeny taxa labels
+#' using \code{\link{match.phylo.data}}? (default=TRUE)
+#' @param ...  Additional arguments to \link{phylosignal}
+#' @return Returns a data frame with phylogenetic signal results for each
+#' trait
+#' @author Steven Kembel <steve.kembel@@gmail.com>
+#' @keywords univar
+#' @export multiPhylosignal
 multiPhylosignal <- function(x, phy, checkdata = TRUE, ...) {
   if (!(is.data.frame(x) | is.matrix(x))) {
     stop("Expecting trait data in data.frame or matrix format")

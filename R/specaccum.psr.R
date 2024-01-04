@@ -1,50 +1,50 @@
-##' Phylogenetic Species Richness Sample-Based Rarefaction Curve
-##' 
-##' Finds a sample-based rarefaction curve for phylogentic species richness for
-##' a set of samples.
-##' 
-##' 
-##' @param samp Community data matrix
-##' @param tree A phylo tree object or a phylogenetic covariance matrix
-##' @param permutations Number of permutations with method \code{method=
-##' "random"}
-##' @param method Species accumulation method, currently only \code{"random"}
-##' is supported which adds samples in random order.
-##' @param \dots Other parameters to functions
-##' @return The function returns an object of class \code{"specaccum"} with
-##' items:
-##' 
-##' \item{call}{ Function call. } \item{method}{ Accumulator method. }
-##' \item{sites}{ Number of sites/samples. } \item{richness}{ The mean
-##' phylogenetic species richness corresponding to number of sites/samples. }
-##' \item{sd}{ The standard deviation of phylogenetic apecies accumulation
-##' curve (or its standard error) estimated from permutations in \code{method =
-##' "random"}. } \item{perm}{ Permutation results with \code{method = "random"}
-##' and NULL in other cases. Each column in perm holds one permutation. }
-##' @author Matthew Helmus \email{mrhelmus@@gmail.com} based on the
-##' \code{vegan} package \link[vegan]{specaccum} function by Roeland Kindt and
-##' Jari Oksanen.
-##' @seealso \code{\link{psr}}, \code{\link[vegan]{specaccum}}
-##' @references Gotelli N.J. & Colwell R.K. (2001) Quantifying biodiversity:
-##' procedures and pitfalls in the measurement and comparison of species
-##' richness. Ecology Letters, 4, 379-391\cr \cr Helmus M.R., Bland T.J.,
-##' Williams C.K. & Ives A.R. (2007) Phylogenetic measures of biodiversity.
-##' American Naturalist, 169, E68-E83
-##' @keywords univar
-##' @examples
-##' 
-##' data(phylocom)
-##' accum.sr<-specaccum(phylocom$sample, permutations = 100, method = "random")
-##' plot(accum.sr, col="blue")
-##' points(accum.sr$sites, accum.sr$richness, pch=19, col="blue")
-##' 
-##' accum.psr<-specaccum.psr(phylocom$sample, phylocom$phylo, permutations = 100, method = "random")
-##' plot(accum.psr, add=TRUE, col = "red")
-##' points(accum.psr$sites, accum.psr$richness, pch=19, col="red")
-##' 
-##' legend(5,5,legend=c("SR","PSR"),pch=c(19,19),col=c("blue","red"))
-##' 
-##' @export specaccum.psr
+#' Phylogenetic Species Richness Sample-Based Rarefaction Curve
+#' 
+#' Finds a sample-based rarefaction curve for phylogentic species richness for
+#' a set of samples.
+#' 
+#' 
+#' @param samp Community data matrix
+#' @param tree A phylo tree object or a phylogenetic covariance matrix
+#' @param permutations Number of permutations with method \code{method=
+#' "random"}
+#' @param method Species accumulation method, currently only \code{"random"}
+#' is supported which adds samples in random order.
+#' @param \dots Other parameters to functions
+#' @return The function returns an object of class \code{"specaccum"} with
+#' items:
+#' 
+#' \item{call}{ Function call. } \item{method}{ Accumulator method. }
+#' \item{sites}{ Number of sites/samples. } \item{richness}{ The mean
+#' phylogenetic species richness corresponding to number of sites/samples. }
+#' \item{sd}{ The standard deviation of phylogenetic apecies accumulation
+#' curve (or its standard error) estimated from permutations in \code{method =
+#' "random"}. } \item{perm}{ Permutation results with \code{method = "random"}
+#' and NULL in other cases. Each column in perm holds one permutation. }
+#' @author Matthew Helmus \email{mrhelmus@@gmail.com} based on the
+#' \code{vegan} package \link[vegan]{specaccum} function by Roeland Kindt and
+#' Jari Oksanen.
+#' @seealso \code{\link{psr}}, \code{\link[vegan]{specaccum}}
+#' @references Gotelli N.J. & Colwell R.K. (2001) Quantifying biodiversity:
+#' procedures and pitfalls in the measurement and comparison of species
+#' richness. Ecology Letters, 4, 379-391\cr \cr Helmus M.R., Bland T.J.,
+#' Williams C.K. & Ives A.R. (2007) Phylogenetic measures of biodiversity.
+#' American Naturalist, 169, E68-E83
+#' @keywords univar
+#' @examples
+#' 
+#' data(phylocom)
+#' accum.sr<-specaccum(phylocom$sample, permutations = 100, method = "random")
+#' plot(accum.sr, col="blue")
+#' points(accum.sr$sites, accum.sr$richness, pch=19, col="blue")
+#' 
+#' accum.psr<-specaccum.psr(phylocom$sample, phylocom$phylo, permutations = 100, method = "random")
+#' plot(accum.psr, add=TRUE, col = "red")
+#' points(accum.psr$sites, accum.psr$richness, pch=19, col="red")
+#' 
+#' legend(5,5,legend=c("SR","PSR"),pch=c(19,19),col=c("blue","red"))
+#' 
+#' @export specaccum.psr
 specaccum.psr <- function(samp, tree, permutations = 100, method = "random", ...) {
   # function adapted from the vegan package specaccum
 

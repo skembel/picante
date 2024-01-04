@@ -3,7 +3,7 @@
 \name{prune.sample}
 \alias{prune.sample}
 \alias{prune.missing}
-\title{Prune tree to match community data or trait data}
+\title{title Prune tree to match community data or trait data}
 \usage{
 prune.sample(samp, phylo)
 
@@ -29,6 +29,10 @@ data set or with non-missing trait data
 trait data
 
 }}
+\examples{
+data(phylocom)
+prune.sample(phylocom$sample,phylocom$phylo)
+}
 \author{
 Steven Kembel \href{mailto:steve.kembel@gmail.com}{steve.kembel@gmail.com}
 }

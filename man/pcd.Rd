@@ -61,6 +61,8 @@ data(phylocom)
 pcd(phylocom$sample, phylocom$phylo)
 }
 
+pcd(phylocom$sample,phylocom$phylo)
+
 }
 \references{
 Ives A.R. & Helmus M.R. (2010). Phylogenetic metrics of

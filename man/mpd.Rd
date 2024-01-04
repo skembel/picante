@@ -21,7 +21,6 @@ Vector of MPD values for each community
 Calculates mean pairwise distance separating taxa in a community
 }
 \examples{
-
 data(phylocom)
 mpd(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
 

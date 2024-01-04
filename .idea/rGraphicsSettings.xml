@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="RGraphicsSettings">
-    <option name="height" value="354" />
+    <option name="height" value="504" />
+    <option name="imageNumber" value="7" />
+    <option name="outputDirectory" value="$USER_HOME$/Downloads" />
     <option name="resolution" value="75" />
-    <option name="standalone" value="false" />
     <option name="version" value="2" />
-    <option name="width" value="510" />
+    <option name="width" value="202" />
   </component>
 </project>

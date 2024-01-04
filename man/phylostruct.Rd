@@ -64,6 +64,10 @@ The function creates null distributions for the \code{\link{psd}} set of
 metrics and for the correlations of \code{\link{sppregs}} from observed
 community data sets.
 }
+\examples{
+data(phylocom)
+phylostruct(phylocom$sample,phylocom$phylo, metric = 'psv')
+}
 \references{
 Helmus M.R., Bland T.J., Williams C.K. & Ives A.R. (2007a)
 Phylogenetic measures of biodiversity. American Naturalist, 169, E68-E83
