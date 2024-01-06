@@ -370,3 +370,21 @@ mntd.new<-function(comm, pd, abundance.weighted = TRUE) {
   res
 }
 ```
+
+
+```{r}
+data(phylocom)
+
+phy <- phylocom$phylo
+
+
+phy$edge <- phy$edge[1:10,]
+phy
+
+```
+```{r}
+w=writesample(4,10)
+# the samples are
+t(apply(w,1,function(x) (1:ncol(w))[x==1]))
+```
+

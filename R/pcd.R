@@ -189,3 +189,4 @@ pcd <- function(comm, tree, PSVmncd = NULL, PSVpool = NULL, reps = 10^4) {
 
   return(list(PCD = as.dist(t(PCD)), PCDc = as.dist(t(PCDc)), PCDp = as.dist(t(PCDp)), PSVmncd = SSii, PSVpool = SCii))
 }
+

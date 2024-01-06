@@ -1,0 +1,114 @@
+---
+title : 'PICANTE'
+author: Steven Kembel
+output: github_document
+---
+
+=======
+
+## News
+
+There was a bug in the ses.pd function in picante versions \<=1.7. Please see [this issue](https://github.com/skembel/picante/issues/17) for more details.
+
+## Overview
+
+R tools for integrating phylogenies and ecology
+
+The PICANTE package provides tools for **P**hylocom **I**ntegration, **C**ommunity **A**nalyses, **N**ull-models, **T**raits and **E**volution in R.
+
+The package includes functions for analyzing the phylogenetic and trait diversity of ecological communities, comparative analyses, and the display and manipulation of phenotypic and phylogenetic data.
+
+## Installation
+
+To install the package
+
+```{r, eval = FALSE}
+install.packages("picante")
+```
+
+To import the package
+
+```{r, eval = TRUE, warning=FALSE,message=FALSE}
+library('picante')
+```
+
+To import a dataset
+
+```{r, eval = TRUE}
+data(phylocom)
+```
+
+## Exemple of datasets
+
+### Community
+
+Picante uses the same community data format as the vegan package - a matrix or data.frame with sites/samples in the rows and taxa in the columns. The elements of this data frame should be numeric values indicating the abundance or presence/absence (0/1) of taxa in different samples.
+
+One important thing to note is that most functions in picante will use the labels on columns in the community data set to match community and phylogenetic data together. You need to make sure your column names are present and match the tip labels of the phylogeny or your analysis may not work.
+
+Most functions in picante do basic error checking and will report when there are mismatches between the data present in the community and phylogenetic data sets. Similarly, your communities/sites/samples can be given informative names, and these should be contained in the row labels, not in a column of the data.frame.
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, message = FALSE}
+community <-phylocom$sample
+community[,1:10]
+```
+
+### Phylogenies
+
+Picante uses the phylo format implemented in the ape package to represent phylogenetic relationships among taxa.
+
+```{r, message = TRUE}
+## in this exemple, edge have been shorted an transposed for better visibility
+phy <- phylocom$phylo
+phy$edge <- t(phy$edge[1:10,])
+phy
+```
+
+***Important*** : in this example, edge have been shorted an transposed for better visibility
+
+### Trait
+
+Trait data include any kind of data associated with the taxa present in a phylogeny. Most functions in picante work with trait data represented as a vector (for individual traits) or data.frame. The documentation for individual functions will explain which data format is expected.
+
+```{r, message = FALSE}
+traits <- phylocom$traits
+head(traits)
+```
+
+## Usage
+
+To calculates mean pairwise distance (MPD) separating taxa in a community
+
+```{r, message = FALSE, warning = FALSE}
+picante::mpd(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
+```
+
+To calculates mean nearest taxon distance (MNTD) for taxa in a community
+
+```{r, message = FALSE}
+mntd(phylocom$sample, cophenetic(phylocom$phylo), abundance.weighted=TRUE)
+```
+
+## Authors and contributors
+
+**Package maintainer**: Steven Kembel
+
+**Developers**: Peter Cowan, Matthew Helmus, Steven Kembel
+
+**Contributors**: David Ackerly, Simon Blomberg, Will Cornwell, Peter Cowan, Matthew Helmus, Steven Kembel, Helene Morlon, Cam Webb
+
+**Supporters** Development of picante has been supported by NSERC, NESCent, the Google Summer of Code, and the Gordon and Betty Moore Foundation.
+
+Thanks to Jonathan Davies, Kyle Dexter, Catherine Graham, Nathaniel Hallinan,Nick Matzke, Alain Paquette, Emmanuel Paradis, Juan Parra, Dan Rabosky, and Marten Winter for feedback and bug reports.
+
+Thanks to R-Forge for hosting the project up to version 1.5.
+
+## Bug reports and feature requests
+
+Please use the Github Issues page for picante to submit bug reports and feature requests. Pull requests are welcomed but are more likely to be accepted if you first submit them as an issue.

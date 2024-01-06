@@ -256,9 +256,10 @@
 #' @export mpd
 mpd <- function(samp, dis, abundance.weighted = FALSE)
 {
-  N <- dim(samp)[1] ## le nombre de row
-  mpd <- numeric(N) ## N en liste de N objets
+  N <- dim(samp)[1] 
+  mpd <- numeric(N) 
   for (i in 1:N) {
+    
     sppInSample <- names(samp[i, samp[i,] > 0]) ## prend les rows avec des espèces présentes
     if (length(sppInSample) > 1) { ## si plus de 1
       sample.dis <- dis[sppInSample, sppInSample] ##les distances en tableau croisé
@@ -281,7 +282,7 @@ mpd <- function(samp, dis, abundance.weighted = FALSE)
 #' 
 #' Calculates MNTD (mean nearest taxon distance) for taxa in a community
 #' 
-#' This metric has also been referred to as MNND (mean nearest neighbour
+#' This metric has also been referred to as MNND (mean nearest neighdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAWElEQVR42mNgGPTAxsZmJsVqQApgmGw1yApwKcQiT7phRBuCzzCSDSHGMKINIeDNmWQlA2IigKJwIssQkHdINgxfmBBtGDEBS3KCxBc7pMQgMYE5c/AXPwAwSX4lV3pTWwAAAABJRU5ErkJggg==bour
 #' distance), and the function was named \code{mnnd} in picante versions <
 #' 0.7.
 #' 

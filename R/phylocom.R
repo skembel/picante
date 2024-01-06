@@ -105,6 +105,9 @@
 #' evolution. Version 4.0.1. \url{http://www.phylodiversity.net/phylocom/}.
 #' @keywords file
 #' @export writesample
+#' @examples
+#' data(phylocom)
+#' writesample(phylocom$sample, "sample.txt")
 
 `writesample` <-
   function(community, filename = "") {
@@ -155,7 +158,7 @@
 
 #' @title  phylocom
 #' @name phylocom
-#' @description one row with NA
+#' @description Phylogeny dataset example
 #' @docType data
 #' @usage data(phylocom)
 #' @keywords datasets

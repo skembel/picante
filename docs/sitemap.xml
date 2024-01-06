@@ -13,16 +13,10 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/color.plot.phylo.html</loc>
-  </url>
-  <url>
     <loc>/reference/cor.table.html</loc>
   </url>
   <url>
     <loc>/reference/match.phylo.comm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/match.phylo.data.html</loc>
   </url>
   <url>
     <loc>/reference/evol.distinct.html</loc>
@@ -109,15 +103,6 @@
     <loc>/reference/phylostruct.html</loc>
   </url>
   <url>
-    <loc>/reference/IvesGodfray.html</loc>
-  </url>
-  <url>
-    <loc>/reference/phylocom.html</loc>
-  </url>
-  <url>
-    <loc>/reference/picante-package.html</loc>
-  </url>
-  <url>
     <loc>/reference/prune.sample.html</loc>
   </url>
   <url>
@@ -140,5 +125,23 @@
   </url>
   <url>
     <loc>/reference/traitgram.html</loc>
+  </url>
+  <url>
+    <loc>/reference/IvesGodfray.html</loc>
+  </url>
+  <url>
+    <loc>/reference/phylocom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rsample.html</loc>
+  </url>
+  <url>
+    <loc>/reference/datasetsVerification.html</loc>
+  </url>
+  <url>
+    <loc>/reference/presenceAbsenceConverter.html</loc>
+  </url>
+  <url>
+    <loc>/reference/NRI.html</loc>
   </url>
 </urlset>

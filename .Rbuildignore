@@ -3,3 +3,7 @@
 ^\.github$
 ^\.idea$
 ^\.lintr$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^README\.Rmd$

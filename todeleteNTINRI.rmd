@@ -42,3 +42,37 @@ iCAMP:: mpdn()
 
 NTI(samp = phylocom$sample, dis = cophenetic(phylocom$phylo),null.model="taxa.labels")
 ```
+```{r}
+data(phylocom)
+phy <-phylocom$sample
+phy[,1:10]
+
+
+
+
+```
+
+```{r}
+ sample<- rsample(maximum = 1, rtree(25))
+`writesample` <-
+        function(community, filename = "") {
+          write.table(matrix2sample(community),
+                      file = filename, append = FALSE,
+                      sep = "\t", eol = "\n", quote = FALSE, row.names = FALSE, col.names = FALSE
+          )
+        }
+
+matrix2sample(phylocom$sample)
+
+writesample(phylocom$sample, "sample.txt")
+
+```
+```{r}
+mauvais <- phylocom$traits
+mauvais <- mauvais[,1, drop=FALSE]
+mauvais <-data.frame(mauvais)
+t(mauvais)
+ncol(mauvais)
+is.data.frame(mauvais)
+match.phylo.data(phylocom$phylo, mauvais)
+```

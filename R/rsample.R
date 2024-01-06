@@ -93,7 +93,7 @@ datasetsVerification <- function(dataset){
 #' data(phylocom)
 #' presenceAbsenceConverter(phylocom$sample)
 presenceAbsenceConverter <- function(dataset){
-  dataset[dataset > 0] = 1
+  dataset[dataset > 0] <- 1
   dataset
 }
 

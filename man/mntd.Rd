@@ -22,7 +22,7 @@ Vector of MNTD values for each community.
 Calculates MNTD (mean nearest taxon distance) for taxa in a community
 }
 \details{
-This metric has also been referred to as MNND (mean nearest neighbour
+This metric has also been referred to as MNND (mean nearest neighdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAWElEQVR42mNgGPTAxsZmJsVqQApgmGw1yApwKcQiT7phRBuCzzCSDSHGMKINIeDNmWQlA2IigKJwIssQkHdINgxfmBBtGDEBS3KCxBc7pMQgMYE5c/AXPwAwSX4lV3pTWwAAAABJRU5ErkJggg==bour
 distance), and the function was named \code{mnnd} in picante versions <
 0.7.
 }

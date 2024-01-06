@@ -160,13 +160,10 @@ phyEstimateDisc <- function(phy, trait, best.state = TRUE, cutoff = 0.5, ...) {
     beststate <- as.data.frame(matrix(nrow = dim(res)[1], ncol = 2))
     colnames(beststate) <- c("estimated.state", "estimated.state.support")
     rownames(beststate) <- rownames(res)
-    print(rownames(res))
 
     for (i in 1:dim(res)[1]) {
       #if >=cutoff % taxa have same label assign a consensus taxon to node
-      # best <- -sort(-(res[i,]))[1]
       best <- -sort(-unlist(res[i,]))[1]
-
       if (best >= cutoff && !is.na(best)) {
         beststate[i, 1] <- names(best)
         beststate[i, 2] <- best

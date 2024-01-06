@@ -92,3 +92,5 @@ NTI <- function(samp,
   colnames(NTI.result) <- 'NTI'
   NTI.result
 }
+
+
