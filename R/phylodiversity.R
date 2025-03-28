@@ -111,8 +111,9 @@ function(phy) {
 }
 
 
-mpd <- function(samp, dis, abundance.weighted=FALSE)
+mpd <- function(samp, dis, abundance.weighted=FALSE, abundance.method=c("full", "tri", "diag"))
 {
+    abundance.method <- match.arg(abundance.method)
     N <- dim(samp)[1]
     mpd <- numeric(N)
     for (i in 1:N) {
@@ -121,8 +122,11 @@ mpd <- function(samp, dis, abundance.weighted=FALSE)
             sample.dis <- dis[sppInSample, sppInSample]
             if (abundance.weighted) {
                 sample.weights <- t(as.matrix(samp[i,sppInSample,drop=FALSE])) %*% as.matrix(samp[i,sppInSample,drop=FALSE])
-                mpd[i] <- weighted.mean(sample.dis,sample.weights)
-
+                j <- switch(abundance.method,
+                            full = rep(TRUE, length(sample.weights)),
+                            tri = lower.tri(sample.weights),
+                            diag = !upper.tri(sample.weights))
+                mpd[i] <- weighted.mean(sample.dis[j], sample.weights[j])
             }
             else {
                 mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])
