@@ -8,7 +8,7 @@
 \usage{data(phylocom)}
 \format{
     A list with three elements:
-    \itemize{
+    \describe{
       \item{ phylo }{ Phylogenetic tree (an object of class phylo) }
       \item{ sample }{ Community data (a data.frame with samples in rows and species in columns }
       \item{ traits }{ Trait data (a data.frame with species in rows and traits in columns }

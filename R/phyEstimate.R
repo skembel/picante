@@ -26,7 +26,6 @@
 ##' support is less than the specified \code{cutoff}, no best state is reported
 ##' and a \code{NA} value will be returned.
 ##' 
-##' @aliases phyEstimate phyEstimateDisc
 ##' @param phy phylo object
 ##' @param trait vector or data.frame containing trait values
 ##' @param method ancestral state estimation method used by \code{ace}
@@ -60,7 +59,7 @@
 ##' #estimate trait values for "missing" taxa using PIC method
 ##' phyEstimate(randtree, randtraits, method="pic")
 ##' 
-##' @export phyEstimate
+##' @export
 phyEstimate <- function(phy, trait, method = "pic", ...) {
   # trait should be a data.frame or vector with (row)names matching phylogeny
   if (is.vector(trait)) {
@@ -107,6 +106,8 @@ phyEstimate <- function(phy, trait, method = "pic", ...) {
 
 
 # for discrete traits
+##' @rdname phyEstimate
+##' @export
 phyEstimateDisc <- function(phy, trait, best.state = TRUE, cutoff = 0.5, ...) {
   # trait should be a data.frame or vector with names matching phylogeny
 
@@ -131,7 +132,7 @@ phyEstimateDisc <- function(phy, trait, best.state = TRUE, cutoff = 0.5, ...) {
       # root the tree at the novel species (leave root as trichotomy)
       tree <- root(tree, i, resolve.root = FALSE)
 
-      ## Mon IDE me dit que ces variables sont jamais utilisés
+      ## IDE reports these variables are never used
 
       # record branch length leading to novel species in rerooted tree
       ## edge <- Nnode(tree) - 1 + which(tree$tip.label == i)

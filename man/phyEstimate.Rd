@@ -6,6 +6,8 @@
 \title{Phylogenetic estimation of traits for unobserved taxa}
 \usage{
 phyEstimate(phy, trait, method = "pic", ...)
+
+phyEstimateDisc(phy, trait, best.state = TRUE, cutoff = 0.5, ...)
 }
 \arguments{
 \item{phy}{phylo object}
@@ -75,6 +77,6 @@ gene copy number information improves estimates of microbial diversity and
 abundance. PLoS Computational Biology 8(10):e1002743.
 }
 \author{
-Steven Kembel \href{mailto:steve.kembel@gmail.com}{steve.kembel@gmail.com}
+Steven Kembel <steve.kembel@gmail.com>
 }
 \keyword{univar}

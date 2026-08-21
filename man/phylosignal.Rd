@@ -10,7 +10,7 @@ phylosignal(x, phy, reps = 999, checkdata=TRUE, ...)
 }
 
 \arguments{
-  \item{x}{ Trait vector (same order as phy\$tip.label) }
+  \item{x}{ Trait vector (same order as \code{phy$tip.label}) }
   \item{phy}{ phylo object }
   \item{reps}{ Number of randomizations }
   \item{checkdata}{ Check for match between trait and phylogeny taxa labels using \code{\link{match.phylo.data}}? (default=TRUE)}  

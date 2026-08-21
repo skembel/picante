@@ -1,11 +1,42 @@
 Package: picante
 Type: Package
 Title: Integrating Phylogenies and Ecology
-Version: 1.8.3
-Date: 2023-07-10
-Author: Steven W. Kembel <steve.kembel@gmail.com>, David D. Ackerly <dackerly@berkeley.edu>, Simon P. Blomberg <s.blomberg1@uq.edu.au>, Will K. Cornwell <cornwell@zoology.ubc.ca>, Peter D. Cowan <pdc@berkeley.edu>, Matthew R. Helmus <mrhelmus@wisc.edu>, Helene Morlon <morlon.helene@gmail.com>, Campbell O. Webb <cwebb@oeb.harvard.edu>
-Maintainer: Steven W. Kembel <steve.kembel@gmail.com>
+Version: 1.8.4
+Date: 2026-08-21
+Authors@R: c(person(given = c("Steven", "W."),
+                    family = "Kembel",
+                    role = c("aut", "cre"),
+                    email = "steve.kembel@gmail.com"),
+             person(given = c("David", "D."),
+                    family = "Ackerly",
+                    role = "aut",
+                    email = "dackerly@berkeley.edu"),
+             person(given = c("Simone", "P."),
+                    family = "Blomberg",
+                    role = "aut",
+                    email = "s.blomberg1@uq.edu.au"),
+             person(given = c("Will", "K."),
+                    family = "Cornwell",
+                    role = "aut",
+                    email = "cornwell@zoology.ubc.ca"),
+             person(given = c("Peter", "D."),
+                    family = "Cowan",
+                    role = "aut",
+                    email = "pdc@berkeley.edu"),
+             person(given = c("Matthew", "R."),
+                    family = "Helmus",
+                    role = "aut",
+                    email = "mrhelmus@wisc.edu"),
+             person(given = "Helene",
+                    family = "Morlon",
+                    role = "aut",
+                    email = "morlon.helene@gmail.com"),
+             person(given = c("Campbell", "O."),
+                    family = "Webb",
+                    role = "aut",
+                    email = "cwebb@oeb.harvard.edu"))
 Depends: ape, vegan, nlme, methods
 Suggests: brglm, circular, corpcor, quantreg
 Description: Functions for phylocom integration, community analyses, null-models, traits and evolution. Implements numerous ecophylogenetic approaches including measures of community phylogenetic and trait diversity, phylogenetic signal, estimation of trait values for unobserved taxa, null models for community and phylogeny randomizations, and utility functions for data input/output and phylogeny plotting. A full description of package functionality and methods are provided by Kembel et al. (2010) <doi:10.1093/bioinformatics/btq166>.
 License: GPL-2
+Config/roxygen2/version: 8.0.0

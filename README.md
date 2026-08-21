@@ -14,7 +14,7 @@ Package maintainer: Steven Kembel
 
 Developers: Peter Cowan, Matthew Helmus, Steven Kembel
 
-Contributors: David Ackerly, Simon Blomberg, Will Cornwell, Peter Cowan, Matthew Helmus, Steven Kembel, Helene Morlon, Cam Webb
+Contributors: David Ackerly, Simone Blomberg, Will Cornwell, Peter Cowan, Kerby Elpenord, Matthew Helmus, Steven Kembel, Helene Morlon, Cam Webb
 
 Development of picante has been supported by NSERC, NESCent, the Google Summer of Code, and the Gordon and Betty Moore Foundation.
 

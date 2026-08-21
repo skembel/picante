@@ -11,7 +11,7 @@ traitgram(x, phy, xaxt = 's', underscore = FALSE, show.names = TRUE,
 }
 
 \arguments{
-  \item{x}{ Trait vector (same order as phy\$tip.label, or with taxon names in names) }
+  \item{x}{ Trait vector (same order as \code{phy$tip.label}, or with taxon names in names) }
   \item{phy}{ phylo object }
   \item{xaxt}{ x axis default type }
   \item{underscore}{ if FALSE remove underscore from taxonomic names }

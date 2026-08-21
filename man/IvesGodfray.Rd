@@ -8,7 +8,7 @@
 \usage{data(IvesGodfray)}
 \format{
     A list with three elements:
-    \itemize{
+    \describe{
       \item{ host }{ Phylogenetic variance/covariance matrix for 12 leaf-mining moth hosts }
       \item{ parasitoid }{ Phylogenetic variance/covariance matrix for 27 species of parasitoid wasps }
       \item{ interactions }{ Matrix describing interactions between hosts and parasitoids }

@@ -34,7 +34,7 @@ tipShuffle(phy)
 \value{
   \item{df2vec}{A named vector}
   \item{internal2tips}{Vector of tips descended from a node}
-  \item{node.age}{Phylo object with phylo\$ages vector of node ages corresponding to phylo\$edge}
+  \item{node.age}{Phylo object with \code{phylo$ages} vector of node ages corresponding to \code{phylo$edge}}
   \item{pic.variance}{Variance of independent contrasts}
   \item{sortColumns}{A data.frame or matrix with columns sorted by name}
   \item{sortRows}{A data.frame or matrix with rows sorted by name}

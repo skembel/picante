@@ -1,8 +1,8 @@
 citHeader("To cite Picante in a publication:")
 
-citEntry(entry="Article",
+bibentry(bibtype = "Article",
 	title = "Picante: {R} tools for integrating phylogenies and ecology",
-        author = personList(as.person("S.W. Kembel"), as.person("P.D. Cowan"), as.person("M.R. Helmus"), as.person("W.K. Cornwell"), as.person("H. Morlon"), as.person("D.D. Ackerly"),as.person("S.P. Blomberg"), as.person("C.O. Webb")),
+	author = c(as.person("S.W. Kembel"), as.person("P.D. Cowan"), as.person("M.R. Helmus"), as.person("W.K. Cornwell"), as.person("H. Morlon"), as.person("D.D. Ackerly"), as.person("S.P. Blomberg"), as.person("C.O. Webb")),
 	journal = "Bioinformatics",
     volume="26",
     pages="1463--1464",

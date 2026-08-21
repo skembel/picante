@@ -11,7 +11,7 @@ sample2matrix(x)
 
 \arguments{
   \item{x}{ Phylocom sample formatted data frame, a data frame with three columns:
-    \itemize{
+    \describe{
     \item{Column 1}{    Community name}
     \item{Column 2}{    Species abundance}
     \item{Column 3}{    Species name}
