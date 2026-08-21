@@ -59,12 +59,18 @@ and a \code{NA} value will be returned.
 }
 \examples{
 
+set.seed(5)
 #generate random phylogeny
 randtree <- rcoal(50)
 #simulate trait evolution for a subset of taxa on phylogeny
 randtraits <- sample(rTraitCont(randtree, sigma=10, root.value=100), 40)
 #estimate trait values for "missing" taxa using PIC method
 phyEstimate(randtree, randtraits, method="pic")
+
+#simulate a discrete trait for a subset of taxa on the phylogeny
+randdisctraits <- sample(rTraitDisc(randtree, model="ER", k=2), 40)
+#estimate discrete trait states for "missing" taxa
+phyEstimateDisc(randtree, randdisctraits)
 
 }
 \references{
@@ -77,6 +83,6 @@ gene copy number information improves estimates of microbial diversity and
 abundance. PLoS Computational Biology 8(10):e1002743.
 }
 \author{
-Steven Kembel <steve.kembel@gmail.com>
+Steven Kembel <steve.kembel@gmail.com> and Kerby Elpenord <kerbybbt@gmail.com>
 }
 \keyword{univar}

@@ -41,7 +41,7 @@
 ##' \item{estimated.state}{ If best.state=TRUE, a column with the state with
 ##' the highest support } \item{estimated.state.support}{ Statistical support
 ##' for the state with the highest support }
-##' @author Steven Kembel <steve.kembel@gmail.com>
+##' @author Steven Kembel <steve.kembel@gmail.com> and Kerby Elpenord <kerbybbt@gmail.com>
 ##' @references T. Garland Jr., and A.R. Ives. 2000. Using the past to predict
 ##' the present: confidence intervals for regression equations in phylogenetic
 ##' comparative methods. American Naturalist 155:346364.
@@ -51,14 +51,20 @@
 ##' abundance. PLoS Computational Biology 8(10):e1002743.
 ##' @keywords univar
 ##' @examples
-##' 
+##'
+##' set.seed(5)
 ##' #generate random phylogeny
 ##' randtree <- rcoal(50)
 ##' #simulate trait evolution for a subset of taxa on phylogeny
 ##' randtraits <- sample(rTraitCont(randtree, sigma=10, root.value=100), 40)
 ##' #estimate trait values for "missing" taxa using PIC method
 ##' phyEstimate(randtree, randtraits, method="pic")
-##' 
+##'
+##' #simulate a discrete trait for a subset of taxa on the phylogeny
+##' randdisctraits <- sample(rTraitDisc(randtree, model="ER", k=2), 40)
+##' #estimate discrete trait states for "missing" taxa
+##' phyEstimateDisc(randtree, randdisctraits)
+##'
 ##' @export
 phyEstimate <- function(phy, trait, method = "pic", ...) {
   # trait should be a data.frame or vector with (row)names matching phylogeny
@@ -110,75 +116,64 @@ phyEstimate <- function(phy, trait, method = "pic", ...) {
 ##' @export
 phyEstimateDisc <- function(phy, trait, best.state = TRUE, cutoff = 0.5, ...) {
   # trait should be a data.frame or vector with names matching phylogeny
-
   if (is.vector(trait) || is.factor(trait)) {
-
     trait <- data.frame(trait)
+  }
 
-    trait[, 1] <- factor(trait[, 1])
-    trait.orig <- trait
+  trait[, 1] <- factor(trait[, 1])
+  trait.orig <- trait
 
-    # given a tree with a novel taxa on it (taxa with no trait value)
-    sppObs <- row.names(trait)
-    sppUnobs <- phy$tip.label[!(phy$tip.label %in% sppObs)]
-    trtlevels <- levels(trait[, 1])
-    res <- as.data.frame(matrix(nrow = length(sppUnobs), ncol = length(trtlevels), dimnames = list(sppUnobs, trtlevels)))
+  # given a tree with a novel taxa on it (taxa with no trait value)
+  sppObs <- row.names(trait)
+  sppUnobs <- phy$tip.label[!(phy$tip.label %in% sppObs)]
+  trtlevels <- levels(trait[, 1])
+  res <- as.data.frame(matrix(nrow = length(sppUnobs), ncol = length(trtlevels), dimnames = list(sppUnobs, trtlevels)))
 
-    # estimate support for different states for each novel taxon
-    for (i in sppUnobs) {
-      # for each novel species, prune all but measured + that species
-      tree <- drop.tip(phy, subset(sppUnobs, sppUnobs != i))
+  # estimate support for different states for each novel taxon
+  for (i in sppUnobs) {
+    # for each novel species, prune all but measured + that species
+    tree <- drop.tip(phy, subset(sppUnobs, sppUnobs != i))
 
-      # root the tree at the novel species (leave root as trichotomy)
-      tree <- root(tree, i, resolve.root = FALSE)
+    # root the tree at the novel species (leave root as trichotomy)
+    tree <- root(tree, i, resolve.root = FALSE)
 
-      ## IDE reports these variables are never used
+    # prune novel species and match new pruned tree <-> trait data
+    tree <- drop.tip(tree, i)
+    trait <- trait.orig[tree$tip.label,]
 
-      # record branch length leading to novel species in rerooted tree
-      ## edge <- Nnode(tree) - 1 + which(tree$tip.label == i)
-      ## bl <- tree$edge.length[edge]
+    # calculate value at root node and impute to novel species
+    est <- ace(trait, tree, type = "discrete", ...)
+    val <- est$lik.anc[1,]
 
-      # prune novel species and match new pruned tree <-> trait data
-      tree <- drop.tip(tree, i)
-      trait <- trait.orig[tree$tip.label,]
+    res[i,] <- val
+  }
 
-      # calculate value at root node and impute to novel species
-      est <- ace(trait, tree, type = "discrete", ...)
-      val <- est$lik.anc[1,]
+  # estimate the best-supported state for each taxon
+  if (best.state) {
+    beststate <- as.data.frame(matrix(nrow = dim(res)[1], ncol = 2))
+    colnames(beststate) <- c("estimated.state", "estimated.state.support")
+    rownames(beststate) <- rownames(res)
 
-      res[i,] <- val
-    }
+    for (i in 1:dim(res)[1]) {
+      #if >=cutoff % taxa have same label assign a consensus taxon to node
+      best <- -sort(-unlist(res[i,]))[1]
 
-    # estimate the best-supported state for each taxon
-    if (best.state) {
-      beststate <- as.data.frame(matrix(nrow = dim(res)[1], ncol = 2))
-      colnames(beststate) <- c("estimated.state", "estimated.state.support")
-      rownames(beststate) <- rownames(res)
-
-      for (i in 1:dim(res)[1]) {
-        #if >=cutoff % taxa have same label assign a consensus taxon to node
-
-        best <- -sort(unlist-(res[i,]))[1]
-        print(res[i,])
-        ## la formuler originale
-        ##best <- -sort(-(res[i, ]))[1]
-
-        if (best >= cutoff) {
-          beststate[i, 1] <- names(best)
-          beststate[i, 2] <- best
-        }
-        else
-        {
-          beststate[i, 1] <- NA
-          beststate[i, 2] <- NA
-        }
+      if (best >= cutoff && !is.na(best)) {
+        beststate[i, 1] <- names(best)
+        beststate[i, 2] <- best
+      }
+      else
+      {
+        beststate[i, 1] <- NA
+        beststate[i, 2] <- NA
       }
     }
+  }
 
-    #return the output
-    if (best.state) {
-      return(cbind(as.matrix(res), beststate))
-    } else {
-      return(as.matrix(res))
-    }
-  }}
+  #return the output
+  if (best.state) {
+    return(cbind(as.matrix(res), beststate))
+  } else {
+    return(as.matrix(res))
+  }
+}
