@@ -2,7 +2,7 @@ Package: picante
 Type: Package
 Title: Integrating Phylogenies and Ecology
 Version: 1.8.4
-Date: 2026-08-21
+Date: 2026-08-23
 Authors@R: c(person(given = c("Steven", "W."),
                     family = "Kembel",
                     role = c("aut", "cre"),
