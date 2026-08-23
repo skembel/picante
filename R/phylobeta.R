@@ -2,30 +2,28 @@
 
 #comdist
 #mean pairwise distance among taxa from two communities
-comdist <- function(comm, dis, abundance.weighted=FALSE) {
-
-    x <- as.matrix(comm)
-    dat <- match.comm.dist(comm, dis)
-    x <- dat$comm
-    dis <- as.matrix(dat$dist)
-    if (!abundance.weighted) {
-        x <- decostand(x, method="pa")
-    }
-    N <- dim(x)[1]
-    S <- dim(x)[2]
-    x <- decostand(x, method="total", MARGIN=1)
-
-	comdist <- matrix(nrow=N,ncol=N)    
-	for (l in 1:(N-1)) {
-		for (k in (l+1):N) {
-			comdist[k,l] <-
-			sum ( dis * outer(as.vector(t(x[k,])),as.vector(t(x[l,]))) )
-		}
-	}
-
-    row.names(comdist) <- row.names(x)
-    colnames(comdist) <- row.names(x)
-    return(as.dist(comdist))
+comdist <- function(comm, dis, abundance.weighted=FALSE, threads = 1) {
+  
+  # Test match
+  dat <- match.comm.dist(comm, dis)
+  x <- dat$comm
+  dis <- as.matrix(dat$dist)
+  
+  # Test weighted
+  if (!abundance.weighted) {
+    x <- decostand(x, method="pa")
+  }
+  
+  x <- decostand(x, method="total", MARGIN=1)
+  
+  # Get distance matrix
+  comdist <- distmat_rcpp(as.matrix(x), dis, threads = threads)
+  
+  # Provide com names
+  row.names(comdist) <- row.names(x)
+  colnames(comdist) <- row.names(x)
+  
+  return(as.dist(comdist))
 
 }
 
