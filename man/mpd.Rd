@@ -12,6 +12,7 @@ mpd(samp, dis, abundance.weighted=FALSE)
   \item{samp}{ Community data matrix }
   \item{dis}{ Interspecific distance matrix }
   \item{abundance.weighted}{ Should mean pairwise distances be weighted by species abundance? (default = FALSE)}  
+  \item{abundance.method}{ If abundance.weighted is TRUE, what method should be used to calculate mean pairwise distances? The default, "full", averages the full distance matrix including the upper and lower triangles and the diagonal. "tri" averages only the lower triangle, corresponding to interspecific distances. "diag" averages the lower triangle and the diagonal, which includes a single instance of each intraspecific and interspecific distance.}  
 }
 
 \value{
